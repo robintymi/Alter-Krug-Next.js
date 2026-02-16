@@ -1,0 +1,571 @@
+{
+  "header": {
+    "navItems": [
+      { "label": "Startseite", "href": "/" },
+      { 
+        "label": "Hotel", 
+        "href": "/hotel",
+        "items": [
+          { "label": "Online Buchen", "href": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX" },
+          { "label": "Gesundheit & Wohlbefinden", "href": "/gesundheit" },
+          { "label": "Gutschein bestellen", "href": "https://www.yovite.com/Restaurant-Gutschein-R-84831799.html?REF=REST" }
+        ]
+      },
+      { 
+        "label": "Restaurant", 
+        "href": "/restaurant",
+        "items": [
+          { "label": "Tischreservierung", "href": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e" },
+          { "label": "Speisekarte", "href": "/speisekarte" },
+          { "label": "Getränkekarte", "href": "/getraenke" },
+          { "label": "Büffet", "href": "/bueffet" },
+          { "label": "Gutschein bestellen", "href": "https://www.yovite.com/Restaurant-Gutschein-R-84831799.html?REF=REST" }
+        ]
+      },
+      { "label": "Veranstaltungen", "href": "/events" },
+      { "label": "Anfahrt", "href": "/anfahrt" },
+      { "label": "Stellenangebote", "href": "/stellenangebote" },
+      { "label": "Kontakt", "href": "/kontakt" }
+    ],
+    "bookingUrl": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "reservationUrl": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e"
+  },
+  "hero": {
+    "title": "Willkommen im Alten Krug Kallinchen",
+    "subtitle": "Ruhe, Erholung und kulinarische Spezialitäten am Motzener See",
+    "buttonText": "Tisch reservieren",
+    "buttonLink": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e",
+    "images": [
+      "/img/allgemein/ak_klein.jpg",
+      "/img/allgemein/Alter-Krug-3klein.jpg"
+    ]
+  },
+  "home_hotel": {
+    "title": "Hotel",
+    "description": "Unsere stilvollen Einzel- und Doppelzimmer bieten alles, was Sie für eine entspannte Auszeit brauchen – Flatscreen-TV, Telefon, kostenloses WLAN sowie Bäder mit Dusche und WC. In unserem Appartement finden Sie Platz für bis zu fünf Personen mit einer kleinen Küche – ideal für eine kleine Auszeit mit der ganzen Familie.",
+    "buttonText": "JETZT BUCHEN",
+    "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "image": "/img/hotel/Doppelzimmer.jpg"
+  },
+  "home_restaurant": {
+    "title": "Restaurant",
+    "description": "Unser Restaurant serviert frische, regionale Küche – abwechslungsreich, gesund und saisonal in Bio – Qualität. Ob vegetarisch, vegan, Fisch – oder Fleischgerichte – dazu eine feine Weinkarte und tolle Jahresangebote wie Candle‑Light‑Dinner oder Verwöhn‑Wochenenden.",
+    "buttonText": "MENÜ ANZEIGEN",
+    "buttonLink": "/speisekarte",
+    "image": "/img/restaurant/Blumenkohl paniert.jpeg"
+  },
+  "home_events": {
+    "title": "Veranstaltungen",
+    "description": "Ob stimmungsvolle Abende mit Livemusik, heitere Karnevalsabende oder inspirierende Seminare rund um Gesundheit und Wohlbefinden – bei uns ist für jeden etwas dabei!",
+    "buttonText": "ZU DEN VERANSTALTUNGEN",
+    "buttonLink": "/events",
+    "image": "/img/events/Klavierabend.jpeg"
+  },
+  "home_gallery": {
+      "images": [
+          "/img/allgemein/Alter-Krug-3klein.jpg",
+          "/img/LANDSCHAFT04.jpg",
+          "/img/Alter_Krug_Kallinchen.jpg",
+          "/img/Zimmer-9.jpg"
+      ]
+  },
+  "home_promo": {
+      "title": "Besondere Events im Blick",
+      "subtitle": "Veranstaltungen erleben",
+      "description": "Freuen Sie sich auf unvergessliche Erlebnisse bei unseren bevorstehenden Veranstaltungen. Genießen Sie gute Gesellschaft, leckeres Essen und eine angenehme Atmosphäre. Kommen Sie vorbei und entdecken Sie, was wir für Sie vorbereitet haben!",
+      "buttonText": "zu den Events",
+      "buttonLink": "/events",
+      "image": "/img/Yoga Werbung.jpg"
+  },
+  "home_contact": {
+      "title": "Kontaktieren Sie uns",
+      "subtitle": "Wir freuen uns auf Ihre Nachricht. Kontaktieren Sie uns für Fragen oder Reservierungen.",
+      "email": "info@alter-krug-kallinchen.de",
+      "phone": "+49 33769 8980",
+      "address": "Hauptstraße 15, 15806 Zossen – Kallinchen",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.463378351664!2d13.56588297693575!3d52.17983636195619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a810f135677717%3A0xe53d6118029d5b0!2sAlter%20Krug%20Kallinchen!5e0!3m2!1sen!2sde!4v1707758378546!5m2!1sen!2sde"
+  },
+  "hotel_page": {
+    "mission": "Genießen Sie Ruhe und Erholung in unseren komfortablen Einzel- und Doppelzimmern, ausgestattet mit TV, Telefon, WLAN sowie eigenem Bad. Die waldreiche Umgebung und der Motzener See laden zu entspannten Spaziergängen und Baden ein. Für aktive Erkundungen stehen Ihnen im Strandbad Kallinchen Leihfahrräder zur Verfügung. Wir sind täglich von 07:00 bis 21:00 Uhr persönlich für Sie da.",
+    "galleryText": "Finden Sie Ruhe und Erholung. Lassen Sie sich am Tage von der waldreichen Umgebung und dem schönen Motzener See zum Spazieren und Baden einladen.",
+    "bookingText": "Entdecken Sie eine angenehme Atmosphäre und erstklassigen Service. Ob für einen romantischen Abend oder eine Feier mit Freunden, wir sorgen für Ihr Wohlbefinden.",
+    "buttonText": "JETZT BUCHEN",
+    "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "image": "/img/hotel/ReziNeuMarco-scaled.jpg",
+    "heroButtonText": "Zimmer buchen",
+    "heroButtonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "gallery": [
+        "/img/biergarten.jpg",
+        "/img/Dekorierter Saal.jpg",
+        "/img/LANDSCHAFT04.jpg"
+    ],
+    "rooms": [
+        { 
+            "type": "Einzelzimmer", 
+            "features": ["inklusive Frühstück"], 
+            "price": "86 bis 111 Euro", 
+            "images": [
+                "/img/hotel/Einzelzimmer/WhatsApp Image 2026-02-13 at 19.14.40.jpeg",
+                "/img/hotel/Einzelzimmer/WhatsApp Image 2026-02-13 at 19.14.40 (1).jpeg",
+                "/img/hotel/Einzelzimmer/WhatsApp Image 2026-02-13 at 19.14.40 (2).jpeg",
+                "/img/hotel/Einzelzimmer/WhatsApp Image 2026-02-13 at 19.14.40 (3).jpeg",
+                "/img/hotel/Einzelzimmer/WhatsApp Image 2026-02-13 at 19.14.41.jpeg"
+            ] 
+        },
+        { 
+            "type": "Standard Doppelzimmer", 
+            "features": ["inklusive Frühstück"], 
+            "price": "97 bis 120 Euro", 
+            "images": [
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33.jpeg",
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (1).jpeg",
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (2).jpeg",
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (3).jpeg",
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (4).jpeg",
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.32.jpeg"
+            ] 
+        },
+        { 
+          "type": "Comfort Doppelzimmer", 
+          "features": ["inklusive Frühstück"], 
+          "price": "111 bis 135 Euro", 
+          "images": [
+                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17.jpeg",
+                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17 (1).jpeg",
+                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17 (2).jpeg",
+                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17 (3).jpeg",
+                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.16.jpeg",
+                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.16 (1).jpeg"
+          ]
+        },
+        { 
+          "type": "Apartment", 
+          "features": ["inklusive Frühstück"], 
+          "price": "ab 111.- pro Nacht", 
+          "images": [
+            "/img/Apartment.jpg",
+            "/img/ApartmentEinzelbett.png",
+            "/img/ApartmentBad.png",
+            "/img/ApartmentKüche.png" 
+          ]
+        }
+    ],
+    "apartmentRecommendation": {
+      "text": "Sollten bei uns keine Zimmer im gewünschten Zeitraum für Sie zur Verfügung stehen, vermitteln wir Ihnen gern eine Ferienwohnung.",
+      "recommendationText": "Wir empfehlen",
+      "linkText": "www.ferienwohnungenclaudia.de",
+      "linkUrl": "http://www.ferienwohnungenclaudia.de"
+    },
+    "services": {
+        "title": "Unser Service für Sie",
+        "shuttle": {
+            "title": "Shuttleservice",
+            "description": "Wenn Sie mit der Bahn oder mit dem Flugzeug anreisen, holen wir Sie auf Anfrage gern ab.",
+            "pricing": [
+                "Abholung Bahnhof Zossen: 20,00 €",
+                "Abholung Bahnhof Bestensee: 20,00 €",
+                "Abholung Bahnhof Königs Wusterhausen: 30,00 €",
+                "Abholung Flughafen BER: 55,00 €"
+            ],
+            "note": "Bitte informieren Sie uns rechtzeitig, damit wir den Service für Sie arrangieren können."
+        },
+        "charging": {
+            "title": "E-Ladestationen",
+            "description": "Für unsere Gäste stehen 2 Elektroladestationen direkt auf unserem Hotelparkplatz zur Verfügung."
+        }
+    },
+    "bottomBooking": {
+        "title": "Buchen Sie Ihr Zimmer",
+        "text": "Entdecken Sie eine angenehme Atmosphäre und erstklassigen Service. Ob für einen romantischen Abend oder eine Feier mit Freunden, wir sorgen für Ihr Wohlbefinden. Reservieren Sie noch heute und genießen Sie einzigartige Momente in unserem Hotel und Restaurant.",
+        "buttonText": "Jetzt buchen",
+        "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX"
+    }
+  },
+  "restaurant_page": {
+    "title": "Herzliche Gastlichkeit",
+    "subtitle": "SEIT GENERATIONEN",
+    "sections": [
+      {
+        "title": "Behagliche Gasträume",
+        "content": "Zwei behaglich eingerichtete Gasträume mit insgesamt 70 Plätzen bieten den passenden Rahmen, um stimmungsvoll im Familienkreis, mit Freunden oder geschäftlich zu speisen."
+      },
+      {
+        "title": "Regionale Küche",
+        "content": "Frische, hochwertige Zutaten aus der Region machen den Unterschied im Geschmack. Für eine gesunde Ernährung verwenden wir Biofleisch, märkisches Wild, Bioeier, Steinsalz und Dinkelmehl."
+      },
+      {
+        "title": "Saisonale Angebote",
+        "content": "Von regional bis international, gut bürgerlich, vegetarisch oder saisonale Spezialitäten – unsere Küche hält für jeden etwas bereit."
+      },
+      {
+        "title": "Saal für Feiern",
+        "content": "Der geräumige Saal bietet Ihnen den passenden Raum für Ihre Feier. Ob Hochzeit, Geburtstag oder Firmenfeier – wir arrangieren alles nach Ihren Wünschen."
+      },
+      {
+        "title": "Biergarten",
+        "content": "Unter Schatten spendenden Bäumen können Sie in unserem Biergarten die Seele baumeln lassen und in entspannter Atmosphäre Essen und Trinken genießen."
+      },
+       {
+        "title": "Gemütliche Bar",
+        "content": "Unsere Bar ist der perfekte Ort, um bei einem frisch gezapften Bier oder einem Drink sich mit Freunden zu treffen oder einfach einen anstrengenden Tag ausklingen zu lassen."
+      }
+    ],
+    "buttonText": "Unsere Speisekarte",
+    "buttonLink": "/speisekarte"
+  },
+  "wellness_page": {
+    "title": "Gesundheit & Wohlbefinden",
+    "description": "Entdecken Sie unsere Angebote für Körper und Seele. Lassen Sie sich verwöhnen und finden Sie Ihre innere Balance.",
+    "contact": {
+      "name": "Ellen Block",
+      "phone": "033769 50170",
+      "mobile": "0162 1324564",
+      "website": "http://www.ellen-block.de"
+    },
+    "image": "/img/wellness/massage-room.png",
+    "babyImage": "/img/wellness/baby-feet.png"
+  },
+  "menu_page": {
+    "title": "Speisekarte",
+    "intro": "Eine Auswahl unserer Gerichte",
+    "categories": [
+        {
+            "name": "Vorspeisen, Suppen, Salate",
+            "items": [
+                { "name": "Geflügelkraftbrühe", "price": "7,50", "description": "mit Grießklößen, Gemüse und Kräutern" },
+                { "name": "Soljanka", "price": "7,90", "description": "deftige Fleischsuppe mit Sauerrahm und Zitrone vom Havelländer Bio Apfelschwein" },
+                { "name": "Bunter Salatteller", "price": "8,90", "description": "mit Kräutern, Sprossen, Kernen und Nüssen" },
+                { "name": "Gebackener Ziegenweichkäse", "price": "16,70", "description": "in knuspriger Saatenpanade auf buntem Wildkräutersalat mit Vinaigrette" },
+                { "name": "Gurkensalat „nach Art des Hauses“", "price": "5,90", "description": "" },
+                { "name": "Salatteller „Zanderfilet“", "price": "16,70", "description": "mit gebratenem Zanderfilet auf buntem Blattsalat mit Vinaigrette" }
+            ],
+            "layout": "list"
+        },
+        {
+          "name": "Burger",
+          "items": [
+            { "name": "Veggieburger", "price": "12,90", "description": "im Brioche Bun, mit knusprigem „Grüner-Haferburger“, Ziegenkäse, rauchiger Honig- Apfelsoße, Blattsalat, Tomate, Zwiebel, Gurke", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+            { "name": "mit Süßkartoffel-Pommes", "price": "16,50", "description": "" },
+            { "name": "Wildschweinburger", "price": "13,90", "description": "im Brioche Bun, mit geschmolzenem Camembert, Preiselbeercreme, Blattsalat, Tomate, Zwiebel, Gewürzgurke", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+            { "name": "mit Pommes Frites", "price": "16,80", "description": "" }
+          ],
+          "layout": "alternating"
+        },
+        {
+            "name": "Aus Fluss und See",
+            "items": [
+                { "name": "Zanderfilet „Spreewälder Art“", "price": "19,50", "description": "mit einer würzigen Soße aus Wurzelgemüse, Meerrettich und Spreewälder Gurken, Petersilienkartoffeln und Gurkensalat", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+                { "name": "Fläminger Forelle „Müllerin Art“", "price": "19,70", "description": "Mandelbutter, mit frischen Kräutern gefüllt, Gurkensalat, Petersilienkartoffeln oder Bratkartoffeln vom Forellenhof Gottow /Unterhammer", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+                { "name": "Aal „grün“ in Dillsoße", "price": "27,70", "description": "mit Petersilienkartoffeln und Gurkensalat. Ein Klassiker kehrt zurück - Traditionsbewusst, regional verwurzelt und zeitgemäß interpretiert.", "image": "/img/allgemein/Alter-Krug-3klein.jpg" }
+            ],
+            "layout": "alternating"
+        },
+        {
+          "name": "Vegetarisch",
+          "items": [
+            { "name": "Veggieburger", "price": "11,90", "description": "im Brioche Bun, mit knusprigem „Grüner-Haferburger“, Ziegenkäse, rauchiger Honig- Apfelsoße, Blattsalat, Tomate, Zwiebel, Gurke", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+            { "name": "mit Süßkartoffelpommes Frites", "price": "15,50", "description": "" },
+            { "name": "Kürbisflammkuchen", "price": "16,70", "description": "mit Ziegenkäse, Walnüssen und Honig" },
+            { "name": "Blumenkohlschnitzel", "price": "17,50", "description": "mit Buttermöhrchen, Petersilienkartoffeln Salatbouquet" },
+            { "name": "Flammkuchen Tomate Mozzarella", "price": "15,90", "description": "und Ruccola" },
+            { "name": "Spinat- Käseknödel", "price": "16,50", "description": "mit würziger Tomatensoße, Parmesankäse und Ruccola" },
+            { "name": "Zucchinischnitzel „Piccata“", "price": "16,50", "description": "in Parmesanhülle gebraten, mit Bandnudeln und Tomatensoße" },
+            { "name": "Elsässer Flammkuchen", "price": "15,90", "description": "mit Frühlingszwiebeln Speck vom Havelländer bio Apfelschwein" },
+            { "name": "Bandnudeln mit Cherrytomaten", "price": "15,60", "description": "Parmesan, Bärlauchpesto und Ruccola" }
+          ],
+           "layout": "list"
+        },
+        {
+          "name": "Klassiker",
+          "items": [
+            { "name": "Märkisches Schweineschnitzel", "price": "20,70", "description": "gefüllt mit Schinken und Käse, buntes Pfannengemüse und Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+             { "name": "Schweineschnitzel „Wiener Art“", "price": "19,70", "description": "mit Buttermöhrchen, Petersilienkartoffeln oder Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+             { "name": "Wildschweingulasch", "price": "18,90", "description": "vom heimischen Wildschwein, mit Apfelrotkohl und Kartoffelklößen", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+             { "name": "Eisbein", "price": "18,70", "description": "Sauerkraut, Erbsenpüree, Petersilienkartoffeln vom Havelländer Bio-Apfelschwein", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+             { "name": "Schweineschnitzel „Wiener Art“ mit Sauce Hollandaise", "price": "19,70", "description": "mit Buttermöhrchen, Sauce Hollandaise, Petersilienkartoffeln oder Bratkartoffeln Havelländer Bio-Apfelschwein", "image": "/img/allgemein/Alter-Krug-3klein.jpg" }
+          ],
+          "layout": "alternating"
+        },
+        {
+            "name": "Für die „Großen“ von Morgen",
+            "items": [
+                { "name": "Kinderschnitzel", "price": "10,50", "description": "mit Buttermöhrchen und Pommes Frites vom Havelländer Bio-Apfelschwein" },
+                { "name": "Wildschweingulasch", "price": "9,80", "description": "mit Rotkohl und Spätzle vom heimischen Wildschwein" },
+                 { "name": "Paniertes Zanderfilet", "price": "10,70", "description": "mit Buttermöhrchen und Petersilienkartoffeln" },
+                 { "name": "Pommes Frites", "price": "4,90", "description": "mit Ketchup oder Mayo" },
+                 { "name": "Eierkuchen mit Apfelmus", "price": "8,50", "description": "aus Bio- Eiern und Dinkelmehl mit Bio - Apfelmus und bunten Schokolinsen" }
+            ],
+            "layout": "list"
+        },
+        {
+            "name": "Dessert und Eis",
+            "items": [
+                { "name": "Crème Brulée", "price": "6,90", "description": "" },
+                { "name": "Eiskaffee", "price": "6,50", "description": "" },
+                { "name": "Eisschokolade", "price": "6,50", "description": "" },
+                 { "name": "Salted Peanut Karamelleisbecher", "price": "9,70", "description": "Erdnuss- Karamelleiscreme, Erdnüssen, Karamellsoße und Sahne" },
+                 { "name": "Schwedeneisbecher", "price": "9,50", "description": "Vanilleeiscreme, mit Apfelmus, hausgemachtem Eierlikör und Sahne" },
+                 { "name": "Gemischter Eisbecher", "price": "6,90", "description": "Erdbeer- , Schokoladen- und Vanilleeiscreme" },
+                 { "name": "Gemischter Eisbecher mit Sahne", "price": "7,90", "description": "" },
+                 { "name": "Schokoladentraum", "price": "8,90", "description": "Schokoladeneis mit Schokosoße und Schokoraspeln und Sahne" }
+            ],
+            "layout": "list"
+        }
+    ]
+  },
+  "drinks_page": {
+    "title": "Getränkekarte",
+    "categories": [
+        {
+            "name": "Sekt und Mixgetränke",
+            "image": "/img/getraenke/Sekt und Mixgetränke.jpeg",
+            "items": [
+                { "name": "Sekt „Alter Krug“ Hausmarke 0,75 l", "price": "16,70", "description": "halbtrocken" },
+                { "name": "Sekt „Alter Krug“ Hausmarke 0,2 l", "price": "6,50" },
+                { "name": "Campari Orange 0,2l", "price": "6,50" },
+                { "name": "Kir Royal 0,15l", "price": "6,50", "description": "Sekt mit Cassis Likör" },
+                { "name": "Gin Tonic 0,2 l", "price": "6,50" },
+                { "name": "Batida – Kirsch 0,2 l", "price": "6,50" },
+                { "name": "Cola Whisky 0,2 l", "price": "6,50" },
+                { "name": "Cuba Libre 0,2 l", "price": "6,50" },
+                { "name": "Wodka Lemon 0,2 l", "price": "7,70" },
+                { "name": "Aperol Spritz 0,25 l", "price": "6,00" },
+                { "name": "Aperol Orangenspritz alkoholfrei 0,25 l", "price": "7,70", "description": "Orangensirup, Tonic, Soda, Orange" },
+                { "name": "Basilikum- Ingwerspritz 0,25 l", "price": "7,70" },
+                { "name": "Rhabarber Rosé Spritz 0,25 l", "price": "7,70" },
+                { "name": "Erdbeer Spritz 0,25 l", "price": "7,70", "description": "Erdbeersirup, Sekt, Erdbeeren" }
+            ],
+            "layout": "alternating"
+        },
+        {
+            "name": "Alkoholfreie Getränke",
+            "image": "/img/getraenke/Softdrinks.jpeg",
+            "items": [
+                { "name": "Rheinsberger Preussenquelle naturelle oder medium 0,33 l", "price": "3,70", "description": "Bio-Mineralwasser aus dem Ruppiner Land" },
+                { "name": "Rheinsberger Preussenquelle naturelle oder medium 1,0 l", "price": "7,50", "description": "Bio-Mineralwasser aus dem Ruppiner Land" },
+                { "name": "7 up Zitronenbrause 0,2l", "price": "3,50" },
+                { "name": "Osta Himbeerbrause 0,2l", "price": "3,50" },
+                { "name": "Kraftmalz 0,33l", "price": "4,00" },
+                { "name": "Pepsi, light 0,2l", "price": "3,50" },
+                { "name": "Pepsi Cola 0,2l", "price": "3,50" },
+                { "name": "Schwipp Schwapp Orangenbrause 0,2 l", "price": "3,50" },
+                { "name": "Spezi 0,2l", "price": "3,50" },
+                { "name": "Tonic 0,2l", "price": "3,70" },
+                { "name": "Ginger Ale 0,2l", "price": "3,70" },
+                { "name": "Bitter Lemon 0,2l", "price": "3,70" },
+                { "name": "Basil Basilikum Ingwer Limonade 0,33 l", "price": "4,00" },
+                { "name": "Bio Zisch Limonade Blutorage 0,33l", "price": "4,00" },
+                { "name": "Rhabarberschorle 0,2l", "price": "3,50" },
+                { "name": "Apfelschorle 0,2l", "price": "3,50" },
+                { "name": "Schorlen 0,4l", "price": "6,00" },
+                { "name": "Apfelsaft 0,2l", "price": "3,50" },
+                { "name": "Orangensaft 0,2l", "price": "3,50" },
+                { "name": "Sauerkirschnektar 0,2l", "price": "3,50" },
+                { "name": "Bananennektar 0,2l", "price": "3,50" },
+                { "name": "Schwarze Johannisbeernektar 0,2l", "price": "3,50" },
+                { "name": "Tomatensaft 0,2l", "price": "3,50" },
+                { "name": "Säfte 0,4l", "price": "6,00" }
+            ],
+            "layout": "alternating"
+        },
+        {
+            "name": "Bier aus der Flasche",
+            "image": "/img/getraenke/Flaschenbier.jpeg",
+            "items": [
+                { "name": "Lammsbräu Bio Edelpils alkoholfrei 0,33l", "price": "4,00" },
+                { "name": "Lammsbräu Bio Edelpils glutenfrei 0,33l", "price": "4,00" },
+                { "name": "Riedenburger Bio Hefeweizen alkoholfrei 0,5l", "price": "6,00" },
+                { "name": "Berliner Weiße mit Schuss 0,33l", "price": "4,50", "description": "mit Himbeer- oder Waldmeistersirup" },
+                { "name": "Oberdorfer Helles 0,5 l", "price": "6,00", "description": "bayrisches Vollbier, mild gehopft" },
+                { "name": "Radeberger Pilsner alkoholfrei 0,33 l", "price": "4,00" }
+            ],
+            "layout": "alternating"
+        },
+        {
+            "name": "Biere vom Fass",
+            "image": "/img/getraenke/Fassbier.jpeg",
+            "items": [
+                { "name": "Radeberger Pilsner 0,3l", "price": "4,00" },
+                { "name": "Radeberger Pilsner 0,4l", "price": "5,00" },
+                { "name": "Lammsbräu Bio Hefeweizen 0,3l", "price": "3,90" },
+                { "name": "Lammsbräu Bio Hefeweizen 0,5l", "price": "5,20" },
+                { "name": "Potsdamer Stange 0,3l", "price": "4,00", "description": "goldgelbes, feinherbes und unfiltriertes Bio Vollbier mit Gersten- und Weizenmalz Braumanufaktur Forsthaus Templin" },
+                { "name": "Potsdamer Stange 0,5l", "price": "6,00", "description": "goldgelbes, feinherbes und unfiltriertes Bio Vollbier mit Gersten- und Weizenmalz Braumanufaktur Forsthaus Templin" },
+                { "name": "Dunkel 0,3l", "price": "4,00", "description": "mildes, bernsteinfarbenes, unfiltriertes Bio Vollbier Braumanufaktur Forsthaus Templin" },
+                { "name": "Dunkel 0,5l", "price": "6,00", "description": "mildes, bernsteinfarbenes, unfiltriertes Bio Vollbier Braumanufaktur Forsthaus Templin" },
+                { "name": "Radler mit Zitronenbrause 0,3l", "price": "4,00" },
+                { "name": "Radler mit Zitronenbrause 0,4l", "price": "5,00" },
+                { "name": "Potsdamer Stange mit Himbeerbrause 0,3l", "price": "4,00", "description": "Braumanufaktur Forsthaus Templin" },
+                { "name": "Potsdamer Stange mit Himbeerbrause 0,5l", "price": "6,00", "description": "Braumanufaktur Forsthaus Templin" }
+            ],
+            "layout": "alternating"
+        },
+        {
+            "name": "Weißwein/Rose´",
+            "image": "/img/getraenke/Weißwein.jpeg",
+            "items": [
+                { "name": "Grauer Burgunder 0,2l", "price": "7,50" },
+                { "name": "Grauer Burgunder 0,75l", "price": "23,90", "description": "trocken Pfalz QbA, Bio-Winzerhof Kesselring-Ellerstadt Mit verführerischem großzügigen Bouquet nach reifen Quitten zeigt er sich im Gaumen gehaltvoll und dicht. Kräftig und cremig. Begleitet zartaromatischen Speisen" },
+                { "name": "Riesling 0,2l", "price": "7,70" },
+                { "name": "Riesling 0,75l", "price": "24,50", "description": "trocken Bio-Qualitätswein, Rheinhessen, Walfried Sander Besticht durch frischen Duft nach gelben Früchten wie Ananas, Quitten und Sternfrucht mit floralen Anklängen. Genießen Sie ihn zu leichten Vorspeisen und Salaten, aber auch zu Gerichten mit hellem Fleisch oder Fisch" },
+                { "name": "Marqués de Castilla 0,2l", "price": "5,90" },
+                { "name": "Marqués de Castilla 0,75l", "price": "18,70", "description": "trocken Sauvignon Blanc & Chardonnay, Spanien /D.O. La Mancha, Bodegas Cristo de la Vega, Im Duft tropische Früchte und Aprikosen, dezente Würze, im Gaumen anregend, fruchtig. Ein vielseitiger Begleiter zu Fisch, Meeresfrüchten, Salat" },
+                { "name": "Kerner Kabinett 0,2l", "price": "6,70" },
+                { "name": "Kerner Kabinett 0,75l", "price": "21,90", "description": "halbtrocken Pfalz, Winzergenossenschaft Weinbiet Aromatisch und fruchtig mit einer belebenden Frische und einem köstlichen Duft nach reifen Äpfeln und Birnen. Passt zu leichten und dezenten Vorspeisen, wie Fisch- oder Gemüseterrinen und Salaten" },
+                { "name": "Bacchus 0,2l", "price": "6,90" },
+                { "name": "Bacchus 0,75l", "price": "22,50", "description": "lieblich Rheinhessen QbA, Weingut Ernst Bretz Aromatisch nach schwarzer Johannisbeere und Orangenzesten mit einem dezenten Muskatbouquet" },
+                { "name": "Landpartie Rosé 0,2l", "price": "6,90" },
+                { "name": "Landpartie Rosé 0,75l", "price": "22,50", "description": "halbtrocken Rhein, Peter Riegel, Bio Cuvée Herrliche Frische und Aromen von roten Früchten" }
+            ],
+            "layout": "alternating"
+        },
+        {
+            "name": "Rotwein",
+            "image": "/img/getraenke/Rotwein.jpeg",
+            "items": [
+                { "name": "Marqués de Castilla Tinto 0,2l", "price": "5,90" },
+                { "name": "Marqués de Castilla Tinto 0,2l", "price": "18,70", "description": "trocken Spanien, D.O. La Mancha, Cristo de la Vega Fruchtbetonte, mit Aromen von Brombeeren und blumigen Nuancen, die an Veilchen und Rosen erinnern. Am Gaumen weich, harmonisch mit eher verhaltener Säure. Ein toller Rotwein aus den Rebsorten Tempranillo, Syrah und Merlot" },
+                { "name": "Dornfelder 0,2l", "price": "7,50" },
+                { "name": "Dornfelder 0,75l", "price": "23,90", "description": "trocken Rheinhessen QbA, Weingut Ernst Bretz Tieffarbig violettrot funkelt er im Glas, mit feinwürzigem Bouquet nach aromatischen Beerenfrüchten, Sauerkirschen und Holunder. Dieser vollmundig, weiche Wein mit saftiger Frucht eignet sich zu Grillgerichten, dunklem Fleisch oder überbackenen Pasta Gerichten" },
+                { "name": "Cabernet Sauvignon-Merlot 0,2l", "price": "7,70" },
+                { "name": "Cabernet Sauvignon-Merlot 0,75l", "price": "24,50", "description": "trocken Pfalz QbA, Bio-Winzerhof Kesselring-Ellerstadt Wärmende, mediterrane Noten aus der Pfalz von dunklen Beeren und reifen Pflaumen. Ein Wein von dem man sich verwöhnen lassen kann. Ein idealer Begleiter zu Rind, Lamm, Wild, Käse und Pastagerichten" },
+                { "name": "Salento Rosso 0,2l", "price": "6,50" },
+                { "name": "Salento Rosso 0,75l", "price": "20,50", "description": "halbtrocken Italien, Apulien, Carlo Botter Dieser halbtrockene Rotwein von der Stiefel-Haxe Italiens verwöhnt mit dichten Aromen dunkler Beeren und getrockneter Pflaumen, harmonisch, mit samtiger Restsüße. Dieser Wein eignet sich als Begleiter zu dunklen Fleischsorten und kräftigen Schmorgerichten, Wild und Käse" },
+                { "name": "Landpartie Rot 0,2l", "price": "6,90" },
+                { "name": "Landpartie Rot 0,2l", "price": "2,90", "description": "halbtrocken Rhein, Peter Riegel, Bio Cuvée Fruchtig und füllig, mit interessantem Hauch von Kräutern und roten Beeren. Eine gute Partie für jeden Tag. Ein Begleiter zu Salat, vegetarischen Gerichte und leichten Fleischspeisen" }
+            ],
+            "layout": "alternating"
+        },
+        {
+            "name": "Heißgetränke",
+            "image": "/img/getraenke/Heißgetränke.jpeg",
+            "items": [
+                { "name": "Kännchen Kaffee", "price": "5,90" },
+                { "name": "Tasse Kaffee", "price": "3,50" },
+                { "name": "Espresso", "price": "3,20" },
+                { "name": "Doppelter Espresso", "price": "4,90" },
+                { "name": "Espresso Macchiato", "price": "4,70" },
+                { "name": "Cappuccino", "price": "5,70" },
+                { "name": "Latte Macchiato", "price": "5,70" },
+                { "name": "Milchkaffee", "price": "5,50" },
+                { "name": "Chociatto", "price": "5,70" },
+                { "name": "Glas heiße Schokolade", "price": "5,50" },
+                { "name": "Irish Coffee", "price": "7,70" },
+                { "name": "Russische Schokolade", "price": "7,70" },
+                { "name": "Lumumba, (heiße Schokolade und Rum)", "price": "7,70" },
+                { "name": "Tasse Bio Tee", "price": "3,50" },
+                { "name": "Kännchen Bio Tee", "price": "5,90", "description": "Bio-Teesorten von Lebensbaum Beeren & Waldmeister Früchtetee, Berg & Frische Alpenkräutertee, Minztee, Darjeeling First Flush Schwarztee, Jasmin Grüntee, Earl Grey Schwarztee mit echtem Bergamotte-Öl" }
+            ],
+            "layout": "list"
+        }
+    ]
+  },
+
+  "buffet_page": {
+    "title": "Büffet & Catering",
+    "intro": "Für Ihre Feierlichkeiten bieten wir Ihnen eine Auswahl an köstlichen Büffets. Gerne stellen wir Ihnen auch ein individuelles Angebot zusammen.",
+    "inquiryLink": "mailto:info@alter-krug-kallinchen.de?subject=Büffetanfrage",
+    "inquiryText": "Jetzt Büffet anfragen",
+    "buffets": [
+        { "name": "Brunchbüffet", "description": "Großer Frühstückskorb mit Brot, Brötchen, Konfitüre, etc. Müslibar, Käse- & Wurstspezialitäten. Warmes: Medaillons vom Schweinefilet, Wildlachsfilets, Broccoli-Nudel-Auflauf. Dessert inklusive." },
+        { "name": "Büffet 'Classic'", "description": "Roastbeef-Röllchen, Räucherfischplatte, Internationale Käsespezialitäten. Märkische Hochzeitssuppe. Schweinemedaillons in Pilzrahm, Zanderfilet. Verschiedene Desserts." },
+        { "name": "Kleines Grillbüffet", "description": "Marinierter Fetakäse, Salate. Warmes vom Grill: Marinierte Zucchini, Bratwurst, Putensteaks, Schweinenacken. Rote Grütze als Dessert." },
+        { "name": "Großes Grillbüffet", "description": "Erweitert mit Lachsfilet, Schaschlikspießen, Grilltomaten, etc." },
+        { "name": "Büffet 'Mittelmeer'", "description": "Antipasti, Serranoschinken, Tomatencremesuppe. Schweinemedaillons in Gorgonzola, Wildlachssteak, Tortilla, Tiramisu." },
+        { "name": "Büffet 'International'", "description": "Canapées, Paprikacremesuppe, Hähnchenbrust auf Chinagemüse, Kalbshüftsteak, Crêpes." }
+    ]
+  },
+  "events_page": {
+      "title": "Unsere kommenden Events",
+      "intro": "Erleben Sie unvergessliche Momente bei unseren Veranstaltungen.",
+       "gallery": [
+        "/images/Klavierabend.jpeg",
+        "/img/events/Klavierabend.jpeg"
+      ],
+      "events": [
+          {
+              "id": "pfingst-frauen-retreat",
+              "title": "Pfingst-Frauen-Retreat",
+              "date": "21. bis 24. Mai 2026",
+              "time": "",
+              "price": "678,00 EUR",
+              "description": "Alter Krug Kallinchen Hauptstraße 15, Zossen OT Kallinchen, Brandenburg\n\nDieses Retreat ist eine Einladung, aus dem Alltag auszusteigen und dir selbst wieder näherzukommen.\n\nIn einem geschützten Raum unter Frauen verbinden wir Körper, Herz und Intuition – getragen von Ritualen, Bewegung, Natur und Gemeinschaft.\n\nDu darfst loslassen, auftanken und neue Impulse für dein Leben mitnehmen.🤍\n\nGutscheincode: HER2026 bei Buchung angeben und 15 % sparen.",
+              "image": "/img/events/Pfingsfest.jpeg"
+          },
+          {
+              "id": "saat-des-feuers",
+              "title": "Saat des Feuers",
+              "date": "17.02.2026",
+              "time": "",
+              "price": "33 bis 44 EUR nach eigenem Ermessen",
+              "description": "🔥 Die Saat des Feuers wird gelegt.\nAm 17. Februar treten wir in einen kraftvollen Übergang: vom Schlangenjahr ins Jahr des Feuerpferdes – eine Zeit des Aufbruchs, der Bewegung und der inneren Wahrheit.💫\n\nGleichzeitig beginnt 2026 als numerologisches Jahr 1. Ein Neubeginn. Nicht im Kopf – sondern im Herzen, im Körper, in der Ausrichtung.🤍\n\nWir zelebrieren diesen Moment gemeinsam mit dir.✨️\n\n📍Alter Krug, Hauptstraße 15, 15806 Kallinchen\n\nDiese Einladung ist für dich, wenn du spürst:\nJetzt. Nicht irgendwann. Jetzt ist der Moment, dich neu zu erfinden, Altes hinter dir zu lassen und mit dir selbst bewusst in die Zukunft zu gehen.🐎\n\n✨ Anmeldung ist jetzt geöffnet unter: www.lebenskunstonline.de oder per WhatsApp unter 0176 20 555 116.\n\nWenn dein ❤️ beim Lesen „Ja“ sagt –\ndan bist du genau richtig. 💫",
+              "image": "/img/events/Saat des Feuers.jpeg"
+          },
+          {
+              "id": "yoga-zeit",
+              "title": "YogaZeit im Alten Krug",
+              "date": "Jeden Dienstag",
+              "time": "09:30",
+              "price": "10-20 € nach eigenem Ermessen",
+              "description": "Alter Krug Kallinchen \nHauptstraße 15\nZossen OT Kallinchen, Brandenburg\n\n🧘♀️ Deine Yoga-Auszeit im Alten Krug\n\nJeden Dienstag um 9:30 Uhr öffnen wir den Raum für eine ganz besondere Auszeit.\n\nEine offene Yogastunde, in der du willkommen bist.\n\nMal fließende Bewegungen, mal ruhige Atemübungen, mal eine kleine Meditation. Jede Woche entsteht etwas Neues. Alles ist anfängergeeignet und du brauchst keinerlei Vorkenntnisse.\n\nMatten und Kissen sind vorhanden. Du darfst einfach kommen und deine Zeit genießen.\n\nWenn du magst, darfst du danach noch bleiben:\nLass die Stunde bei einer Tasse Kaffee oder Tee gemütlich ausklingen, komm ins Gespräch oder genieße einfach noch ein paar ruhige Minuten für dich.\n\nGäste des Hauses sind herzlich eingeladen, spontan mit auf die Matte zu kommen.\n\nWir freuen uns sehr auf dich 🤍",
+              "image": "/img/events/WöchentlYoga.jpeg",
+              "recurring": true
+          },
+          {
+              "id": "krimidinner",
+              "title": "Krimidinner – Todsicher unsterblich",
+              "date": "04.04.2026",
+              "time": "18:00 - 22:00",
+              "price": "89,00 € inkl. 4-Gänge Menü & Aperitif",
+              "description": "Todsicher unsterblich – Das Krimidinner\n\nEin Abend voller Genuss, Spannung und mörderisch guter Unterhaltung erwartet dich im Alten Krug.\n\nZwischen Vorspeise und Dessert wird nicht nur serviert. Es wird ermittelt, verdächtigt, geflüstert und gelacht. Denn irgendwo im Raum sitzt ein Täter … vielleicht sogar direkt neben dir.\n\nUnser Krimidinner ist mehr als ein Theaterstück. Es ist ein interaktives Erlebnis. Während ein spannendes Schauspiel seinen Lauf nimmt, kannst du selbst Teil der Geschichte werden. Wer möchte, schlüpft in eine Rolle, sammelt Hinweise, schmiedet Alibis und hilft dabei, den Fall zu lösen. Wer lieber genießt und beobachtet, ist genauso willkommen – denn auch vom Tisch aus wird mitgerätselt.\n\nFreue dich auf ein exklusives 3-Gänge-Buffet, ausgesuchte Getränke, stilvolles Ambiente und ein Beisammensein, das garantiert in Erinnerung bleibt. Zwischen Kerzenschein, cleveren Dialogen und überraschenden Wendungen entsteht ein Abend, der „todsicher unsterblich“ ist.\n\nAlso: Schärfe deinen Verstand, bring dein bestes Pokerface mit und sichere dir deinen Platz beim nächsten Krimidinner im Alten Krug.\n\nWir freuen uns auf einen Abend voller Spannung, Genuss und einer guten Portion Humor.",
+              "image": "/img/events/TodsicherUnsertblich.jpeg"
+          },
+          {
+              "id": "kakao-zeremonie",
+              "title": "Kakao Zeremonie",
+              "date": "24.04.2026",
+              "time": "18:00",
+              "price": "45,00 €",
+              "description": "Eine herzöffnende Zeremonie mit rituellem Kakao. Tauchen Sie ein in eine Welt der inneren Ruhe und Verbundenheit. Begleitet von Meditation und sanften Klängen, hilft Ihnen der rituelle Kakao, das Herz zu öffnen und Blockaden zu lösen.",
+              "image": ""
+          }
+      ]
+  },
+  "job_page": {
+      "title": "Stellenangebote",
+      "intro": "Werden Sie Teil unseres Teams!",
+      "jobs": [
+          { "title": "Servicekraft (m/w/d)", "type": "Vollzeit / Teilzeit", "description": "Wir suchen freundliche und motivierte Servicekräfte zur Verstärkung unseres Teams." },
+          { "title": "Koch/Köchin (m/w/d)", "type": "Vollzeit", "description": "Sie kochen mit Leidenschaft? Dann bewerben Sie sich bei uns!" }
+      ]
+  },
+  "contact_page": {
+      "title": "Kontakt",
+      "intro": "Wir freuen uns auf Ihre Nachricht."
+  },
+  "directions_page": {
+      "title": "Anfahrt",
+      "intro": "So finden Sie uns."
+  },
+  "footer": {
+    "address": {
+      "title": "Anschrift",
+      "lines": [
+        "Hotel & Restaurant Alter Krug Kallinchen",
+        "Hauptstraße 15",
+        "15806 Zossen – Kallinchen",
+        "Deutschland"
+      ],
+      "email": "info@alter-krug-kallinchen.de",
+      "phone": "+49 (0) 33769 8980"
+    },
+    "openingHours": {
+      "title": "Unsere Öffnungszeiten",
+      "lines": [
+        "Aktuell:",
+        "täglich: 12:00 bis 21:00 Uhr",
+        "Küchenschluss: 20:00 Uhr"
+      ]
+    }
+  }
+}
