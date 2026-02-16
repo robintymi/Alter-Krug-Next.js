@@ -1,6 +1,14 @@
 import Image from "next/image";
 import { getSiteContent } from "@/app/actions";
-import { MenuCategory } from "@/data/types";
+import { MenuCategory, MenuSectionLayout } from "@/data/types";
+
+function getSectionDirection(direction: MenuSectionLayout | undefined, index: number): "items-left" | "image-left" {
+  if (direction === "items-left" || direction === "image-left") {
+    return direction;
+  }
+
+  return index % 2 === 0 ? "items-left" : "image-left";
+}
 
 export default async function MenuPage() {
   const content = await getSiteContent();
@@ -23,41 +31,51 @@ export default async function MenuPage() {
 
       <section className="pb-16 md:pb-20">
         <div className="site-container max-w-5xl space-y-8">
-          {menu_page.categories.map((cat: MenuCategory, idx: number) => (
-            <article key={cat.name + idx} className="panel p-5 md:p-7">
-              <h2 className="font-serif text-3xl md:text-4xl">{cat.name}</h2>
-              <div className="mt-5 grid gap-5">
-                {cat.items.map((item, itemIdx) => {
-                  const alignRight = cat.layout === "alternating" && itemIdx % 2 !== 0;
+          {menu_page.categories.map((cat: MenuCategory, idx: number) => {
+            const sectionDirection = getSectionDirection(cat.layoutDirection, idx);
+            const imageOnLeft = sectionDirection === "image-left";
+            const sectionImage = cat.image || cat.items.find((item) => item.image)?.image;
 
-                  return (
-                    <div key={item.name + itemIdx} className={`flex gap-4 ${alignRight ? "flex-row-reverse text-right" : "text-left"}`}>
-                      {item.image && (
-                        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-primary/10 md:h-24 md:w-24">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            loading="lazy"
-                            sizes="96px"
-                            className="object-cover"
-                          />
-                        </div>
-                      )}
+            return (
+              <article key={cat.name + idx} className="panel p-5 md:p-7">
+                <div
+                  className={`grid gap-5 md:grid-cols-[minmax(0,1fr)_220px] md:items-start ${
+                    imageOnLeft ? "md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1" : ""
+                  }`}
+                >
+                  <div>
+                    <h2 className="font-serif text-3xl md:text-4xl">{cat.name}</h2>
 
-                      <div className="min-w-0 flex-1">
-                        <div className={`mb-1 flex gap-3 border-b border-dotted border-primary/20 pb-2 ${alignRight ? "flex-row-reverse" : "justify-between"}`}>
-                          <h3 className="text-base font-semibold md:text-lg">{item.name}</h3>
-                          <span className="whitespace-nowrap text-sm font-semibold text-primary md:text-base">{item.price} €</span>
-                        </div>
-                        {item.description && <p className="text-sm text-muted-foreground">{item.description}</p>}
+                    {cat.items.length > 0 ? (
+                      <div className="mt-4 space-y-3">
+                        {cat.items.map((item, itemIdx: number) => (
+                          <div key={item.name + itemIdx} className="flex items-start justify-between gap-4 border-b border-dotted border-primary/15 pb-2">
+                            <div>
+                              <p className="text-sm font-medium text-foreground md:text-base">{item.name}</p>
+                              {item.description && <p className="mt-1 text-xs text-muted-foreground md:text-sm">{item.description}</p>}
+                            </div>
+                            <span className="whitespace-nowrap text-sm font-normal text-black/75 md:text-base">{item.price}</span>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </article>
-          ))}
+                    ) : (
+                      <p className="mt-4 text-sm text-muted-foreground">Noch keine Einträge in dieser Sektion.</p>
+                    )}
+                  </div>
+
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-primary/10">
+                    {sectionImage ? (
+                      <Image src={sectionImage} alt={cat.name} fill loading="lazy" sizes="220px" className="object-cover" />
+                    ) : (
+                      <div className="flex h-full items-center justify-center bg-muted/60 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                        Bild folgt
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
     </main>

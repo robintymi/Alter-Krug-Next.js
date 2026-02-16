@@ -3,35 +3,56 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { revalidatePath } from 'next/cache'
+import { Event } from '@/data/types'
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'site-content.json')
 
-export async function getEvents() {
+interface SiteContentWithEvents {
+    events_page?: {
+        events?: Event[]
+    }
+}
+
+function toSiteContentWithEvents(value: unknown): SiteContentWithEvents {
+    if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+        return {}
+    }
+
+    return value as SiteContentWithEvents
+}
+
+export async function getEvents(): Promise<Event[]> {
     try {
-        console.log('Reading events from:', DATA_FILE_PATH);
         const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8')
-        const data = JSON.parse(fileContent)
-        const events = data.events_page?.events || []
-        console.log(`Found ${events.length} events.`);
-        return events
+        const data = toSiteContentWithEvents(JSON.parse(fileContent))
+        return Array.isArray(data.events_page?.events) ? data.events_page.events : []
     } catch (error) {
         console.error('Error reading events:', error)
         return []
     }
 }
 
-export async function saveEvents(events: any[]) {
+export async function saveEvents(events: Event[]) {
     try {
         const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8')
-        const data = JSON.parse(fileContent)
+        const parsed = JSON.parse(fileContent)
+        const root =
+            typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)
+                ? (parsed as Record<string, unknown>)
+                : {}
+        const data = toSiteContentWithEvents(root)
 
-        // Update only events
+        if (!data.events_page) {
+            data.events_page = {}
+        }
+
         data.events_page.events = events
 
-        await fs.writeFile(DATA_FILE_PATH, JSON.stringify(data, null, 2), 'utf-8')
+        await fs.writeFile(DATA_FILE_PATH, JSON.stringify(root, null, 2), 'utf-8')
         revalidatePath('/admin')
+        revalidatePath('/admin/events')
         revalidatePath('/events')
-        revalidatePath('/') // In case they are shown on homepage
+        revalidatePath('/')
         return { success: true }
     } catch (error) {
         console.error('Error saving events:', error)
@@ -41,20 +62,26 @@ export async function saveEvents(events: any[]) {
 
 export async function debugEvents() {
     try {
-        const fileExists = await fs.access(DATA_FILE_PATH).then(() => true).catch(() => false);
-        let contentSnippet = '';
+        const fileExists = await fs
+            .access(DATA_FILE_PATH)
+            .then(() => true)
+            .catch(() => false)
+
+        let contentSnippet = ''
         if (fileExists) {
-            const content = await fs.readFile(DATA_FILE_PATH, 'utf-8');
-            contentSnippet = content.substring(0, 200) + '...';
+            const content = await fs.readFile(DATA_FILE_PATH, 'utf-8')
+            contentSnippet = content.substring(0, 200) + '...'
         }
+
         return {
             path: DATA_FILE_PATH,
             exists: fileExists,
             cwd: process.cwd(),
-            snippet: contentSnippet
-        };
-    } catch (e: any) {
-        return { error: e.message, path: DATA_FILE_PATH, cwd: process.cwd() };
+            snippet: contentSnippet,
+        }
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Unknown error'
+        return { error: message, path: DATA_FILE_PATH, cwd: process.cwd() }
     }
 }
 
@@ -68,14 +95,14 @@ export async function addEvent(formData: FormData) {
 
     if (!title || !date) return { error: 'Titel und Datum sind erforderlich' }
 
-    const newEvent = {
+    const newEvent: Event = {
         id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
         title,
         date,
         time,
         price,
         description,
-        image: image || ''
+        image: image || '',
     }
 
     const events = await getEvents()
@@ -108,7 +135,7 @@ export async function updateEvent(index: number, formData: FormData) {
         time,
         price,
         description,
-        image: image || events[index].image // Keep old image if not updated/provided
+        image: image || events[index].image,
     }
 
     await saveEvents(events)

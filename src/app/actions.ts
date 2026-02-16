@@ -2,15 +2,15 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { cache } from 'react';
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 const ADMIN_PASSWORD = "alterkrug-admin";
 const SESSION_COOKIE_NAME = "alter_krug_admin_session";
 
 const dataFilePath = path.join(process.cwd(), 'src/data/site-content.json');
 
-const readSiteContent = cache(async () => {
+async function readSiteContent() {
   try {
     const data = await fs.readFile(dataFilePath, 'utf-8');
     return JSON.parse(data);
@@ -18,7 +18,7 @@ const readSiteContent = cache(async () => {
     console.error('Failed to read site content:', error);
     return null;
   }
-});
+}
 
 export async function getSiteContent() {
   return readSiteContent();
@@ -27,6 +27,12 @@ export async function getSiteContent() {
 export async function updateSiteContent(newContent: unknown) {
   try {
     await fs.writeFile(dataFilePath, JSON.stringify(newContent, null, 2), 'utf-8');
+    revalidatePath('/');
+    revalidatePath('/restaurant');
+    revalidatePath('/speisekarte');
+    revalidatePath('/getraenke');
+    revalidatePath('/events');
+    revalidatePath('/admin');
     return { success: true };
   } catch (error) {
     console.error('Failed to update site content:', error);

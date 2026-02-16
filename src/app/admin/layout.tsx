@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { logout } from "@/app/actions/auth"
+import Link from "next/link"
 
 export default function AdminLayout({
   children,
@@ -14,6 +15,17 @@ export default function AdminLayout({
                <span className="font-bold text-3xl text-primary font-serif">Admin Dashboard</span>
                <div className="h-6 w-px bg-gray-300 mx-2 hidden md:block"></div>
                <span className="text-sm text-muted-foreground hidden md:block">Alter Krug Kallinchen</span>
+               <div className="hidden items-center gap-2 md:flex">
+                 <Button variant="ghost" size="sm" asChild>
+                   <Link href="/admin">Übersicht</Link>
+                 </Button>
+                 <Button variant="ghost" size="sm" asChild>
+                   <Link href="/admin/events">Events</Link>
+                 </Button>
+                 <Button variant="ghost" size="sm" asChild>
+                   <Link href="/admin/karten">Speise- & Getränkekarte</Link>
+                 </Button>
+               </div>
             </div>
             
             <form action={logout}>

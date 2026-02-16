@@ -1,43 +1,38 @@
 'use client'
 
-import { useFormState } from 'react-dom'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { addEvent, updateEvent } from "@/app/actions/admin-events"
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { addEvent, updateEvent } from '@/app/actions/admin-events'
+import { Event } from '@/data/types'
 
 interface EventFormProps {
     mode: 'create' | 'edit'
-    initialData?: any
+    initialData?: Partial<Event>
     index?: number
 }
 
-const initialState = {
-    message: null,
-    error: null
-}
-
 export function EventForm({ mode, initialData, index }: EventFormProps) {
-    const action = mode === 'create' 
-        ? addEvent 
-        : updateEvent.bind(null, index as number)
+    const action = mode === 'create' ? addEvent : updateEvent.bind(null, index as number)
 
     return (
-        <Card className="max-w-2xl mx-auto">
+        <Card className="mx-auto max-w-2xl">
             <CardHeader>
                 <CardTitle>{mode === 'create' ? 'Neues Event erstellen' : 'Event bearbeiten'}</CardTitle>
             </CardHeader>
-            <form action={async (formData) => {
-                 const result = await action(formData);
-                 if (result?.success) {
-                     window.location.href = '/admin'; // Redirect on success
-                 } else {
-                     alert(result?.error || 'Fehler beim Speichern');
-                 }
-            }}>
+            <form
+                action={async (formData) => {
+                    const result = await action(formData)
+                    if (result?.success) {
+                        window.location.href = '/admin/events'
+                    } else {
+                        alert(result?.error || 'Fehler beim Speichern')
+                    }
+                }}
+            >
                 <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
@@ -57,14 +52,14 @@ export function EventForm({ mode, initialData, index }: EventFormProps) {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="price">Preis</Label>
-                            <Input id="price" name="price" defaultValue={initialData?.price} placeholder="z.B. 15,00 €" />
+                            <Input id="price" name="price" defaultValue={initialData?.price} placeholder="z.B. 15,00 EUR" />
                         </div>
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="image">Bild-Pfad (optional)</Label>
-                        <Input id="image" name="image" defaultValue={initialData?.image} placeholder="/images/beispiel.jpg" />
-                        <p className="text-xs text-muted-foreground">Geben Sie den Pfad zu einem Bild im public/images Ordner an.</p>
+                        <Input id="image" name="image" defaultValue={initialData?.image} placeholder="/img/events/beispiel.jpg" />
+                        <p className="text-xs text-muted-foreground">Geben Sie den Pfad zu einem Bild im public-Ordner an.</p>
                     </div>
 
                     <div className="space-y-2">
@@ -74,7 +69,7 @@ export function EventForm({ mode, initialData, index }: EventFormProps) {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     <Button variant="outline" type="button" asChild>
-                        <Link href="/admin">Abbrechen</Link>
+                        <Link href="/admin/events">Abbrechen</Link>
                     </Button>
                     <Button type="submit">Speichern</Button>
                 </CardFooter>

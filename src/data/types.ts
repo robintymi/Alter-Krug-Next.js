@@ -22,16 +22,21 @@ export interface JobOffer {
     description: string;
 }
 
+export type MenuSectionLayout = 'auto' | 'items-left' | 'image-left';
+
+export interface MenuItem {
+    name: string;
+    price: string;
+    description?: string;
+    image?: string;
+}
+
 export interface MenuCategory {
     name: string;
-    items: {
-        name: string;
-        price: string;
-        description?: string;
-        image?: string;
-    }[];
+    items: MenuItem[];
     image?: string;
-    layout?: 'list' | 'alternating'; // New field for layout control
+    layout?: 'list' | 'alternating'; // Legacy field kept for compatibility
+    layoutDirection?: MenuSectionLayout;
 }
 
 export interface Room {
