@@ -12,7 +12,7 @@ export function Footer({ content }: FooterProps) {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Adresse</p>
-            <h3 className="mt-3 font-serif text-3xl">{content.address.title}</h3>
+            <h3 className="mt-3 font-script text-5xl leading-none">{content.address.title}</h3>
             <div className="mt-4 space-y-1 text-sm text-white/80">
               {content.address.lines.map((line, i) => (
                 <p key={line + i}>{line}</p>
@@ -30,7 +30,7 @@ export function Footer({ content }: FooterProps) {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Info</p>
-            <h3 className="mt-3 font-serif text-3xl">{content.openingHours.title}</h3>
+            <h3 className="mt-3 font-script text-5xl leading-none">{content.openingHours.title}</h3>
             <ul className="mt-4 space-y-1 text-sm text-white/80">
               {content.openingHours.lines.map((line, i) => (
                 <li key={line + i}>{line}</li>
@@ -40,7 +40,7 @@ export function Footer({ content }: FooterProps) {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Rechtliches</p>
-            <h3 className="mt-3 font-serif text-3xl">Links</h3>
+            <h3 className="mt-3 font-script text-5xl leading-none">Links</h3>
             <ul className="mt-4 space-y-2 text-sm text-white/80">
               <li>
                 <Link href="/impressum" className="transition-colors hover:text-[#f6c38a]">

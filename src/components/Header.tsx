@@ -38,7 +38,7 @@ function NavItemLink({ href, label }: { href: string; label: string }) {
 
 export function Header({ content }: HeaderProps) {
   return (
-    <header className="w-full border-b border-white/40 bg-[#fcf6eb]/95">
+    <header className="sticky top-0 z-50 w-full border-b border-white/40 bg-[#fcf6eb]/95 backdrop-blur-md">
       <div className="site-container flex min-h-[100px] items-center justify-between gap-6 py-2">
         <div className="hidden md:flex flex-col text-xs uppercase tracking-[0.15em] text-muted-foreground">
           <span>Hotel & Restaurant</span>
@@ -65,39 +65,41 @@ export function Header({ content }: HeaderProps) {
         </a>
       </div>
 
-      <div className="nav-surface sticky top-0 z-50 shadow-[0_8px_20px_-20px_rgba(27,17,7,0.7)]">
+      <div className="nav-surface shadow-[0_8px_20px_-20px_rgba(27,17,7,0.7)]">
         <div className="site-container flex min-h-[66px] items-center gap-4">
           <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8">
             {content.navItems.map((item) => (
               <div key={item.label} className="group relative">
                 <NavItemLink href={item.href} label={item.label} />
                 {item.items && (
-                  <div className="pointer-events-none absolute left-1/2 top-full z-30 w-64 -translate-x-1/2 translate-y-2 rounded-2xl border border-white/60 bg-[#fff9f2] p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-3 group-hover:opacity-100">
-                    {item.items.map((subItem) => {
-                      if (isExternalLink(subItem.href)) {
+                  <div className="invisible absolute left-1/2 top-full z-30 w-64 -translate-x-1/2 translate-y-1 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    <div className="rounded-2xl border border-white/60 bg-[#fff9f2] p-2 shadow-xl">
+                      {item.items.map((subItem) => {
+                        if (isExternalLink(subItem.href)) {
+                          return (
+                            <a
+                              key={subItem.label}
+                              href={subItem.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block rounded-xl px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary"
+                            >
+                              {subItem.label}
+                            </a>
+                          );
+                        }
+
                         return (
-                          <a
+                          <Link
                             key={subItem.label}
                             href={subItem.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             className="block rounded-xl px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary"
                           >
                             {subItem.label}
-                          </a>
+                          </Link>
                         );
-                      }
-
-                      return (
-                        <Link
-                          key={subItem.label}
-                          href={subItem.href}
-                          className="block rounded-xl px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary"
-                        >
-                          {subItem.label}
-                        </Link>
-                      );
-                    })}
+                      })}
+                    </div>
                   </div>
                 )}
               </div>

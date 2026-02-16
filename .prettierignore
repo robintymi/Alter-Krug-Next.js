@@ -1,0 +1,9 @@
+.next
+node_modules
+coverage
+out
+build
+package-lock.json
+build.log
+build_debug.log
+build_error.log

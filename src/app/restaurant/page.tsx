@@ -18,6 +18,19 @@ export default async function RestaurantPage() {
         </div>
       </section>
 
+      <section className="pb-10 md:pb-14">
+        <div className="site-container">
+          <div className="panel overflow-hidden">
+            <div className="flex aspect-[16/7] w-full items-center justify-center bg-gradient-to-br from-[#f7ecdb] to-[#efe1cc]">
+              <div className="rounded-2xl border border-dashed border-primary/35 bg-white/70 px-6 py-4 text-center">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/70">Platzhalter</p>
+                <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">Foto folgt</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="pb-16 md:pb-20">
         <div className="site-container grid gap-6 md:grid-cols-2">
           {restaurant_page.sections.map((section: { title: string; content: string }, idx: number) => (

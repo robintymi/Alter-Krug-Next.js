@@ -12,6 +12,7 @@
 
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --font-script: var(--font-tangerine), "Times New Roman", cursive;
   --font-serif: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-sans: var(--font-sans), "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 

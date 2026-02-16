@@ -1,28 +1,33 @@
 # Aufgabenliste (TO-DO)
 
 ## 🚨 Wichtige Korrekturen (Build-Fehler)
-- [ ] **Tailwind-Konfiguration reparieren**: Behebe `unknown utility class border-border` in `globals.css`.
-  - Stelle sicher, dass `tailwind.config.ts` das Theme mit benutzerdefinierten Farben (border, input, ring, background, foreground) erweitert, die von Shadcn UI oder ähnlichen Bibliotheken verwendet werden.
-  - Überprüfe, ob die `content`-Pfade alle Komponentendateien einschließen.
+
+- [x] **Tailwind-Konfiguration reparieren**: `unknown utility class border-border` ist nicht mehr vorhanden; Theme-Tokens sind in `src/app/globals.css` (`@theme`) für Tailwind v4 definiert.
+  - [x] Farben (`border`, `input`, `ring`, `background`, `foreground`) sind als Theme-Variablen angelegt.
+  - [x] Build-Check erfolgreich (`npm run build` am 16.02.2026).
 
 ## 🛠 Projekteinrichtung
-- [ ] Projektstruktur initialisieren (Erledigt)
-- [ ] Basis-Layout erstellen (`app/layout.tsx`)
-- [ ] ESLint und Prettier konfigurieren
-- [ ] Notwendige Shadcn/UI-Komponenten hinzufügen (Button, Card, Input, etc.)
+
+- [x] Projektstruktur initialisieren (Erledigt)
+- [x] Basis-Layout erstellen (`app/layout.tsx`)
+- [x] ESLint und Prettier konfigurieren
+- [x] Notwendige Shadcn/UI-Komponenten hinzufügen (Button, Card, Input, etc.)
 
 ## 🚀 Features
-- [ ] Startseite implementieren (`app/page.tsx`)
-- [ ] Navigationskomponente erstellen
-- [ ] Footer-Komponente implementieren
-- [ ] Ladezustände und Fehlerbehandlung hinzufügen
+
+- [x] Startseite implementieren (`app/page.tsx`)
+- [x] Navigationskomponente erstellen
+- [x] Footer-Komponente implementieren
+- [x] Ladezustände und Fehlerbehandlung hinzufügen
 
 ## 🎨 Design & UI
-- [ ] Farbpalette in `tailwind.config.ts` definieren
-- [ ] Typografie (Schriftarten) einrichten
-- [ ] Wiederverwendbare UI-Komponenten erstellen
+
+- [x] Farbpalette definieren (Tailwind v4 via `src/app/globals.css`)
+- [x] Typografie (Schriftarten) einrichten
+- [x] Wiederverwendbare UI-Komponenten erstellen
 
 ## 🧪 Testing & Qualitätssicherung
+
 - [ ] Unit-Tests für kritische Funktionen schreiben
 - [ ] E2E-Tests hinzufügen (Playwright/Cypress)
-- [ ] Vollständigen Build-Check durchführen (`npm run build`)
+- [x] Vollständigen Build-Check durchführen (`npm run build`)

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Manrope, Tangerine } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { getSiteContent } from "@/app/actions";
@@ -17,6 +17,12 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
 });
 
+const tangerine = Tangerine({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-tangerine",
+});
+
 export const metadata: Metadata = {
   title: "Alter Krug Kallinchen",
   description: "Hotel & Restaurant am Motzener See",
@@ -31,7 +37,14 @@ export default async function RootLayout({
 
   return (
     <html lang="de" className="scroll-smooth">
-      <body className={cn("min-h-screen antialiased", manrope.variable, cormorant.variable)}>
+      <body
+        className={cn(
+          "min-h-screen antialiased",
+          manrope.variable,
+          cormorant.variable,
+          tangerine.variable
+        )}
+      >
         {content && <Header content={content.header} />}
         <div className="min-h-screen">{children}</div>
         {content && <Footer content={content.footer} />}
