@@ -33,6 +33,21 @@
 - [ ] **Domain verifizieren**: resend.com → **Domains** → "Add Domain" → `alter-krug.de` eintragen → DNS-Einträge beim Hoster (udmedia) setzen
   - Danach `FROM_EMAIL=buchung@alter-krug.de` in `.env.local` (lokal) und in den Server-Umgebungsvariablen setzen
 
+## 💳 Stripe – Zahlungsabwicklung
+
+- [ ] **Stripe-Konto erstellen** → [stripe.com](https://stripe.com)
+- [ ] API-Keys in `.env.local` eintragen:
+  - `STRIPE_SECRET_KEY=sk_test_...`
+  - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...`
+- [ ] **Buchungsflow testen** (Stripe Test-Modus):
+  - Stripe CLI installieren: `stripe listen --forward-to localhost:3000/api/stripe/webhook`
+  - Testkarte: `4242 4242 4242 4242`, Ablauf: beliebig, CVC: beliebig
+- [ ] **Nach Deployment**: Stripe Webhook registrieren
+  - stripe.com → Developers → Webhooks → "Add endpoint"
+  - URL: `https://alter-krug.de/api/stripe/webhook`
+  - Event: `checkout.session.completed`
+  - `STRIPE_WEBHOOK_SECRET=whsec_...` in Server-Umgebungsvariablen eintragen
+
 ## 🧪 Testing & Qualitätssicherung
 
 - [ ] Unit-Tests für kritische Funktionen schreiben
