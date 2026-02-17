@@ -92,6 +92,8 @@ export async function addEvent(formData: FormData) {
     const price = formData.get('price') as string
     const description = formData.get('description') as string
     const image = formData.get('image') as string
+    const maxSeatsRaw = formData.get('maxSeats') as string
+    const priceInCentsRaw = formData.get('priceInCents') as string
 
     if (!title || !date) return { error: 'Titel und Datum sind erforderlich' }
 
@@ -103,6 +105,8 @@ export async function addEvent(formData: FormData) {
         price,
         description,
         image: image || '',
+        ...(maxSeatsRaw ? { maxSeats: parseInt(maxSeatsRaw, 10) } : {}),
+        ...(priceInCentsRaw ? { priceInCents: Math.round(parseFloat(priceInCentsRaw) * 100) } : {}),
     }
 
     const events = await getEvents()
@@ -119,6 +123,8 @@ export async function updateEvent(index: number, formData: FormData) {
     const price = formData.get('price') as string
     const description = formData.get('description') as string
     const image = formData.get('image') as string
+    const maxSeatsRaw = formData.get('maxSeats') as string
+    const priceInCentsRaw = formData.get('priceInCents') as string
 
     if (!title || !date) return { error: 'Titel und Datum sind erforderlich' }
 
@@ -136,6 +142,8 @@ export async function updateEvent(index: number, formData: FormData) {
         price,
         description,
         image: image || events[index].image,
+        maxSeats: maxSeatsRaw ? parseInt(maxSeatsRaw, 10) : undefined,
+        priceInCents: priceInCentsRaw ? Math.round(parseFloat(priceInCentsRaw) * 100) : undefined,
     }
 
     await saveEvents(events)

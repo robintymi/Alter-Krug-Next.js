@@ -13,7 +13,9 @@ export interface Event {
     description: string;
     image?: string;
     galleryImage?: string;
-    recurring?: boolean; // New field for recurring events
+    recurring?: boolean;
+    maxSeats?: number;       // Maximum number of bookable seats
+    priceInCents?: number;   // Price per seat in cents (e.g. 1500 = 15,00 €)
 }
 
 export interface JobOffer {

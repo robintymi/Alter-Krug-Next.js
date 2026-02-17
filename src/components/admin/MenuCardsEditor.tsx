@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowDown, ArrowUp, Plus, Save, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronDown, ChevronRight, GripVertical, Plus, Save, Settings2, Trash2 } from 'lucide-react'
 import { saveMenuAndDrinksPages, EditableCardPage } from '@/app/actions/admin-menu'
 import { MenuCategory, MenuItem, MenuSectionLayout } from '@/data/types'
 import { Button } from '@/components/ui/button'
@@ -85,6 +85,21 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
 
+    // Accordion state: which items are expanded for editing
+    const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({})
+    // Which category settings panels are open
+    const [expandedCategorySettings, setExpandedCategorySettings] = useState<Record<string, boolean>>({})
+
+    const itemKey = (pageKey: PageKey, catIdx: number, itemIdx: number) =>
+        `${pageKey}-${catIdx}-${itemIdx}`
+    const catKey = (pageKey: PageKey, catIdx: number) => `${pageKey}-${catIdx}`
+
+    const toggleItem = (key: string) =>
+        setExpandedItems((prev) => ({ ...prev, [key]: !prev[key] }))
+
+    const toggleCategorySettings = (key: string) =>
+        setExpandedCategorySettings((prev) => ({ ...prev, [key]: !prev[key] }))
+
     const updatePage = (pageKey: PageKey, updater: (page: EditableCardPage) => EditableCardPage) => {
         setPages((previous) => ({
             ...previous,
@@ -108,21 +123,13 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
         updatePage(pageKey, (page) => ({
             ...page,
             categories: page.categories.map((category, index) => {
-                if (index !== categoryIndex) {
-                    return category
-                }
+                if (index !== categoryIndex) return category
 
                 if (field === 'layoutDirection') {
-                    return {
-                        ...category,
-                        layoutDirection: value as MenuSectionLayout,
-                    }
+                    return { ...category, layoutDirection: value as MenuSectionLayout }
                 }
 
-                return {
-                    ...category,
-                    [field]: value,
-                }
+                return { ...category, [field]: value }
             }),
         }))
     }
@@ -158,19 +165,12 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
         updatePage(pageKey, (page) => ({
             ...page,
             categories: page.categories.map((category, currentCategoryIndex) => {
-                if (currentCategoryIndex !== categoryIndex) {
-                    return category
-                }
+                if (currentCategoryIndex !== categoryIndex) return category
 
                 return {
                     ...category,
                     items: category.items.map((item, currentItemIndex) =>
-                        currentItemIndex === itemIndex
-                            ? {
-                                  ...item,
-                                  [field]: value,
-                              }
-                            : item
+                        currentItemIndex === itemIndex ? { ...item, [field]: value } : item
                     ),
                 }
             }),
@@ -178,26 +178,30 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
     }
 
     const addItem = (pageKey: PageKey, categoryIndex: number) => {
+        const newItemIndex =
+            (pages[pageKey].categories[categoryIndex]?.items.length ?? 0)
         updatePage(pageKey, (page) => ({
             ...page,
             categories: page.categories.map((category, index) =>
                 index === categoryIndex
-                    ? {
-                          ...category,
-                          items: [...category.items, createEmptyItem()],
-                      }
+                    ? { ...category, items: [...category.items, createEmptyItem()] }
                     : category
             ),
         }))
+        // Auto-expand the new item
+        setTimeout(() => {
+            setExpandedItems((prev) => ({
+                ...prev,
+                [itemKey(pageKey, categoryIndex, newItemIndex)]: true,
+            }))
+        }, 0)
     }
 
     const removeItem = (pageKey: PageKey, categoryIndex: number, itemIndex: number) => {
         updatePage(pageKey, (page) => ({
             ...page,
             categories: page.categories.map((category, index) => {
-                if (index !== categoryIndex) {
-                    return category
-                }
+                if (index !== categoryIndex) return category
 
                 return {
                     ...category,
@@ -211,9 +215,7 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
         updatePage(pageKey, (page) => ({
             ...page,
             categories: page.categories.map((category, index) => {
-                if (index !== categoryIndex) {
-                    return category
-                }
+                if (index !== categoryIndex) return category
 
                 return {
                     ...category,
@@ -246,11 +248,12 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
 
     return (
         <div className="space-y-8">
+            {/* Header bar */}
             <div className="flex flex-col gap-4 rounded-xl border bg-white p-5 shadow-sm md:flex-row md:items-center md:justify-between">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Speise- und Getränkekarten</h1>
                     <p className="text-sm text-muted-foreground">
-                        Sektionen und Einträge bearbeiten, Reihenfolge ändern und Layout pro Sektion festlegen.
+                        Auf einen Eintrag klicken zum Bearbeiten. Sektionen und Einträge per Pfeile sortieren.
                     </p>
                 </div>
                 <Button onClick={handleSave} disabled={saving}>
@@ -259,185 +262,277 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                 </Button>
             </div>
 
-            {message && <p className="rounded-md border border-green-200 bg-green-50 px-4 py-2 text-sm text-green-800">{message}</p>}
-            {error && <p className="rounded-md border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">{error}</p>}
+            {message && (
+                <p className="rounded-md border border-green-200 bg-green-50 px-4 py-2 text-sm text-green-800">
+                    {message}
+                </p>
+            )}
+            {error && (
+                <p className="rounded-md border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
+                    {error}
+                </p>
+            )}
 
             {(['menu', 'drinks'] as PageKey[]).map((pageKey) => {
                 const page = pages[pageKey]
                 const pageConfig = PAGE_CONFIG[pageKey]
 
                 return (
-                    <section key={pageKey} className="space-y-5 rounded-xl border bg-white p-5 shadow-sm">
-                        <div className="grid gap-4 md:grid-cols-2">
-                            <div className="space-y-2">
-                                <Label>{pageConfig.title} Titel</Label>
-                                <Input value={page.title} onChange={(event) => setPageField(pageKey, 'title', event.target.value)} />
+                    <section key={pageKey} className="space-y-4 rounded-xl border bg-white p-5 shadow-sm">
+                        {/* Page title / intro */}
+                        <div className="grid gap-4 border-b pb-4 md:grid-cols-2">
+                            <div className="space-y-1.5">
+                                <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                    {pageConfig.title} — Seitentitel
+                                </Label>
+                                <Input
+                                    value={page.title}
+                                    onChange={(e) => setPageField(pageKey, 'title', e.target.value)}
+                                />
                             </div>
 
                             {pageConfig.showIntro && (
-                                <div className="space-y-2">
-                                    <Label>Einleitung</Label>
+                                <div className="space-y-1.5">
+                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                        Einleitung
+                                    </Label>
                                     <Textarea
                                         rows={2}
                                         value={page.intro ?? ''}
-                                        onChange={(event) => setPageField(pageKey, 'intro', event.target.value)}
+                                        onChange={(e) => setPageField(pageKey, 'intro', e.target.value)}
                                     />
                                 </div>
                             )}
                         </div>
 
-                        <div className="space-y-4">
-                            {page.categories.map((category, categoryIndex) => (
-                                <article key={`${pageKey}-${categoryIndex}`} className="space-y-4 rounded-lg border bg-gray-50 p-4">
-                                    <div className="flex flex-wrap items-center justify-between gap-3">
-                                        <h3 className="font-semibold">{`Sektion ${categoryIndex + 1}`}</h3>
-                                        <div className="flex items-center gap-2">
-                                            <Button
+                        {/* Categories as accordion sections */}
+                        <div className="space-y-3">
+                            {page.categories.map((category, categoryIndex) => {
+                                const ck = catKey(pageKey, categoryIndex)
+                                const settingsOpen = expandedCategorySettings[ck] ?? false
+
+                                return (
+                                    <article key={ck} className="overflow-hidden rounded-lg border border-gray-200">
+                                        {/* Section header */}
+                                        <div className="flex items-center gap-2 bg-amber-50 px-4 py-3">
+                                            <GripVertical className="h-4 w-4 shrink-0 text-muted-foreground" />
+                                            <span className="flex-1 font-semibold text-sm">
+                                                {category.name || `Sektion ${categoryIndex + 1}`}
+                                            </span>
+                                            <span className="text-xs text-muted-foreground mr-1">
+                                                {category.items.length} Einträge
+                                            </span>
+                                            <button
                                                 type="button"
-                                                variant="outline"
-                                                size="sm"
+                                                title="Einstellungen"
+                                                onClick={() => toggleCategorySettings(ck)}
+                                                className={`rounded p-1 transition-colors hover:bg-amber-200 ${settingsOpen ? 'bg-amber-200 text-amber-900' : 'text-muted-foreground'}`}
+                                            >
+                                                <Settings2 className="h-4 w-4" />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                title="Nach oben"
                                                 onClick={() => moveCategory(pageKey, categoryIndex, -1)}
                                                 disabled={categoryIndex === 0}
+                                                className="rounded p-1 text-muted-foreground transition-colors hover:bg-amber-200 disabled:opacity-30"
                                             >
                                                 <ArrowUp className="h-4 w-4" />
-                                            </Button>
-                                            <Button
+                                            </button>
+                                            <button
                                                 type="button"
-                                                variant="outline"
-                                                size="sm"
+                                                title="Nach unten"
                                                 onClick={() => moveCategory(pageKey, categoryIndex, 1)}
                                                 disabled={categoryIndex === page.categories.length - 1}
+                                                className="rounded p-1 text-muted-foreground transition-colors hover:bg-amber-200 disabled:opacity-30"
                                             >
                                                 <ArrowDown className="h-4 w-4" />
-                                            </Button>
-                                            <Button type="button" variant="destructive" size="sm" onClick={() => removeCategory(pageKey, categoryIndex)}>
-                                                <Trash2 className="mr-2 h-4 w-4" />
-                                                Sektion löschen
-                                            </Button>
-                                        </div>
-                                    </div>
-
-                                    <div className="grid gap-4 md:grid-cols-3">
-                                        <div className="space-y-2 md:col-span-2">
-                                            <Label>Sektionsname</Label>
-                                            <Input
-                                                value={category.name}
-                                                onChange={(event) => setCategoryField(pageKey, categoryIndex, 'name', event.target.value)}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label>Layout</Label>
-                                            <select
-                                                value={category.layoutDirection ?? 'auto'}
-                                                onChange={(event) => setCategoryField(pageKey, categoryIndex, 'layoutDirection', event.target.value)}
-                                                className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+                                            </button>
+                                            <button
+                                                type="button"
+                                                title="Sektion löschen"
+                                                onClick={() => removeCategory(pageKey, categoryIndex)}
+                                                className="rounded p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
                                             >
-                                                <option value="auto">Automatisch abwechselnd</option>
-                                                <option value="items-left">Links Einträge, rechts Bild</option>
-                                                <option value="image-left">Links Bild, rechts Einträge</option>
-                                            </select>
+                                                <Trash2 className="h-4 w-4" />
+                                            </button>
                                         </div>
-                                    </div>
 
-                                    <div className="space-y-2">
-                                        <Label>Sektionsbild (Pfad)</Label>
-                                        <Input
-                                            placeholder="/img/getraenke/Heißgetränke.jpeg"
-                                            value={category.image ?? ''}
-                                            onChange={(event) => setCategoryField(pageKey, categoryIndex, 'image', event.target.value)}
-                                        />
-                                    </div>
-
-                                    <div className="flex items-center justify-between">
-                                        <h4 className="text-sm font-semibold text-muted-foreground">Einträge</h4>
-                                        <Button type="button" variant="outline" size="sm" onClick={() => addItem(pageKey, categoryIndex)}>
-                                            <Plus className="mr-2 h-4 w-4" />
-                                            Eintrag hinzufügen
-                                        </Button>
-                                    </div>
-
-                                    <div className="space-y-3">
-                                        {category.items.map((item, itemIndex) => (
-                                            <div key={`${pageKey}-${categoryIndex}-${itemIndex}`} className="space-y-3 rounded-md border bg-white p-3">
-                                                <div className="flex flex-wrap items-center justify-between gap-2">
-                                                    <p className="text-sm font-medium">{`Eintrag ${itemIndex + 1}`}</p>
-                                                    <div className="flex items-center gap-2">
-                                                        <Button
-                                                            type="button"
-                                                            variant="outline"
-                                                            size="sm"
-                                                            onClick={() => moveItem(pageKey, categoryIndex, itemIndex, -1)}
-                                                            disabled={itemIndex === 0}
-                                                        >
-                                                            <ArrowUp className="h-4 w-4" />
-                                                        </Button>
-                                                        <Button
-                                                            type="button"
-                                                            variant="outline"
-                                                            size="sm"
-                                                            onClick={() => moveItem(pageKey, categoryIndex, itemIndex, 1)}
-                                                            disabled={itemIndex === category.items.length - 1}
-                                                        >
-                                                            <ArrowDown className="h-4 w-4" />
-                                                        </Button>
-                                                        <Button
-                                                            type="button"
-                                                            variant="destructive"
-                                                            size="sm"
-                                                            onClick={() => removeItem(pageKey, categoryIndex, itemIndex)}
-                                                        >
-                                                            <Trash2 className="mr-2 h-4 w-4" />
-                                                            Entfernen
-                                                        </Button>
-                                                    </div>
-                                                </div>
-
-                                                <div className="grid gap-3 md:grid-cols-3">
-                                                    <div className="space-y-2 md:col-span-2">
-                                                        <Label>Name</Label>
-                                                        <Input
-                                                            value={item.name}
-                                                            onChange={(event) =>
-                                                                setItemField(pageKey, categoryIndex, itemIndex, 'name', event.target.value)
-                                                            }
-                                                        />
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        <Label>Preis</Label>
-                                                        <Input
-                                                            value={item.price}
-                                                            onChange={(event) =>
-                                                                setItemField(pageKey, categoryIndex, itemIndex, 'price', event.target.value)
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="space-y-2">
-                                                    <Label>Beschreibung (optional)</Label>
-                                                    <Textarea
-                                                        rows={2}
-                                                        value={item.description ?? ''}
-                                                        onChange={(event) =>
-                                                            setItemField(pageKey, categoryIndex, itemIndex, 'description', event.target.value)
+                                        {/* Section settings (collapsible) */}
+                                        {settingsOpen && (
+                                            <div className="grid gap-4 border-b bg-amber-50/40 px-4 py-4 md:grid-cols-3">
+                                                <div className="space-y-1.5 md:col-span-2">
+                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                        Sektionsname
+                                                    </Label>
+                                                    <Input
+                                                        value={category.name}
+                                                        onChange={(e) =>
+                                                            setCategoryField(pageKey, categoryIndex, 'name', e.target.value)
                                                         }
                                                     />
                                                 </div>
-
-                                                <div className="space-y-2">
-                                                    <Label>Bildpfad am Eintrag (optional)</Label>
+                                                <div className="space-y-1.5">
+                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                        Layout
+                                                    </Label>
+                                                    <select
+                                                        value={category.layoutDirection ?? 'auto'}
+                                                        onChange={(e) =>
+                                                            setCategoryField(pageKey, categoryIndex, 'layoutDirection', e.target.value)
+                                                        }
+                                                        className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+                                                    >
+                                                        <option value="auto">Automatisch abwechselnd</option>
+                                                        <option value="items-left">Links Einträge, rechts Bild</option>
+                                                        <option value="image-left">Links Bild, rechts Einträge</option>
+                                                    </select>
+                                                </div>
+                                                <div className="space-y-1.5 md:col-span-3">
+                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                        Sektionsbild (Pfad, optional)
+                                                    </Label>
                                                     <Input
-                                                        value={item.image ?? ''}
-                                                        onChange={(event) =>
-                                                            setItemField(pageKey, categoryIndex, itemIndex, 'image', event.target.value)
+                                                        placeholder="/img/getraenke/Heißgetränke.jpeg"
+                                                        value={category.image ?? ''}
+                                                        onChange={(e) =>
+                                                            setCategoryField(pageKey, categoryIndex, 'image', e.target.value)
                                                         }
                                                     />
                                                 </div>
                                             </div>
-                                        ))}
-                                    </div>
-                                </article>
-                            ))}
+                                        )}
+
+                                        {/* Items list */}
+                                        <div className="divide-y">
+                                            {category.items.map((item, itemIndex) => {
+                                                const ik = itemKey(pageKey, categoryIndex, itemIndex)
+                                                const isOpen = expandedItems[ik] ?? false
+
+                                                return (
+                                                    <div key={ik}>
+                                                        {/* Compact row */}
+                                                        <div
+                                                            className={`flex cursor-pointer items-center gap-2 px-4 py-2.5 transition-colors hover:bg-gray-50 ${isOpen ? 'bg-blue-50' : ''}`}
+                                                            onClick={() => toggleItem(ik)}
+                                                        >
+                                                            {isOpen ? (
+                                                                <ChevronDown className="h-3.5 w-3.5 shrink-0 text-blue-500" />
+                                                            ) : (
+                                                                <ChevronRight className="h-3.5 w-3.5 shrink-0 text-gray-400" />
+                                                            )}
+                                                            <span className={`flex-1 text-sm ${!item.name ? 'italic text-muted-foreground' : ''}`}>
+                                                                {item.name || 'Neuer Eintrag'}
+                                                            </span>
+                                                            {item.description && (
+                                                                <span className="hidden max-w-[200px] truncate text-xs text-muted-foreground sm:block">
+                                                                    {item.description}
+                                                                </span>
+                                                            )}
+                                                            <span className="ml-auto shrink-0 text-sm font-medium text-gray-700">
+                                                                {item.price || '—'}
+                                                            </span>
+                                                            {/* Row actions — stop propagation so click doesn't toggle */}
+                                                            <button
+                                                                type="button"
+                                                                title="Nach oben"
+                                                                onClick={(e) => { e.stopPropagation(); moveItem(pageKey, categoryIndex, itemIndex, -1) }}
+                                                                disabled={itemIndex === 0}
+                                                                className="rounded p-1 text-gray-400 hover:bg-gray-200 disabled:opacity-30"
+                                                            >
+                                                                <ArrowUp className="h-3.5 w-3.5" />
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                title="Nach unten"
+                                                                onClick={(e) => { e.stopPropagation(); moveItem(pageKey, categoryIndex, itemIndex, 1) }}
+                                                                disabled={itemIndex === category.items.length - 1}
+                                                                className="rounded p-1 text-gray-400 hover:bg-gray-200 disabled:opacity-30"
+                                                            >
+                                                                <ArrowDown className="h-3.5 w-3.5" />
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                title="Eintrag löschen"
+                                                                onClick={(e) => { e.stopPropagation(); removeItem(pageKey, categoryIndex, itemIndex) }}
+                                                                className="rounded p-1 text-red-400 hover:bg-red-100 hover:text-red-600"
+                                                            >
+                                                                <Trash2 className="h-3.5 w-3.5" />
+                                                            </button>
+                                                        </div>
+
+                                                        {/* Expanded edit form */}
+                                                        {isOpen && (
+                                                            <div className="space-y-3 border-t bg-blue-50/40 px-4 py-4">
+                                                                <div className="grid gap-3 md:grid-cols-3">
+                                                                    <div className="space-y-1.5 md:col-span-2">
+                                                                        <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                                            Name
+                                                                        </Label>
+                                                                        <Input
+                                                                            value={item.name}
+                                                                            autoFocus
+                                                                            onChange={(e) =>
+                                                                                setItemField(pageKey, categoryIndex, itemIndex, 'name', e.target.value)
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                    <div className="space-y-1.5">
+                                                                        <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                                            Preis
+                                                                        </Label>
+                                                                        <Input
+                                                                            value={item.price}
+                                                                            onChange={(e) =>
+                                                                                setItemField(pageKey, categoryIndex, itemIndex, 'price', e.target.value)
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="space-y-1.5">
+                                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                                        Beschreibung (optional)
+                                                                    </Label>
+                                                                    <Textarea
+                                                                        rows={2}
+                                                                        value={item.description ?? ''}
+                                                                        onChange={(e) =>
+                                                                            setItemField(pageKey, categoryIndex, itemIndex, 'description', e.target.value)
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                                <div className="space-y-1.5">
+                                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
+                                                                        Bildpfad am Eintrag (optional)
+                                                                    </Label>
+                                                                    <Input
+                                                                        value={item.image ?? ''}
+                                                                        onChange={(e) =>
+                                                                            setItemField(pageKey, categoryIndex, itemIndex, 'image', e.target.value)
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+
+                                        {/* Add item button */}
+                                        <div className="border-t bg-gray-50 px-4 py-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => addItem(pageKey, categoryIndex)}
+                                                className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                                            >
+                                                <Plus className="h-3.5 w-3.5" />
+                                                Eintrag hinzufügen
+                                            </button>
+                                        </div>
+                                    </article>
+                                )
+                            })}
                         </div>
 
                         <Button type="button" variant="secondary" onClick={() => addCategory(pageKey)}>

@@ -38,34 +38,36 @@ function NavItemLink({ href, label }: { href: string; label: string }) {
 
 export function Header({ content }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/40 bg-[#fcf6eb]/95 backdrop-blur-md">
-      <div className="site-container flex min-h-[100px] items-center justify-between gap-6 py-2">
-        <div className="hidden md:flex flex-col text-xs uppercase tracking-[0.15em] text-muted-foreground">
-          <span>Hotel & Restaurant</span>
-          <span className="text-foreground">Am Motzener See</span>
+    <header className="w-full">
+      <div className="w-full border-b border-white/40 bg-[#fcf6eb]/95">
+        <div className="site-container flex min-h-[100px] items-center justify-between gap-6 py-2">
+          <div className="hidden md:flex flex-col text-xs uppercase tracking-[0.15em] text-muted-foreground">
+            <span>Hotel & Restaurant</span>
+            <span className="text-foreground">Am Motzener See</span>
+          </div>
+
+          <Link href="/" className="relative mx-auto block h-[76px] w-[240px] md:h-[82px] md:w-[280px]">
+            <Image
+              src="/img/allgemein/Logo-neu.png"
+              alt="Alter Krug Kallinchen"
+              fill
+              priority
+              sizes="(max-width: 768px) 240px, 280px"
+              className="object-contain"
+            />
+          </Link>
+
+          <a
+            href="tel:+49337698980"
+            className="hidden md:inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            <PhoneCall className="h-3.5 w-3.5" />
+            033769 8980
+          </a>
         </div>
-
-        <Link href="/" className="relative mx-auto block h-[76px] w-[240px] md:h-[82px] md:w-[280px]">
-          <Image
-            src="/img/allgemein/Logo-neu.png"
-            alt="Alter Krug Kallinchen"
-            fill
-            priority
-            sizes="(max-width: 768px) 240px, 280px"
-            className="object-contain"
-          />
-        </Link>
-
-        <a
-          href="tel:+49337698980"
-          className="hidden md:inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-        >
-          <PhoneCall className="h-3.5 w-3.5" />
-          033769 8980
-        </a>
       </div>
 
-      <div className="nav-surface shadow-[0_8px_20px_-20px_rgba(27,17,7,0.7)]">
+      <div className="nav-surface sticky top-0 z-50 shadow-[0_8px_20px_-20px_rgba(27,17,7,0.7)]">
         <div className="site-container flex min-h-[66px] items-center gap-4">
           <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8">
             {content.navItems.map((item) => (

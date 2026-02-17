@@ -1,8 +1,12 @@
+export const dynamic = 'force-dynamic'
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock, Euro } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Euro, Users } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getSiteContent } from "@/app/actions";
+import { getAvailableSeats } from "@/app/actions/booking";
+import { BookingForm } from "@/components/BookingForm";
 
 interface EventPageProps {
   params: Promise<{
@@ -23,6 +27,12 @@ export default async function EventDetailPage({ params }: EventPageProps) {
   if (!event) {
     notFound();
   }
+
+  // Load available seats if booking is enabled
+  const bookingEnabled = !!(event.priceInCents && event.maxSeats)
+  const availableSeats = bookingEnabled
+    ? await getAvailableSeats(event.id, event.maxSeats!)
+    : 0
 
   return (
     <main className="min-h-screen">
@@ -63,20 +73,37 @@ export default async function EventDetailPage({ params }: EventPageProps) {
                   <Euro className="h-4 w-4 text-primary" />
                   {event.price}
                 </span>
+                {bookingEnabled && (
+                  <span className="inline-flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" />
+                    {availableSeats > 0
+                      ? `${availableSeats} von ${event.maxSeats} Plätzen frei`
+                      : 'Ausgebucht'}
+                  </span>
+                )}
               </div>
 
               <h1 className="font-serif text-4xl md:text-6xl">{event.title}</h1>
               <p className="mt-6 whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">{event.description}</p>
 
               <div className="mt-9 border-t border-primary/10 pt-6">
-                <a
-                  href={content.header.reservationUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-brand"
-                >
-                  Jetzt reservieren
-                </a>
+                {bookingEnabled ? (
+                  <BookingForm
+                    eventId={event.id}
+                    eventTitle={event.title}
+                    priceInCents={event.priceInCents!}
+                    availableSeats={availableSeats}
+                  />
+                ) : (
+                  <a
+                    href={content.header.reservationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-brand"
+                  >
+                    Jetzt reservieren
+                  </a>
+                )}
               </div>
             </div>
           </div>

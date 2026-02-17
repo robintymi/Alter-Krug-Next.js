@@ -26,6 +26,13 @@
 - [x] Typografie (Schriftarten) einrichten
 - [x] Wiederverwendbare UI-Komponenten erstellen
 
+## 📧 Resend – E-Mail-Versand
+
+- [x] Resend-Konto erstellt, API Key in `.env.local` eingetragen
+- [x] `FROM_EMAIL=onboarding@resend.dev` (Testadresse, funktioniert ohne Domain-Verifikation)
+- [ ] **Domain verifizieren**: resend.com → **Domains** → "Add Domain" → `alter-krug.de` eintragen → DNS-Einträge beim Hoster (udmedia) setzen
+  - Danach `FROM_EMAIL=buchung@alter-krug.de` in `.env.local` (lokal) und in den Server-Umgebungsvariablen setzen
+
 ## 🧪 Testing & Qualitätssicherung
 
 - [ ] Unit-Tests für kritische Funktionen schreiben

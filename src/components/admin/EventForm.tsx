@@ -51,8 +51,38 @@ export function EventForm({ mode, initialData, index }: EventFormProps) {
                             <Input id="time" name="time" defaultValue={initialData?.time} placeholder="z.B. 18:00" />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="price">Preis</Label>
+                            <Label htmlFor="price">Preis (Anzeigetext)</Label>
                             <Input id="price" name="price" defaultValue={initialData?.price} placeholder="z.B. 15,00 EUR" />
+                        </div>
+                    </div>
+
+                    <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 space-y-4">
+                        <p className="text-sm font-semibold text-amber-900">Online-Buchung (optional)</p>
+                        <p className="text-xs text-amber-700">Wenn beide Felder ausgefüllt sind, können Kunden online buchen und per Karte bezahlen.</p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="maxSeats">Max. Plätze</Label>
+                                <Input
+                                    id="maxSeats"
+                                    name="maxSeats"
+                                    type="number"
+                                    min="1"
+                                    defaultValue={initialData?.maxSeats ?? ''}
+                                    placeholder="z.B. 30"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="priceInCents">Preis pro Platz (€)</Label>
+                                <Input
+                                    id="priceInCents"
+                                    name="priceInCents"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    defaultValue={initialData?.priceInCents ? (initialData.priceInCents / 100).toFixed(2) : ''}
+                                    placeholder="z.B. 15.00"
+                                />
+                            </div>
                         </div>
                     </div>
 
