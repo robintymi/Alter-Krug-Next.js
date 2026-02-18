@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+import { getEvents } from "@/lib/content";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const events = await getEvents();
+  return events.map((e) => ({ slug: e.id }));
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

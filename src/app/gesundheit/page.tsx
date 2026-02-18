@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 
 export default async function WellnessPage() {
   const content = await getSiteContent();

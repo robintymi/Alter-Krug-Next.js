@@ -1,21 +1,35 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { CalendarDays, ChefHat, Ticket } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { getEvents } from '@/app/actions/admin-events'
-import { getMenuAndDrinksPages } from '@/app/actions/admin-menu'
+import { getEvents, getMenuPages, getBookings } from '@/lib/admin-api'
 
-export const dynamic = 'force-dynamic'
-import { getBookings } from '@/app/actions/admin-bookings'
+export default function AdminDashboardPage() {
+    const [eventsCount, setEventsCount] = useState(0)
+    const [menuCount, setMenuCount] = useState(0)
+    const [drinksCount, setDrinksCount] = useState(0)
+    const [bookingsCount, setBookingsCount] = useState(0)
+    const [confirmedCount, setConfirmedCount] = useState(0)
+    const [loading, setLoading] = useState(true)
 
-export default async function AdminDashboardPage() {
-    const [events, pages, bookings] = await Promise.all([
-        getEvents(),
-        getMenuAndDrinksPages(),
-        getBookings(),
-    ])
-    const menuCategoryCount = pages.menuPage.categories.length
-    const drinksCategoryCount = pages.drinksPage.categories.length
-    const confirmedBookings = bookings.filter((b) => b.status === 'confirmed').length
+    useEffect(() => {
+        Promise.all([getEvents(), getMenuPages(), getBookings()])
+            .then(([events, pages, bookings]) => {
+                setEventsCount(events.length)
+                setMenuCount(pages.menuPage.categories.length)
+                setDrinksCount(pages.drinksPage.categories.length)
+                setBookingsCount(bookings.length)
+                setConfirmedCount(bookings.filter((b) => b.status === 'confirmed').length)
+            })
+            .catch(console.error)
+            .finally(() => setLoading(false))
+    }, [])
+
+    if (loading) {
+        return <div className="text-muted-foreground">Laden...</div>
+    }
 
     return (
         <div className="space-y-8">
@@ -29,7 +43,7 @@ export default async function AdminDashboardPage() {
                     <div className="flex items-start justify-between">
                         <div>
                             <p className="text-sm text-muted-foreground">Veranstaltungen</p>
-                            <h2 className="mt-1 text-2xl font-bold">{events.length} Einträge</h2>
+                            <h2 className="mt-1 text-2xl font-bold">{eventsCount} Einträge</h2>
                         </div>
                         <CalendarDays className="h-6 w-6 text-primary" />
                     </div>
@@ -42,8 +56,8 @@ export default async function AdminDashboardPage() {
                     <div className="flex items-start justify-between">
                         <div>
                             <p className="text-sm text-muted-foreground">Buchungen</p>
-                            <h2 className="mt-1 text-2xl font-bold">{bookings.length} gesamt</h2>
-                            <p className="mt-1 text-xs text-muted-foreground">{confirmedBookings} bestätigt</p>
+                            <h2 className="mt-1 text-2xl font-bold">{bookingsCount} gesamt</h2>
+                            <p className="mt-1 text-xs text-muted-foreground">{confirmedCount} bestätigt</p>
                         </div>
                         <Ticket className="h-6 w-6 text-primary" />
                     </div>
@@ -56,9 +70,9 @@ export default async function AdminDashboardPage() {
                     <div className="flex items-start justify-between">
                         <div>
                             <p className="text-sm text-muted-foreground">Karten</p>
-                            <h2 className="mt-1 text-2xl font-bold">{menuCategoryCount + drinksCategoryCount} Sektionen</h2>
+                            <h2 className="mt-1 text-2xl font-bold">{menuCount + drinksCount} Sektionen</h2>
                             <p className="mt-1 text-xs text-muted-foreground">
-                                Speisen: {menuCategoryCount} · Getränke: {drinksCategoryCount}
+                                Speisen: {menuCount} · Getränke: {drinksCount}
                             </p>
                         </div>
                         <ChefHat className="h-6 w-6 text-primary" />

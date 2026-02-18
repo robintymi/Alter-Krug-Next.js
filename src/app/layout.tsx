@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope, Tangerine } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 

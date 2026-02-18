@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { createCheckoutSession } from '@/app/actions/booking'
+import { useState, useEffect } from 'react'
+import { supabase } from '@/lib/supabase-browser'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -10,17 +10,31 @@ interface BookingFormProps {
     eventId: string
     eventTitle: string
     priceInCents: number
-    availableSeats: number
+    maxSeats: number
 }
 
-export function BookingForm({ eventId, eventTitle, priceInCents, availableSeats }: BookingFormProps) {
+export function BookingForm({ eventId, eventTitle, priceInCents, maxSeats }: BookingFormProps) {
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [seats, setSeats] = useState(1)
+    const [availableSeats, setAvailableSeats] = useState<number | null>(null)
 
     const priceFormatted = (priceInCents / 100).toFixed(2).replace('.', ',') + ' €'
     const totalFormatted = ((priceInCents * seats) / 100).toFixed(2).replace('.', ',') + ' €'
+
+    // Verfügbare Plätze client-side laden
+    useEffect(() => {
+        supabase
+            .from('bookings')
+            .select('seats')
+            .eq('event_id', eventId)
+            .in('status', ['pending', 'confirmed'])
+            .then(({ data }) => {
+                const booked = (data ?? []).reduce((sum: number, b: { seats: number }) => sum + b.seats, 0)
+                setAvailableSeats(Math.max(0, maxSeats - booked))
+            })
+    }, [eventId, maxSeats])
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -30,24 +44,46 @@ export function BookingForm({ eventId, eventTitle, priceInCents, availableSeats 
         const form = e.currentTarget
         const formData = new FormData(form)
 
-        const result = await createCheckoutSession({
-            eventId,
-            customerName: formData.get('name') as string,
-            customerEmail: formData.get('email') as string,
-            customerPhone: (formData.get('phone') as string) || undefined,
-            seats,
-        })
+        try {
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/create-checkout-session`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        eventId,
+                        customerName: formData.get('name') as string,
+                        customerEmail: formData.get('email') as string,
+                        customerPhone: (formData.get('phone') as string) || undefined,
+                        seats,
+                    }),
+                }
+            )
 
-        setLoading(false)
+            const result = await response.json()
 
-        if (result.error) {
-            setError(result.error)
-            return
+            if (result.error) {
+                setError(result.error)
+                setLoading(false)
+                return
+            }
+
+            if (result.url) {
+                window.location.href = result.url
+            }
+        } catch {
+            setError('Ein Fehler ist aufgetreten. Bitte versuche es erneut.')
+            setLoading(false)
         }
+    }
 
-        if (result.url) {
-            window.location.href = result.url
-        }
+    if (availableSeats === null) {
+        return (
+            <div className="text-sm text-muted-foreground">Verfügbarkeit wird geladen...</div>
+        )
     }
 
     if (availableSeats === 0) {
@@ -75,7 +111,7 @@ export function BookingForm({ eventId, eventTitle, priceInCents, availableSeats 
                             onClick={() => { setOpen(false); setError('') }}
                             className="text-xs text-muted-foreground hover:text-foreground"
                         >
-                            ✕ Schließen
+                            Schließen
                         </button>
                     </div>
 

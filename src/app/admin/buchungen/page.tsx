@@ -1,8 +1,8 @@
-import { getBookings } from '@/app/actions/admin-bookings'
-import { getEvents } from '@/app/actions/admin-events'
-import type { Booking } from '@/lib/supabase'
+'use client'
 
-export const dynamic = 'force-dynamic'
+import { useEffect, useState } from 'react'
+import { getBookings, getEvents, type Booking } from '@/lib/admin-api'
+import type { Event } from '@/data/types'
 
 const STATUS_LABELS: Record<Booking['status'], { label: string; class: string }> = {
     confirmed: { label: 'Bestätigt', class: 'bg-green-100 text-green-800' },
@@ -24,10 +24,22 @@ function formatDate(iso: string) {
     })
 }
 
-export default async function AdminBookingsPage() {
-    const [bookings, events] = await Promise.all([getBookings(), getEvents()])
+export default function AdminBookingsPage() {
+    const [bookings, setBookings] = useState<Booking[]>([])
+    const [events, setEvents] = useState<Event[]>([])
+    const [loading, setLoading] = useState(true)
 
-    // Stats per event (only events with booking enabled)
+    useEffect(() => {
+        Promise.all([getBookings(), getEvents()])
+            .then(([b, e]) => { setBookings(b); setEvents(e) })
+            .catch(console.error)
+            .finally(() => setLoading(false))
+    }, [])
+
+    if (loading) {
+        return <div className="text-muted-foreground">Laden...</div>
+    }
+
     const bookableEvents = events.filter((e) => e.maxSeats && e.priceInCents)
 
     const statsPerEvent = bookableEvents.map((event) => {
@@ -54,7 +66,6 @@ export default async function AdminBookingsPage() {
 
     return (
         <div className="space-y-8">
-            {/* Header */}
             <div className="flex flex-col gap-2">
                 <h1 className="text-3xl font-bold tracking-tight">Buchungen</h1>
                 <p className="text-sm text-muted-foreground">
@@ -62,7 +73,6 @@ export default async function AdminBookingsPage() {
                 </p>
             </div>
 
-            {/* Summary cards */}
             <div className="grid gap-4 sm:grid-cols-3">
                 <div className="rounded-xl border bg-white p-5 shadow-sm">
                     <p className="text-xs uppercase tracking-wide text-muted-foreground">Buchungen gesamt</p>
@@ -80,7 +90,6 @@ export default async function AdminBookingsPage() {
                 </div>
             </div>
 
-            {/* Per-event stats */}
             {statsPerEvent.length > 0 && (
                 <section className="space-y-3 rounded-xl border bg-white p-5 shadow-sm">
                     <h2 className="font-semibold">Auslastung pro Veranstaltung</h2>
@@ -118,7 +127,6 @@ export default async function AdminBookingsPage() {
                 </section>
             )}
 
-            {/* Bookings table */}
             <section className="rounded-xl border bg-white shadow-sm overflow-hidden">
                 <div className="p-5 border-b">
                     <h2 className="font-semibold">Alle Buchungen</h2>

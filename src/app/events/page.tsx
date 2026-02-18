@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 import { Event } from "@/data/types";
 
 export default async function EventsPage() {

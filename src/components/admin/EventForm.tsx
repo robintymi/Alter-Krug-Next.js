@@ -1,38 +1,75 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { addEvent, updateEvent } from '@/app/actions/admin-events'
+import { addEvent, updateEvent } from '@/lib/admin-api'
 import { Event } from '@/data/types'
 
 interface EventFormProps {
     mode: 'create' | 'edit'
     initialData?: Partial<Event>
-    index?: number
+    eventId?: string
 }
 
-export function EventForm({ mode, initialData, index }: EventFormProps) {
-    const action = mode === 'create' ? addEvent : updateEvent.bind(null, index as number)
+function slugify(text: string): string {
+    return text
+        .toLowerCase()
+        .replace(/[äÄ]/g, 'ae').replace(/[öÖ]/g, 'oe').replace(/[üÜ]/g, 'ue').replace(/ß/g, 'ss')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+}
+
+export function EventForm({ mode, initialData, eventId }: EventFormProps) {
+    const [saving, setSaving] = useState(false)
+    const router = useRouter()
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        setSaving(true)
+
+        const form = e.currentTarget
+        const formData = new FormData(form)
+
+        const eventData: Partial<Event> = {
+            title: formData.get('title') as string,
+            date: formData.get('date') as string,
+            time: (formData.get('time') as string) || '',
+            price: (formData.get('price') as string) || '',
+            description: (formData.get('description') as string) || '',
+            image: (formData.get('image') as string) || '',
+        }
+
+        const maxSeatsRaw = formData.get('maxSeats') as string
+        const priceInCentsRaw = formData.get('priceInCents') as string
+        if (maxSeatsRaw) eventData.maxSeats = parseInt(maxSeatsRaw, 10)
+        if (priceInCentsRaw) eventData.priceInCents = Math.round(parseFloat(priceInCentsRaw) * 100)
+
+        try {
+            if (mode === 'create') {
+                const id = slugify(eventData.title || 'event')
+                await addEvent({ ...eventData, id } as Event & { id: string })
+            } else if (eventId) {
+                await updateEvent(eventId, eventData)
+            }
+            router.push('/admin/events')
+        } catch (err) {
+            alert('Fehler beim Speichern: ' + (err as Error).message)
+            setSaving(false)
+        }
+    }
 
     return (
         <Card className="mx-auto max-w-2xl">
             <CardHeader>
                 <CardTitle>{mode === 'create' ? 'Neues Event erstellen' : 'Event bearbeiten'}</CardTitle>
             </CardHeader>
-            <form
-                action={async (formData) => {
-                    const result = await action(formData)
-                    if (result?.success) {
-                        window.location.href = '/admin/events'
-                    } else {
-                        alert(result?.error || 'Fehler beim Speichern')
-                    }
-                }}
-            >
+            <form onSubmit={handleSubmit}>
                 <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
@@ -72,7 +109,7 @@ export function EventForm({ mode, initialData, index }: EventFormProps) {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="priceInCents">Preis pro Platz (€)</Label>
+                                <Label htmlFor="priceInCents">Preis pro Platz (EUR)</Label>
                                 <Input
                                     id="priceInCents"
                                     name="priceInCents"
@@ -101,7 +138,9 @@ export function EventForm({ mode, initialData, index }: EventFormProps) {
                     <Button variant="outline" type="button" asChild>
                         <Link href="/admin/events">Abbrechen</Link>
                     </Button>
-                    <Button type="submit">Speichern</Button>
+                    <Button type="submit" disabled={saving}>
+                        {saving ? 'Speichern...' : 'Speichern'}
+                    </Button>
                 </CardFooter>
             </form>
         </Card>

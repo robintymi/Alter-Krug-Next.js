@@ -1,13 +1,42 @@
-﻿import Link from 'next/link'
-import { AlertTriangle, Plus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { getEvents, debugEvents } from '@/app/actions/admin-events'
-import { DeleteEventButton } from '@/components/admin/DeleteEventButton'
-import { Event } from '@/data/types'
+'use client'
 
-export default async function AdminEventsPage() {
-    const events = await getEvents()
-    const debugInfo = events.length === 0 ? await debugEvents() : null
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { Plus, Trash2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { getEvents, deleteEvent } from '@/lib/admin-api'
+import type { Event } from '@/data/types'
+
+export default function AdminEventsPage() {
+    const [events, setEvents] = useState<Event[]>([])
+    const [loading, setLoading] = useState(true)
+
+    async function loadEvents() {
+        try {
+            const data = await getEvents()
+            setEvents(data)
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => { loadEvents() }, [])
+
+    async function handleDelete(id: string) {
+        if (!confirm('Möchten Sie dieses Event wirklich löschen?')) return
+        try {
+            await deleteEvent(id)
+            setEvents((prev) => prev.filter((e) => e.id !== id))
+        } catch (err) {
+            alert('Fehler beim Löschen: ' + (err as Error).message)
+        }
+    }
+
+    if (loading) {
+        return <div className="text-muted-foreground">Laden...</div>
+    }
 
     return (
         <div className="space-y-8">
@@ -26,37 +55,20 @@ export default async function AdminEventsPage() {
 
             <div className="grid gap-6">
                 {events.length === 0 ? (
-                    <div className="space-y-4 rounded-lg border bg-gray-50 p-12 text-center text-muted-foreground">
+                    <div className="rounded-lg border bg-gray-50 p-12 text-center text-muted-foreground">
                         <p>Keine Veranstaltungen gefunden. Erstellen Sie die erste.</p>
-
-                        <div className="max-w-full overflow-auto rounded border bg-gray-100 p-4 text-left font-mono text-xs">
-                            <p className="mb-2 font-bold text-red-500">
-                                <AlertTriangle className="mr-1 inline h-4 w-4" />
-                                Debug Info:
-                            </p>
-                            <p>Current Working Directory: {debugInfo?.cwd}</p>
-                            <p>Data File Path: {debugInfo?.path}</p>
-                            <p>File Exists: {debugInfo?.exists ? 'Yes' : 'No'}</p>
-                            {debugInfo?.error && <p className="text-red-600">Error: {debugInfo.error}</p>}
-                            {debugInfo?.snippet && (
-                                <div className="mt-2 text-gray-600">
-                                    <strong>Content Preview:</strong>
-                                    <pre className="whitespace-pre-wrap break-all">{debugInfo.snippet}</pre>
-                                </div>
-                            )}
-                        </div>
                     </div>
                 ) : (
                     <div className="divide-y rounded-md border bg-white shadow-sm">
-                        {events.map((event: Event, index: number) => (
+                        {events.map((event) => (
                             <div
-                                key={index}
+                                key={event.id}
                                 className="flex flex-col justify-between gap-4 p-6 transition-colors hover:bg-gray-50 md:flex-row md:items-center"
                             >
                                 <div className="space-y-1">
                                     <div className="flex items-center gap-2">
                                         <h3 className="text-lg font-bold">{event.title}</h3>
-                                        {event.id && <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">#{event.id}</span>}
+                                        <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">#{event.id}</span>
                                     </div>
                                     <div className="flex flex-col text-sm text-gray-500 sm:flex-row sm:gap-4">
                                         <span>{event.date}</span>
@@ -68,9 +80,16 @@ export default async function AdminEventsPage() {
                                 </div>
                                 <div className="flex shrink-0 items-center gap-3">
                                     <Button variant="outline" size="sm" asChild>
-                                        <Link href={`/admin/events/edit/${index}`}>Bearbeiten</Link>
+                                        <Link href={`/admin/events/edit?id=${event.id}`}>Bearbeiten</Link>
                                     </Button>
-                                    <DeleteEventButton index={index} />
+                                    <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        onClick={() => handleDelete(event.id)}
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+                                        <span className="sr-only">Löschen</span>
+                                    </Button>
                                 </div>
                             </div>
                         ))}

@@ -112,6 +112,13 @@ export interface SiteContent {
         heroButtonText?: string;
         heroButtonLink?: string;
         gallery?: string[];
+        rooms?: Room[];
+        apartmentRecommendation?: {
+            text: string;
+            recommendationText: string;
+            linkText: string;
+            linkUrl: string;
+        };
         bottomBooking?: {
             title: string;
             text: string;

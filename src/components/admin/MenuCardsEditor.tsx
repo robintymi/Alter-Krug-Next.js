@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { ArrowDown, ArrowUp, ChevronDown, ChevronRight, GripVertical, Plus, Save, Settings2, Trash2 } from 'lucide-react'
-import { saveMenuAndDrinksPages, EditableCardPage } from '@/app/actions/admin-menu'
+import { saveMenuPages, MenuPageData } from '@/lib/admin-api'
 import { MenuCategory, MenuItem, MenuSectionLayout } from '@/data/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,13 +12,13 @@ import { Textarea } from '@/components/ui/textarea'
 type PageKey = 'menu' | 'drinks'
 
 interface MenuCardsEditorProps {
-    initialMenuPage: EditableCardPage
-    initialDrinksPage: EditableCardPage
+    initialMenuPage: MenuPageData
+    initialDrinksPage: MenuPageData
 }
 
 interface EditorState {
-    menu: EditableCardPage
-    drinks: EditableCardPage
+    menu: MenuPageData
+    drinks: MenuPageData
 }
 
 const PAGE_CONFIG: Record<PageKey, { title: string; showIntro: boolean }> = {
@@ -57,7 +57,7 @@ function moveEntry<T>(entries: T[], fromIndex: number, delta: number): T[] {
     return next
 }
 
-function normalizePageForEditor(page: EditableCardPage, showIntro: boolean): EditableCardPage {
+function normalizePageForEditor(page: MenuPageData, showIntro: boolean): MenuPageData {
     return {
         title: page.title ?? '',
         intro: showIntro ? page.intro ?? '' : undefined,
@@ -100,7 +100,7 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
     const toggleCategorySettings = (key: string) =>
         setExpandedCategorySettings((prev) => ({ ...prev, [key]: !prev[key] }))
 
-    const updatePage = (pageKey: PageKey, updater: (page: EditableCardPage) => EditableCardPage) => {
+    const updatePage = (pageKey: PageKey, updater: (page: MenuPageData) => MenuPageData) => {
         setPages((previous) => ({
             ...previous,
             [pageKey]: updater(previous[pageKey]),
@@ -230,20 +230,15 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
         setMessage('')
         setError('')
 
-        const result = await saveMenuAndDrinksPages({
-            menuPage: pages.menu,
-            drinksPage: pages.drinks,
-        })
-
-        setSaving(false)
-
-        if (result.success) {
+        try {
+            await saveMenuPages(pages.menu, pages.drinks)
             setMessage('Karten erfolgreich gespeichert.')
             setTimeout(() => setMessage(''), 3000)
-            return
+        } catch (err) {
+            setError((err as Error).message || 'Beim Speichern ist ein Fehler aufgetreten.')
+        } finally {
+            setSaving(false)
         }
-
-        setError(result.error || 'Beim Speichern ist ein Fehler aufgetreten.')
     }
 
     return (

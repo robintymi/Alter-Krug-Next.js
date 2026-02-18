@@ -1,4 +1,4 @@
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 
 export default async function RestaurantPage() {
   const content = await getSiteContent();

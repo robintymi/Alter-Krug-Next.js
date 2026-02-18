@@ -1,4 +1,4 @@
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 import { ContactSection } from "@/components/ContactSection";
 import { FeatureSection } from "@/components/FeatureSection";
 import { GallerySection } from "@/components/GallerySection";

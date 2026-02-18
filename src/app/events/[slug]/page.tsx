@@ -1,12 +1,17 @@
-export const dynamic = 'force-dynamic'
-
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock, Euro, Users } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Euro } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getSiteContent } from "@/app/actions";
-import { getAvailableSeats } from "@/app/actions/booking";
+import { getSiteContent, getEvents, getEventBySlug } from "@/lib/content";
 import { BookingForm } from "@/components/BookingForm";
+import { AvailableSeatsDisplay } from "@/components/AvailableSeatsDisplay";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const events = await getEvents();
+  return events.map((e) => ({ slug: e.id }));
+}
 
 interface EventPageProps {
   params: Promise<{
@@ -16,23 +21,16 @@ interface EventPageProps {
 
 export default async function EventDetailPage({ params }: EventPageProps) {
   const { slug } = await params;
-  const content = await getSiteContent();
-
-  if (!content) {
-    return <div className="site-container py-16">Laden der Inhalte fehlgeschlagen.</div>;
-  }
-
-  const event = content.events_page.events.find((entry: { id: string }) => entry.id === slug);
+  const [event, content] = await Promise.all([
+    getEventBySlug(slug),
+    getSiteContent(),
+  ]);
 
   if (!event) {
     notFound();
   }
 
-  // Load available seats if booking is enabled
-  const bookingEnabled = !!(event.priceInCents && event.maxSeats)
-  const availableSeats = bookingEnabled
-    ? await getAvailableSeats(event.id, event.maxSeats!)
-    : 0
+  const bookingEnabled = !!(event.priceInCents && event.maxSeats);
 
   return (
     <main className="min-h-screen">
@@ -74,12 +72,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
                   {event.price}
                 </span>
                 {bookingEnabled && (
-                  <span className="inline-flex items-center gap-2">
-                    <Users className="h-4 w-4 text-primary" />
-                    {availableSeats > 0
-                      ? `${availableSeats} von ${event.maxSeats} Plätzen frei`
-                      : 'Ausgebucht'}
-                  </span>
+                  <AvailableSeatsDisplay eventId={event.id} maxSeats={event.maxSeats!} />
                 )}
               </div>
 
@@ -92,11 +85,11 @@ export default async function EventDetailPage({ params }: EventPageProps) {
                     eventId={event.id}
                     eventTitle={event.title}
                     priceInCents={event.priceInCents!}
-                    availableSeats={availableSeats}
+                    maxSeats={event.maxSeats!}
                   />
                 ) : (
                   <a
-                    href={content.header.reservationUrl}
+                    href={content?.header?.reservationUrl ?? '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-brand"

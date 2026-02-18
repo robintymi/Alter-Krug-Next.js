@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 import { MenuCategory, MenuSectionLayout } from "@/data/types";
 
 function getSectionDirection(direction: MenuSectionLayout | undefined, index: number): "items-left" | "image-left" {

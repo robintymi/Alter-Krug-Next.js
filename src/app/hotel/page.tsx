@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { getSiteContent } from "@/app/actions";
+import { getSiteContent } from "@/lib/content";
 import { GallerySection } from "@/components/GallerySection";
 import { ImageCarousel } from "@/components/ImageCarousel";
-import { Room } from "@/data/types";
 
 export default async function HotelPage() {
   const content = await getSiteContent();
@@ -12,7 +11,7 @@ export default async function HotelPage() {
   }
 
   const { hotel_page } = content;
-  const rooms = (hotel_page.rooms as Room[] | undefined) ?? [];
+  const rooms = hotel_page.rooms ?? [];
 
   return (
     <main className="min-h-screen">
