@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase-browser'
+import { getSession } from '@/lib/admin-auth'
 import { useRouter } from 'next/navigation'
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -10,25 +10,14 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     const router = useRouter()
 
     useEffect(() => {
-        supabase.auth.getSession().then(({ data }) => {
-            if (data.session) {
+        getSession().then((session) => {
+            if (session) {
                 setAuthenticated(true)
             } else {
                 router.replace('/admin/login')
             }
             setLoading(false)
         })
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            if (!session) {
-                setAuthenticated(false)
-                router.replace('/admin/login')
-            } else {
-                setAuthenticated(true)
-            }
-        })
-
-        return () => subscription.unsubscribe()
     }, [router])
 
     if (loading) {
@@ -40,6 +29,5 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     }
 
     if (!authenticated) return null
-
     return <>{children}</>
 }

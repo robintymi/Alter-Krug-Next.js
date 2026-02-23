@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase-browser'
 import { Users } from 'lucide-react'
 
 interface AvailableSeatsDisplayProps {
@@ -13,15 +12,11 @@ export function AvailableSeatsDisplay({ eventId, maxSeats }: AvailableSeatsDispl
     const [available, setAvailable] = useState<number | null>(null)
 
     useEffect(() => {
-        supabase
-            .from('bookings')
-            .select('seats')
-            .eq('event_id', eventId)
-            .in('status', ['pending', 'confirmed'])
-            .then(({ data }) => {
-                const booked = (data ?? []).reduce((sum: number, b: { seats: number }) => sum + b.seats, 0)
-                setAvailable(Math.max(0, maxSeats - booked))
-            })
+        const API = process.env.NEXT_PUBLIC_API_URL || '/api'
+        fetch(`${API}/seats.php?event_id=${encodeURIComponent(eventId)}`)
+            .then(res => res.json())
+            .then(data => setAvailable(data.available ?? 0))
+            .catch(() => setAvailable(0))
     }, [eventId, maxSeats])
 
     if (available === null) {

@@ -1,15 +1,26 @@
-import { supabase } from './supabase-browser'
+import { getAuthToken } from './admin-auth'
 import type { Event, MenuCategory } from '@/data/types'
+
+const API = process.env.NEXT_PUBLIC_API_URL || '/api'
+
+async function authFetch(url: string, options: RequestInit = {}): Promise<Response> {
+    const token = getAuthToken()
+    return fetch(url, {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+            ...(options.headers as Record<string, string> ?? {}),
+        },
+    })
+}
 
 // ─── Events ──────────────────────────────────────────────
 
 export async function getEvents(): Promise<Event[]> {
-    const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .order('sort_order', { ascending: true })
-
-    if (error) throw new Error(error.message)
+    const res = await authFetch(`${API}/events.php`)
+    if (!res.ok) throw new Error('Events konnten nicht geladen werden.')
+    const data = await res.json()
 
     return (data ?? []).map((row: Record<string, unknown>) => ({
         id: row.id as string,
@@ -20,74 +31,77 @@ export async function getEvents(): Promise<Event[]> {
         description: (row.description as string) || '',
         image: (row.image as string) || '',
         galleryImage: (row.gallery_image as string) || '',
-        recurring: (row.recurring as boolean) || false,
-        maxSeats: row.max_seats as number | undefined,
-        priceInCents: row.price_in_cents as number | undefined,
+        recurring: row.recurring === 1 || row.recurring === true,
+        maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
+        priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
     }))
 }
 
 export async function addEvent(event: Partial<Event> & { id: string }) {
-    const { error } = await supabase.from('events').insert({
-        id: event.id,
-        title: event.title,
-        date: event.date,
-        time: event.time || '',
-        price: event.price || '',
-        description: event.description || '',
-        image: event.image || '',
-        gallery_image: event.galleryImage || '',
-        recurring: event.recurring || false,
-        max_seats: event.maxSeats || null,
-        price_in_cents: event.priceInCents || null,
-        sort_order: 999,
+    const res = await authFetch(`${API}/events.php`, {
+        method: 'POST',
+        body: JSON.stringify({
+            id: event.id,
+            title: event.title,
+            date: event.date,
+            time: event.time || '',
+            price: event.price || '',
+            description: event.description || '',
+            image: event.image || '',
+            galleryImage: event.galleryImage || '',
+            recurring: event.recurring || false,
+            maxSeats: event.maxSeats || null,
+            priceInCents: event.priceInCents || null,
+            sort_order: 999,
+        }),
     })
-    if (error) throw new Error(error.message)
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Fehler beim Erstellen.')
+    }
     return { success: true }
 }
 
 export async function updateEvent(id: string, updates: Partial<Event>) {
-    const row: Record<string, unknown> = { updated_at: new Date().toISOString() }
-    if (updates.title !== undefined) row.title = updates.title
-    if (updates.date !== undefined) row.date = updates.date
-    if (updates.time !== undefined) row.time = updates.time
-    if (updates.price !== undefined) row.price = updates.price
-    if (updates.description !== undefined) row.description = updates.description
-    if (updates.image !== undefined) row.image = updates.image
-    if (updates.galleryImage !== undefined) row.gallery_image = updates.galleryImage
-    if (updates.recurring !== undefined) row.recurring = updates.recurring
-    if (updates.maxSeats !== undefined) row.max_seats = updates.maxSeats || null
-    if (updates.priceInCents !== undefined) row.price_in_cents = updates.priceInCents || null
-
-    const { error } = await supabase.from('events').update(row).eq('id', id)
-    if (error) throw new Error(error.message)
+    const res = await authFetch(`${API}/events.php?id=${encodeURIComponent(id)}`, {
+        method: 'PUT',
+        body: JSON.stringify(updates),
+    })
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Fehler beim Aktualisieren.')
+    }
     return { success: true }
 }
 
 export async function deleteEvent(id: string) {
-    const { error } = await supabase.from('events').delete().eq('id', id)
-    if (error) throw new Error(error.message)
+    const res = await authFetch(`${API}/events.php?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+    })
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Fehler beim Löschen.')
+    }
     return { success: true }
 }
 
 // ─── Site Content ────────────────────────────────────────
 
 export async function getSiteContentSection<T = unknown>(key: string): Promise<T | null> {
-    const { data, error } = await supabase
-        .from('site_content')
-        .select('data')
-        .eq('key', key)
-        .single()
-
-    if (error || !data) return null
-    return (data as { data: T }).data
+    const res = await authFetch(`${API}/content.php?key=${encodeURIComponent(key)}`)
+    if (!res.ok) return null
+    return await res.json() as T
 }
 
 export async function updateSiteContentSection(key: string, newData: unknown) {
-    const { error } = await supabase
-        .from('site_content')
-        .upsert({ key, data: newData, updated_at: new Date().toISOString() })
-
-    if (error) throw new Error(error.message)
+    const res = await authFetch(`${API}/content.php?key=${encodeURIComponent(key)}`, {
+        method: 'PUT',
+        body: JSON.stringify(newData),
+    })
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Fehler beim Speichern.')
+    }
     return { success: true }
 }
 
@@ -100,25 +114,20 @@ export interface MenuPageData {
 }
 
 export async function getMenuPages(): Promise<{ menuPage: MenuPageData; drinksPage: MenuPageData }> {
-    const [menuResult, drinksResult] = await Promise.all([
-        supabase.from('site_content').select('data').eq('key', 'menu_page').single(),
-        supabase.from('site_content').select('data').eq('key', 'drinks_page').single(),
-    ])
-
-    return {
-        menuPage: (menuResult.data as { data: MenuPageData } | null)?.data ?? { title: 'Speisekarte', categories: [] },
-        drinksPage: (drinksResult.data as { data: MenuPageData } | null)?.data ?? { title: 'Getränkekarte', categories: [] },
-    }
+    const res = await authFetch(`${API}/menu.php`)
+    if (!res.ok) throw new Error('Menü konnte nicht geladen werden.')
+    return await res.json()
 }
 
 export async function saveMenuPages(menuPage: MenuPageData, drinksPage: MenuPageData) {
-    const now = new Date().toISOString()
-    const results = await Promise.all([
-        supabase.from('site_content').upsert({ key: 'menu_page', data: menuPage, updated_at: now }),
-        supabase.from('site_content').upsert({ key: 'drinks_page', data: drinksPage, updated_at: now }),
-    ])
-    const err = results.find(r => r.error)?.error
-    if (err) throw new Error(err.message)
+    const res = await authFetch(`${API}/menu.php`, {
+        method: 'PUT',
+        body: JSON.stringify({ menuPage, drinksPage }),
+    })
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Fehler beim Speichern.')
+    }
     return { success: true }
 }
 
@@ -140,32 +149,24 @@ export interface Booking {
 }
 
 export async function getBookings(): Promise<Booking[]> {
-    const { data, error } = await supabase
-        .from('bookings')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-    if (error) throw new Error(error.message)
-    return (data ?? []) as Booking[]
+    const res = await authFetch(`${API}/bookings.php`)
+    if (!res.ok) throw new Error('Buchungen konnten nicht geladen werden.')
+    return await res.json() as Booking[]
 }
 
 export async function getBookingsForEvent(eventId: string): Promise<Booking[]> {
-    const { data, error } = await supabase
-        .from('bookings')
-        .select('*')
-        .eq('event_id', eventId)
-        .order('created_at', { ascending: false })
-
-    if (error) throw new Error(error.message)
-    return (data ?? []) as Booking[]
+    const res = await authFetch(`${API}/bookings.php?event_id=${encodeURIComponent(eventId)}`)
+    if (!res.ok) throw new Error('Buchungen konnten nicht geladen werden.')
+    return await res.json() as Booking[]
 }
 
 export async function cancelBooking(bookingId: string) {
-    const { error } = await supabase
-        .from('bookings')
-        .update({ status: 'cancelled' })
-        .eq('id', bookingId)
-
-    if (error) throw new Error(error.message)
+    const res = await authFetch(`${API}/bookings.php?id=${encodeURIComponent(bookingId)}&action=cancel`, {
+        method: 'PUT',
+    })
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Fehler beim Stornieren.')
+    }
     return { success: true }
 }

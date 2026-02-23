@@ -1,10 +1,11 @@
-import { supabaseServer } from './supabase-server'
 import type { SiteContent, Event } from '@/data/types'
 import fs from 'fs/promises'
 import path from 'path'
 
+const API = process.env.NEXT_PUBLIC_API_URL || 'https://alter-krug-kallinchen.de/api'
+
 /**
- * Fallback: site-content.json laden wenn Supabase nicht verfügbar
+ * Fallback: site-content.json laden wenn PHP API nicht verfügbar
  */
 async function loadFallbackContent(): Promise<SiteContent | null> {
     try {
@@ -17,100 +18,97 @@ async function loadFallbackContent(): Promise<SiteContent | null> {
 }
 
 /**
- * Lädt alle Site-Content-Abschnitte aus Supabase und setzt sie zu einem SiteContent-Objekt zusammen.
- * Fällt auf die lokale JSON-Datei zurück wenn Supabase nicht verfügbar ist.
+ * Lädt alle Site-Content-Abschnitte aus der PHP API.
+ * Fällt auf die lokale JSON-Datei zurück wenn die API nicht verfügbar ist.
  */
 export async function getSiteContent(): Promise<SiteContent | null> {
-    const { data, error } = await supabaseServer
-        .from('site_content')
-        .select('key, data')
+    try {
+        const res = await fetch(`${API}/content.php`, { next: { revalidate: 0 } })
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const rows: { key: string; data: unknown }[] = await res.json()
 
-    if (error || !data || data.length === 0) {
-        console.warn('Supabase site_content not available, using fallback JSON:', error?.message)
+        if (!rows || rows.length === 0) throw new Error('Keine Daten')
+
+        const content: Record<string, unknown> = {}
+        for (const row of rows) {
+            content[row.key] = row.data
+        }
+
+        // Events aus der separaten Tabelle laden und in events_page einfügen
+        const events = await getEvents()
+        const eventsPage = content['events_page'] as Record<string, unknown> | undefined
+        if (eventsPage) {
+            eventsPage.events = events
+        }
+
+        // hotel_page.rooms aus rooms_page übernehmen (falls separat gespeichert)
+        const roomsPage = content['rooms_page'] as Record<string, unknown> | undefined
+        const hotelPage = content['hotel_page'] as Record<string, unknown> | undefined
+        if (roomsPage && hotelPage && !hotelPage.rooms) {
+            hotelPage.rooms = (roomsPage as { rooms?: unknown[] }).rooms
+        }
+
+        return content as unknown as SiteContent
+    } catch (err) {
+        console.warn('PHP API not available, using fallback JSON:', (err as Error).message)
         return loadFallbackContent()
     }
-
-    const content: Record<string, unknown> = {}
-    for (const row of data as { key: string; data: unknown }[]) {
-        content[row.key] = row.data
-    }
-
-    // Events aus der separaten Tabelle laden und in events_page einfügen
-    const events = await getEvents()
-    const eventsPage = content['events_page'] as Record<string, unknown> | undefined
-    if (eventsPage) {
-        eventsPage.events = events
-    }
-
-    // hotel_page.rooms aus rooms_page übernehmen (falls separat gespeichert)
-    const roomsPage = content['rooms_page'] as Record<string, unknown> | undefined
-    const hotelPage = content['hotel_page'] as Record<string, unknown> | undefined
-    if (roomsPage && hotelPage && !hotelPage.rooms) {
-        hotelPage.rooms = (roomsPage as { rooms?: unknown[] }).rooms
-    }
-
-    return content as unknown as SiteContent
 }
 
 /**
- * Lädt alle Events aus der events-Tabelle, sortiert nach sort_order.
+ * Lädt alle Events aus der PHP API, sortiert nach sort_order.
  * Fällt auf events aus der JSON-Datei zurück.
  */
 export async function getEvents(): Promise<Event[]> {
-    const { data, error } = await supabaseServer
-        .from('events')
-        .select('*')
-        .order('sort_order', { ascending: true })
+    try {
+        const res = await fetch(`${API}/events.php`, { next: { revalidate: 0 } })
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data = await res.json()
 
-    if (error || !data) {
-        console.warn('Supabase events not available, using fallback JSON:', error?.message)
+        return (data ?? []).map((row: Record<string, unknown>) => ({
+            id: row.id as string,
+            title: row.title as string,
+            date: row.date as string,
+            time: (row.time as string) || '',
+            price: (row.price as string) || '',
+            description: (row.description as string) || '',
+            image: (row.image as string) || '',
+            galleryImage: (row.gallery_image as string) || '',
+            recurring: row.recurring === 1 || row.recurring === true || row.recurring === '1',
+            maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
+            priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
+        }))
+    } catch (err) {
+        console.warn('PHP API events not available, using fallback JSON:', (err as Error).message)
         const fallback = await loadFallbackContent()
         return fallback?.events_page?.events ?? []
     }
-
-    return (data ?? []).map((row: Record<string, unknown>) => ({
-        id: row.id as string,
-        title: row.title as string,
-        date: row.date as string,
-        time: (row.time as string) || '',
-        price: (row.price as string) || '',
-        description: (row.description as string) || '',
-        image: (row.image as string) || '',
-        galleryImage: (row.gallery_image as string) || '',
-        recurring: (row.recurring as boolean) || false,
-        maxSeats: row.max_seats as number | undefined,
-        priceInCents: row.price_in_cents as number | undefined,
-    }))
 }
 
 /**
  * Lädt ein einzelnes Event anhand seines Slugs/ID.
  */
 export async function getEventBySlug(slug: string): Promise<Event | null> {
-    const { data, error } = await supabaseServer
-        .from('events')
-        .select('*')
-        .eq('id', slug)
-        .single()
+    try {
+        const res = await fetch(`${API}/events.php?id=${encodeURIComponent(slug)}`, { next: { revalidate: 0 } })
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const row = await res.json() as Record<string, unknown>
 
-    if (error || !data) {
-        // Fallback: aus JSON suchen
+        return {
+            id: row.id as string,
+            title: row.title as string,
+            date: row.date as string,
+            time: (row.time as string) || '',
+            price: (row.price as string) || '',
+            description: (row.description as string) || '',
+            image: (row.image as string) || '',
+            galleryImage: (row.gallery_image as string) || '',
+            recurring: row.recurring === 1 || row.recurring === true || row.recurring === '1',
+            maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
+            priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
+        }
+    } catch {
         const events = await getEvents()
         return events.find(e => e.id === slug) ?? null
-    }
-
-    const row = data as Record<string, unknown>
-    return {
-        id: row.id as string,
-        title: row.title as string,
-        date: row.date as string,
-        time: (row.time as string) || '',
-        price: (row.price as string) || '',
-        description: (row.description as string) || '',
-        image: (row.image as string) || '',
-        galleryImage: (row.gallery_image as string) || '',
-        recurring: (row.recurring as boolean) || false,
-        maxSeats: row.max_seats as number | undefined,
-        priceInCents: row.price_in_cents as number | undefined,
     }
 }

@@ -1,0 +1,16 @@
+# config.php nicht direkt aufrufbar
+<Files "config.php">
+    Require all denied
+</Files>
+
+# CORS Headers für alle PHP-Endpoints
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# OPTIONS Preflight sofort beantworten
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=204,L]

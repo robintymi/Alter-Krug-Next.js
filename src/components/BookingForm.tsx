@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase-browser'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -23,18 +22,15 @@ export function BookingForm({ eventId, eventTitle, priceInCents, maxSeats }: Boo
     const priceFormatted = (priceInCents / 100).toFixed(2).replace('.', ',') + ' €'
     const totalFormatted = ((priceInCents * seats) / 100).toFixed(2).replace('.', ',') + ' €'
 
+    const API = process.env.NEXT_PUBLIC_API_URL || '/api'
+
     // Verfügbare Plätze client-side laden
     useEffect(() => {
-        supabase
-            .from('bookings')
-            .select('seats')
-            .eq('event_id', eventId)
-            .in('status', ['pending', 'confirmed'])
-            .then(({ data }) => {
-                const booked = (data ?? []).reduce((sum: number, b: { seats: number }) => sum + b.seats, 0)
-                setAvailableSeats(Math.max(0, maxSeats - booked))
-            })
-    }, [eventId, maxSeats])
+        fetch(`${API}/seats.php?event_id=${encodeURIComponent(eventId)}`)
+            .then(res => res.json())
+            .then(data => setAvailableSeats(data.available ?? 0))
+            .catch(() => setAvailableSeats(0))
+    }, [eventId, maxSeats, API])
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -46,12 +42,11 @@ export function BookingForm({ eventId, eventTitle, priceInCents, maxSeats }: Boo
 
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/create-checkout-session`,
+                `${API}/checkout.php`,
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
                     },
                     body: JSON.stringify({
                         eventId,
