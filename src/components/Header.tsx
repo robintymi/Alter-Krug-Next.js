@@ -49,7 +49,7 @@ export function Header({ content }: HeaderProps) {
 
           <Link href="/" className="relative mx-auto block h-[76px] w-[240px] md:h-[82px] md:w-[280px]">
             <Image
-              src="/img/allgemein/Logo-neu.png"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/allgemein/Logo-neu.png`}
               alt="Alter Krug Kallinchen"
               fill
               priority
