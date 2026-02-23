@@ -5,11 +5,11 @@
 define('DB_HOST', 'sql2.udmedia.de');
 define('DB_NAME', 'usr_ud05_370_10');
 define('DB_USER', 'ud05_370');           // TODO: Benutzername anpassen
-define('DB_PASS', '');                    // TODO: Passwort eintragen
+define('DB_PASS', 'TpayBmVVUn');
 
 // --- Stripe ---
 define('STRIPE_SECRET_KEY', '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');
-define('STRIPE_WEBHOOK_SECRET', '');      // TODO: Nach Webhook-Erstellung eintragen
+define('STRIPE_WEBHOOK_SECRET', 'whsec_fZ3uve455cLENTU9as9TOZIMpl7nnJnC');
 
 // --- Resend (E-Mail) ---
 define('RESEND_API_KEY', 're_En4AMvYF_78z3d5kKeeBPoRjAbrHDLebt');
