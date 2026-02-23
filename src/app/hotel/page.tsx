@@ -17,13 +17,13 @@ export default async function HotelPage() {
     <main className="min-h-screen">
       {hotel_page.image && (
         <section className="relative isolate overflow-hidden">
-          <div className="relative h-[48svh] min-h-[380px] w-full md:h-[58svh]">
-            <Image src={hotel_page.image} alt="Hotel Alter Krug" fill priority sizes="100vw" className="object-cover" />
+          <div className="relative h-[58svh] min-h-[480px] w-full md:h-[70svh]">
+            <Image src={hotel_page.image} alt="Hotel Alter Krug" fill priority sizes="100vw" className="object-cover object-[center_25%]" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/35 to-black/65" />
           <div className="absolute inset-0 z-10 flex items-center">
             <div className="site-container text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">Hotel</p>
+              <p className="font-script text-5xl text-white/80 md:text-6xl">Hotel</p>
               <h1 className="mt-3 font-serif text-5xl md:text-7xl">Unser Hotel</h1>
               <a
                 href={hotel_page.heroButtonLink || "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX"}
@@ -41,7 +41,7 @@ export default async function HotelPage() {
       <section className="section-space">
         <div className="site-container grid gap-7 lg:grid-cols-[1.2fr_1fr]">
           <article className="panel p-6 md:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Philosophie</p>
+            <p className="section-label">Philosophie</p>
             <h2 className="mt-3 font-serif text-4xl md:text-5xl">Erholung am Motzener See</h2>
             <p className="mt-5 text-muted-foreground">{hotel_page.mission}</p>
           </article>
@@ -67,7 +67,7 @@ export default async function HotelPage() {
         <section className="section-space bg-[#f7efe2]/65">
           <div className="site-container">
             <div className="mb-10 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Zimmer</p>
+              <p className="section-label">Zimmer</p>
               <h2 className="section-title mt-3">Zimmer & Preise</h2>
             </div>
 

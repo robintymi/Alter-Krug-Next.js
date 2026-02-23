@@ -44,7 +44,7 @@ export function FeatureSection({
         )}
       >
         <div className={cn("panel p-6 md:p-8", reversed && "md:order-2")}>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Alter Krug</p>
+          <p className="section-label">Alter Krug</p>
           <h2 className="mt-4 font-serif text-4xl font-semibold text-foreground md:text-5xl">{title}</h2>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">{description}</p>
           {cta}

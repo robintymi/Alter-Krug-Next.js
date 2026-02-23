@@ -17,7 +17,7 @@ export default async function EventsPage() {
     <main className="min-h-screen">
       <section className="section-space pb-8">
         <div className="site-container text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Veranstaltungen</p>
+          <p className="section-label">Veranstaltungen</p>
           <h1 className="section-title mt-3">{events_page.title}</h1>
           <p className="section-lead mx-auto">{events_page.intro}</p>
         </div>

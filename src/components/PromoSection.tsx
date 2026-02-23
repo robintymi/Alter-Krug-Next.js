@@ -40,7 +40,7 @@ export function PromoSection({ title, subtitle, description, buttonText, buttonL
           <div className="absolute inset-0 bg-gradient-to-r from-[#1f1a13]/80 via-[#1f1a13]/62 to-[#1f1a13]/20" />
 
           <div className="relative z-10 max-w-3xl px-6 py-14 text-white md:px-10 md:py-20">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">{subtitle}</p>
+            <p className="font-script text-4xl text-white/80 md:text-5xl">{subtitle}</p>
             <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight md:text-6xl">{title}</h2>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 md:text-lg">{description}</p>
             {cta}

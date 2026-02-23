@@ -1,14 +1,5 @@
-import Image from "next/image";
 import { getSiteContent } from "@/lib/content";
-import { MenuCategory, MenuSectionLayout } from "@/data/types";
-
-function getSectionDirection(direction: MenuSectionLayout | undefined, index: number): "items-left" | "image-left" {
-  if (direction === "items-left" || direction === "image-left") {
-    return direction;
-  }
-
-  return index % 2 === 0 ? "items-left" : "image-left";
-}
+import { MenuCategory } from "@/data/types";
 
 export default async function MenuPage() {
   const content = await getSiteContent();
@@ -23,7 +14,7 @@ export default async function MenuPage() {
     <main className="min-h-screen">
       <section className="section-space pb-8 text-center">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Restaurant</p>
+          <p className="section-label">Restaurant</p>
           <h1 className="section-title mt-3">{menu_page.title}</h1>
           <p className="section-lead mx-auto">{menu_page.intro}</p>
         </div>
@@ -32,17 +23,9 @@ export default async function MenuPage() {
       <section className="pb-16 md:pb-20">
         <div className="site-container max-w-5xl space-y-8">
           {menu_page.categories.map((cat: MenuCategory, idx: number) => {
-            const sectionDirection = getSectionDirection(cat.layoutDirection, idx);
-            const imageOnLeft = sectionDirection === "image-left";
-            const sectionImage = cat.image || cat.items.find((item) => item.image)?.image;
-
             return (
               <article key={cat.name + idx} className="panel p-5 md:p-7">
-                <div
-                  className={`grid gap-5 md:grid-cols-[minmax(0,1fr)_220px] md:items-start ${
-                    imageOnLeft ? "md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1" : ""
-                  }`}
-                >
+                <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_220px] md:items-start">
                   <div>
                     <h2 className="font-serif text-3xl md:text-4xl">{cat.name}</h2>
 
@@ -63,14 +46,11 @@ export default async function MenuPage() {
                     )}
                   </div>
 
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-primary/10">
-                    {sectionImage ? (
-                      <Image src={sectionImage} alt={cat.name} fill loading="lazy" sizes="220px" className="object-cover" />
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-muted/60 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                        Bild folgt
-                      </div>
-                    )}
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-dashed border-primary/25 bg-gradient-to-br from-[#f7ecdb] to-[#efe1cc]">
+                    <div className="flex h-full flex-col items-center justify-center gap-2">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/50">Platzhalter</p>
+                      <p className="font-script text-4xl text-foreground/50">Foto folgt</p>
+                    </div>
                   </div>
                 </div>
               </article>

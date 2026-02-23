@@ -15,7 +15,7 @@ export default async function WellnessPage() {
       <section className="section-space">
         <div className="site-container grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <article className="panel p-6 md:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Wohlbefinden</p>
+            <p className="section-label">Wohlbefinden</p>
             <h1 className="mt-3 font-serif text-4xl md:text-5xl">{wellness_page.title}</h1>
             <p className="mt-5 text-muted-foreground">{wellness_page.description}</p>
 

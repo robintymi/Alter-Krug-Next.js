@@ -19,7 +19,7 @@ function NavItemLink({ href, label }: { href: string; label: string }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80 transition-colors hover:text-primary"
+        className="inline-flex items-center text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-foreground/80 transition-colors hover:text-primary"
       >
         {label}
       </a>
@@ -29,7 +29,7 @@ function NavItemLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80 transition-colors hover:text-primary"
+      className="inline-flex items-center text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-foreground/80 transition-colors hover:text-primary"
     >
       {label}
     </Link>
@@ -38,10 +38,11 @@ function NavItemLink({ href, label }: { href: string; label: string }) {
 
 export function Header({ content }: HeaderProps) {
   return (
+    <>
     <header className="w-full">
       <div className="w-full border-b border-white/40 bg-[#fcf6eb]/95">
         <div className="site-container flex min-h-[100px] items-center justify-between gap-6 py-2">
-          <div className="hidden md:flex flex-col text-xs uppercase tracking-[0.15em] text-muted-foreground">
+          <div className="hidden lg:flex flex-col text-xs uppercase tracking-[0.15em] text-muted-foreground">
             <span>Hotel & Restaurant</span>
             <span className="text-foreground">Am Motzener See</span>
           </div>
@@ -59,17 +60,18 @@ export function Header({ content }: HeaderProps) {
 
           <a
             href="tel:+49337698980"
-            className="hidden md:inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="hidden lg:inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             <PhoneCall className="h-3.5 w-3.5" />
             033769 8980
           </a>
         </div>
       </div>
+    </header>
 
       <div className="nav-surface sticky top-0 z-50 shadow-[0_8px_20px_-20px_rgba(27,17,7,0.7)]">
         <div className="site-container flex min-h-[66px] items-center gap-4">
-          <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8">
+          <nav className="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-7">
             {content.navItems.map((item) => (
               <div key={item.label} className="group relative">
                 <NavItemLink href={item.href} label={item.label} />
@@ -108,7 +110,7 @@ export function Header({ content }: HeaderProps) {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <a
               href={content.bookingUrl}
               target="_blank"
@@ -127,11 +129,11 @@ export function Header({ content }: HeaderProps) {
             </a>
           </div>
 
-          <div className="ml-auto md:hidden">
+          <div className="ml-auto lg:hidden">
             <MobileMenu content={content} />
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }

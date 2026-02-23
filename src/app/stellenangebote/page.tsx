@@ -13,7 +13,7 @@ export default async function JobPage() {
     <main className="min-h-screen">
       <section className="section-space pb-8 text-center">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Karriere</p>
+          <p className="section-label">Karriere</p>
           <h1 className="section-title mt-3">{job_page.title}</h1>
           <p className="section-lead mx-auto">{job_page.intro}</p>
         </div>

@@ -77,7 +77,7 @@ export function HeroCarousel({ images, content }: HeroCarouselProps) {
 
       <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-4">
         <div className="max-w-5xl text-center text-white">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-white/85 md:text-sm">
+          <p className="mb-4 font-script text-5xl text-white/85 md:text-6xl">
             Alter Krug Kallinchen
           </p>
           <h1 className="text-display font-serif font-semibold drop-shadow-[0_8px_28px_rgba(0,0,0,0.45)]">

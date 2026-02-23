@@ -12,7 +12,6 @@
 
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --font-script: var(--font-tangerine), "Times New Roman", cursive;
   --font-serif: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-sans: var(--font-sans), "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
@@ -116,6 +115,10 @@
   .section-lead {
     @apply mt-4 max-w-3xl text-base text-muted-foreground md:text-lg;
   }
+  .section-label {
+    font-family: var(--font-tangerine), cursive;
+    @apply text-4xl text-primary/80 md:text-5xl;
+  }
   .panel {
     @apply rounded-2xl border border-white/60 bg-white/70 shadow-[0_15px_55px_-30px_rgba(35,25,10,0.55)] backdrop-blur;
   }
@@ -131,6 +134,9 @@
 }
 
 @layer utilities {
+  .font-script {
+    font-family: var(--font-tangerine), cursive;
+  }
   .text-display {
     font-size: clamp(2.2rem, 8vw, 5.4rem);
     line-height: 0.95;
