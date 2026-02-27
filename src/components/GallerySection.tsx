@@ -13,8 +13,7 @@ export function GallerySection({ images }: GallerySectionProps) {
     <section className="section-space">
       <div className="site-container">
         <div className="mb-10 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">Impressionen</p>
-          <h2 className="section-title mt-3">Einblicke in den Alten Krug</h2>
+          <p className="section-label">Impressionen</p>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

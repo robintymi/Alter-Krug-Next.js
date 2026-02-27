@@ -47,7 +47,7 @@ export function Header({ content }: HeaderProps) {
             <span className="text-foreground">Am Motzener See</span>
           </div>
 
-          <Link href="/" className="relative mx-auto block h-[76px] w-[240px] md:h-[82px] md:w-[280px]">
+          <Link href="/" className="relative mx-auto block h-[86px] w-[270px] md:h-[96px] md:w-[320px]">
             <Image
               src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/allgemein/Logo-neu.png`}
               alt="Alter Krug Kallinchen"
@@ -127,6 +127,16 @@ export function Header({ content }: HeaderProps) {
             >
               Tisch reservieren
             </a>
+            {content.voucherUrl && (
+              <a
+                href={content.voucherUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-brand-soft"
+              >
+                Gutschein
+              </a>
+            )}
           </div>
 
           <div className="ml-auto lg:hidden">

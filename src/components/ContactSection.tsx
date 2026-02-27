@@ -15,7 +15,6 @@ export function ContactSection({ title, subtitle, email, phone, address, mapUrl 
       <div className="site-container grid gap-8 lg:grid-cols-[1fr_1.15fr]">
         <div className="panel p-6 md:p-8">
           <p className="section-label">Kontakt</p>
-          <h2 className="mt-4 font-serif text-4xl font-semibold text-foreground md:text-5xl">{title}</h2>
           <p className="mt-4 text-muted-foreground">{subtitle}</p>
 
           <div className="mt-8 space-y-5">

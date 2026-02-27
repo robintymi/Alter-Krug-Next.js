@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface FeatureSectionProps {
   id?: string;
+  label?: string;
   title: string;
   description: string;
   buttonText: string;
@@ -18,6 +19,7 @@ function isExternalLink(href: string) {
 
 export function FeatureSection({
   id,
+  label,
   title,
   description,
   buttonText,
@@ -44,7 +46,7 @@ export function FeatureSection({
         )}
       >
         <div className={cn("panel p-6 md:p-8", reversed && "md:order-2")}>
-          <p className="section-label">Alter Krug</p>
+          {label && <p className="section-label">{label}</p>}
           <h2 className="mt-4 font-serif text-4xl font-semibold text-foreground md:text-5xl">{title}</h2>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">{description}</p>
           {cta}

@@ -1,7 +1,14 @@
-const API = process.env.NEXT_PUBLIC_API_URL || '/api'
+function getApiBase(): string {
+    if (typeof window !== 'undefined') {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+        return window.location.origin + basePath + '/api'
+    }
+    return process.env.NEXT_PUBLIC_API_URL || '/api'
+}
 
 export async function adminLogin(email: string, password: string) {
     try {
+        const API = getApiBase()
         const res = await fetch(`${API}/auth.php?action=login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -19,6 +26,7 @@ export async function adminLogin(email: string, password: string) {
 }
 
 export async function adminLogout() {
+    const API = getApiBase()
     const token = localStorage.getItem('admin_token')
     if (token) {
         await fetch(`${API}/auth.php?action=logout`, {
@@ -37,6 +45,7 @@ export async function getSession() {
         return null
     }
     try {
+        const API = getApiBase()
         const res = await fetch(`${API}/auth.php?action=check`, {
             headers: { 'Authorization': `Bearer ${token}` },
         })

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { getSiteContent } from "@/lib/content";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CookieConsent } from "@/components/CookieConsent";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -46,8 +47,9 @@ export default async function RootLayout({
         )}
       >
         {content && <Header content={content.header} />}
-        <div className="min-h-screen">{children}</div>
+        <div className="relative z-0 min-h-screen">{children}</div>
         {content && <Footer content={content.footer} />}
+        <CookieConsent />
       </body>
     </html>
   );

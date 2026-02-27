@@ -28,15 +28,16 @@
       { "label": "Kontakt", "href": "/kontakt" }
     ],
     "bookingUrl": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
-    "reservationUrl": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e"
+    "reservationUrl": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e",
+    "voucherUrl": "https://www.yovite.com/Restaurant-Gutschein-R-84831799.html?REF=REST"
   },
   "hero": {
-    "title": "Willkommen im Alten Krug Kallinchen",
-    "subtitle": "Ruhe, Erholung und kulinarische Spezialitäten am Motzener See",
-    "buttonText": "Tisch reservieren",
-    "buttonLink": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e",
+    "title": "Herzlich Willkommen",
+    "subtitle": "",
+    "buttonText": "",
+    "buttonLink": "",
     "images": [
-      "/img/allgemein/ak_klein.jpg",
+      "/img/Alter Krug scharf.jpg",
       "/img/allgemein/Alter-Krug-3klein.jpg"
     ]
   },
@@ -78,12 +79,12 @@
       "image": "/img/Yoga Werbung.jpg"
   },
   "home_contact": {
-      "title": "Kontaktieren Sie uns",
+      "title": "",
       "subtitle": "Wir freuen uns auf Ihre Nachricht. Kontaktieren Sie uns für Fragen oder Reservierungen.",
       "email": "info@alter-krug-kallinchen.de",
       "phone": "+49 33769 8980",
       "address": "Hauptstraße 15, 15806 Zossen – Kallinchen",
-      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d611.1158445381!2d13.567650!3d52.179836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a810f135677717%3A0xe53d6118029d5b0!2sAlter%20Krug%20Kallinchen!5e0!3m2!1sde!2sde!4v1707758378546!5m2!1sde!2sde"
+      "mapUrl": "https://maps.google.com/maps?q=Alter+Krug+Kallinchen,+Hauptstra%C3%9Fe+15,+15806+Zossen&t=&z=16&ie=UTF8&iwloc=B&output=embed"
   },
   "hotel_page": {
     "mission": "Genießen Sie Ruhe und Erholung in unseren komfortablen Einzel- und Doppelzimmern, ausgestattet mit TV, Telefon, WLAN sowie eigenem Bad. Die waldreiche Umgebung und der Motzener See laden zu entspannten Spaziergängen und Baden ein. Für aktive Erkundungen stehen Ihnen im Strandbad Kallinchen Leihfahrräder zur Verfügung. Wir sind täglich von 07:00 bis 21:00 Uhr persönlich für Sie da.",
@@ -484,15 +485,6 @@
       ],
       "events": [
           {
-              "id": "pfingst-frauen-retreat",
-              "title": "Pfingst-Frauen-Retreat",
-              "date": "21. bis 24. Mai 2026",
-              "time": "",
-              "price": "678,00 EUR",
-              "description": "Alter Krug Kallinchen Hauptstraße 15, Zossen OT Kallinchen, Brandenburg\n\nDieses Retreat ist eine Einladung, aus dem Alltag auszusteigen und dir selbst wieder näherzukommen.\n\nIn einem geschützten Raum unter Frauen verbinden wir Körper, Herz und Intuition – getragen von Ritualen, Bewegung, Natur und Gemeinschaft.\n\nDu darfst loslassen, auftanken und neue Impulse für dein Leben mitnehmen.🤍\n\nGutscheincode: HER2026 bei Buchung angeben und 15 % sparen.",
-              "image": "/img/events/Pfingsfest.jpeg"
-          },
-          {
               "id": "saat-des-feuers",
               "title": "Saat des Feuers",
               "date": "17.02.2026",
@@ -500,6 +492,15 @@
               "price": "33 bis 44 EUR nach eigenem Ermessen",
               "description": "🔥 Die Saat des Feuers wird gelegt.\nAm 17. Februar treten wir in einen kraftvollen Übergang: vom Schlangenjahr ins Jahr des Feuerpferdes – eine Zeit des Aufbruchs, der Bewegung und der inneren Wahrheit.💫\n\nGleichzeitig beginnt 2026 als numerologisches Jahr 1. Ein Neubeginn. Nicht im Kopf – sondern im Herzen, im Körper, in der Ausrichtung.🤍\n\nWir zelebrieren diesen Moment gemeinsam mit dir.✨️\n\n📍Alter Krug, Hauptstraße 15, 15806 Kallinchen\n\nDiese Einladung ist für dich, wenn du spürst:\nJetzt. Nicht irgendwann. Jetzt ist der Moment, dich neu zu erfinden, Altes hinter dir zu lassen und mit dir selbst bewusst in die Zukunft zu gehen.🐎\n\n✨ Anmeldung ist jetzt geöffnet unter: www.lebenskunstonline.de oder per WhatsApp unter 0176 20 555 116.\n\nWenn dein ❤️ beim Lesen „Ja“ sagt –\ndan bist du genau richtig. 💫",
               "image": "/img/events/Saat des Feuers.jpeg"
+          },
+          {
+              "id": "pfingst-frauen-retreat",
+              "title": "Pfingst-Frauen-Retreat",
+              "date": "21. bis 24. Mai 2026",
+              "time": "",
+              "price": "678,00 EUR",
+              "description": "Alter Krug Kallinchen Hauptstraße 15, Zossen OT Kallinchen, Brandenburg\n\nDieses Retreat ist eine Einladung, aus dem Alltag auszusteigen und dir selbst wieder näherzukommen.\n\nIn einem geschützten Raum unter Frauen verbinden wir Körper, Herz und Intuition – getragen von Ritualen, Bewegung, Natur und Gemeinschaft.\n\nDu darfst loslassen, auftanken und neue Impulse für dein Leben mitnehmen.🤍\n\nGutscheincode: HER2026 bei Buchung angeben und 15 % sparen.",
+              "image": "/img/events/Pfingsfest.jpeg"
           },
           {
               "id": "yoga-zeit",
@@ -510,24 +511,6 @@
               "description": "Alter Krug Kallinchen \nHauptstraße 15\nZossen OT Kallinchen, Brandenburg\n\n🧘♀️ Deine Yoga-Auszeit im Alten Krug\n\nJeden Dienstag um 9:30 Uhr öffnen wir den Raum für eine ganz besondere Auszeit.\n\nEine offene Yogastunde, in der du willkommen bist.\n\nMal fließende Bewegungen, mal ruhige Atemübungen, mal eine kleine Meditation. Jede Woche entsteht etwas Neues. Alles ist anfängergeeignet und du brauchst keinerlei Vorkenntnisse.\n\nMatten und Kissen sind vorhanden. Du darfst einfach kommen und deine Zeit genießen.\n\nWenn du magst, darfst du danach noch bleiben:\nLass die Stunde bei einer Tasse Kaffee oder Tee gemütlich ausklingen, komm ins Gespräch oder genieße einfach noch ein paar ruhige Minuten für dich.\n\nGäste des Hauses sind herzlich eingeladen, spontan mit auf die Matte zu kommen.\n\nWir freuen uns sehr auf dich 🤍",
               "image": "/img/events/WöchentlYoga.jpeg",
               "recurring": true
-          },
-          {
-              "id": "krimidinner",
-              "title": "Krimidinner – Todsicher unsterblich",
-              "date": "04.04.2026",
-              "time": "18:00 - 22:00",
-              "price": "89,00 € inkl. 4-Gänge Menü & Aperitif",
-              "description": "Todsicher unsterblich – Das Krimidinner\n\nEin Abend voller Genuss, Spannung und mörderisch guter Unterhaltung erwartet dich im Alten Krug.\n\nZwischen Vorspeise und Dessert wird nicht nur serviert. Es wird ermittelt, verdächtigt, geflüstert und gelacht. Denn irgendwo im Raum sitzt ein Täter … vielleicht sogar direkt neben dir.\n\nUnser Krimidinner ist mehr als ein Theaterstück. Es ist ein interaktives Erlebnis. Während ein spannendes Schauspiel seinen Lauf nimmt, kannst du selbst Teil der Geschichte werden. Wer möchte, schlüpft in eine Rolle, sammelt Hinweise, schmiedet Alibis und hilft dabei, den Fall zu lösen. Wer lieber genießt und beobachtet, ist genauso willkommen – denn auch vom Tisch aus wird mitgerätselt.\n\nFreue dich auf ein exklusives 3-Gänge-Buffet, ausgesuchte Getränke, stilvolles Ambiente und ein Beisammensein, das garantiert in Erinnerung bleibt. Zwischen Kerzenschein, cleveren Dialogen und überraschenden Wendungen entsteht ein Abend, der „todsicher unsterblich“ ist.\n\nAlso: Schärfe deinen Verstand, bring dein bestes Pokerface mit und sichere dir deinen Platz beim nächsten Krimidinner im Alten Krug.\n\nWir freuen uns auf einen Abend voller Spannung, Genuss und einer guten Portion Humor.",
-              "image": "/img/events/TodsicherUnsertblich.jpeg"
-          },
-          {
-              "id": "kakao-zeremonie",
-              "title": "Kakao Zeremonie",
-              "date": "24.04.2026",
-              "time": "18:00",
-              "price": "45,00 €",
-              "description": "Eine herzöffnende Zeremonie mit rituellem Kakao. Tauchen Sie ein in eine Welt der inneren Ruhe und Verbundenheit. Begleitet von Meditation und sanften Klängen, hilft Ihnen der rituelle Kakao, das Herz zu öffnen und Blockaden zu lösen.",
-              "image": ""
           }
       ]
   },
@@ -541,7 +524,8 @@
   },
   "contact_page": {
       "title": "Kontakt",
-      "intro": "Wir freuen uns auf Ihre Nachricht."
+      "intro": "Wir freuen uns auf Ihre Nachricht.",
+      "email": "info@alter-krug-kallinchen.de"
   },
   "directions_page": {
       "title": "Anfahrt",

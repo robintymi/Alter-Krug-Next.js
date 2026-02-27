@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { type SiteContent } from "@/data/types";
 
@@ -71,11 +72,23 @@ export function Footer({ content }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col items-center gap-5 border-t border-white/10 pt-8">
+          <div className="relative h-[60px] w-[200px]">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/allgemein/Logo-neu.png`}
+              alt="Alter Krug Kallinchen"
+              fill
+              loading="lazy"
+              sizes="200px"
+              className="object-contain brightness-0 invert"
+            />
+          </div>
+          <div className="flex w-full flex-col gap-3 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {new Date().getFullYear()} Alter Krug Kallinchen. Alle Rechte vorbehalten.</p>
           <Link href="/admin/login" className="text-white/60 transition-colors hover:text-[#f6c38a]">
             Admin Login
           </Link>
+          </div>
         </div>
       </div>
     </footer>

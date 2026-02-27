@@ -23,8 +23,7 @@ export default async function HotelPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/35 to-black/65" />
           <div className="absolute inset-0 z-10 flex items-center">
             <div className="site-container text-white">
-              <p className="font-script text-5xl text-white/80 md:text-6xl">Hotel</p>
-              <h1 className="mt-3 font-serif text-5xl md:text-7xl">Unser Hotel</h1>
+              <h1 className="font-script text-6xl text-white md:text-8xl">Hotel</h1>
               <a
                 href={hotel_page.heroButtonLink || "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX"}
                 target="_blank"
@@ -41,13 +40,12 @@ export default async function HotelPage() {
       <section className="section-space">
         <div className="site-container grid gap-7 lg:grid-cols-[1.2fr_1fr]">
           <article className="panel p-6 md:p-8">
-            <p className="section-label">Philosophie</p>
-            <h2 className="mt-3 font-serif text-4xl md:text-5xl">Erholung am Motzener See</h2>
+            <h2 className="font-script text-5xl text-primary/80 md:text-6xl">Erholung am Motzener See</h2>
             <p className="mt-5 text-muted-foreground">{hotel_page.mission}</p>
           </article>
 
           <article className="panel p-6 md:p-8">
-            <h3 className="font-serif text-3xl md:text-4xl">Ihr Aufenthalt</h3>
+            <h3 className="font-script text-5xl text-primary/80 md:text-6xl">Ihr Aufenthalt</h3>
             <p className="mt-4 text-muted-foreground">{hotel_page.bookingText}</p>
             <a
               href={hotel_page.buttonLink}
@@ -61,14 +59,11 @@ export default async function HotelPage() {
         </div>
       </section>
 
-      {hotel_page.gallery && <GallerySection images={hotel_page.gallery} />}
-
       {rooms.length > 0 && (
         <section className="section-space bg-[#f7efe2]/65">
           <div className="site-container">
             <div className="mb-10 text-center">
-              <p className="section-label">Zimmer</p>
-              <h2 className="section-title mt-3">Zimmer & Preise</h2>
+              <h2 className="font-script text-5xl text-primary/80 md:text-6xl">Zimmer & Preise</h2>
             </div>
 
             <div className="space-y-8">
@@ -111,6 +106,8 @@ export default async function HotelPage() {
         </section>
       )}
 
+      {hotel_page.gallery && <GallerySection images={hotel_page.gallery} />}
+
       {hotel_page.apartmentRecommendation && (
         <section className="section-space">
           <div className="site-container">
@@ -133,7 +130,7 @@ export default async function HotelPage() {
         <section className="section-space pt-0">
           <div className="site-container">
             <div className="panel mx-auto max-w-4xl p-8 text-center md:p-10">
-              <h2 className="font-serif text-4xl md:text-5xl">{hotel_page.bottomBooking.title}</h2>
+              <h2 className="font-script text-5xl text-primary/80 md:text-6xl">{hotel_page.bottomBooking.title}</h2>
               <p className="mt-5 text-muted-foreground">{hotel_page.bottomBooking.text}</p>
               <a
                 href={hotel_page.bottomBooking.buttonLink}

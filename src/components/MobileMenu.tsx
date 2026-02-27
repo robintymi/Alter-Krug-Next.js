@@ -121,6 +121,17 @@ export function MobileMenu({ content }: MobileMenuProps) {
               >
                 Tisch reservieren
               </a>
+              {content.voucherUrl && (
+                <a
+                  href={content.voucherUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-brand-soft w-full"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Gutschein bestellen
+                </a>
+              )}
             </div>
           </div>
         </div>

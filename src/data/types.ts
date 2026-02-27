@@ -54,6 +54,7 @@ export interface SiteContent {
         navItems: NavItem[];
         bookingUrl: string;
         reservationUrl: string;
+        voucherUrl?: string;
     };
     hero: {
         title: string;

@@ -1,4 +1,5 @@
 import { getSiteContent } from "@/lib/content";
+import { GoogleMapsEmbed } from "@/components/GoogleMapsEmbed";
 
 export default async function DirectionsPage() {
   const content = await getSiteContent();
@@ -7,15 +8,33 @@ export default async function DirectionsPage() {
     return <div className="site-container py-16">Laden der Inhalte fehlgeschlagen.</div>;
   }
 
-  const { directions_page } = content;
-
   return (
     <main className="min-h-screen">
       <section className="section-space pb-8 text-center">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">Anfahrt</p>
-          <h1 className="section-title mt-3">{directions_page.title}</h1>
-          <p className="section-lead mx-auto">{directions_page.intro}</p>
+          <h1 className="font-script text-6xl text-primary/80 md:text-7xl">Anfahrt</h1>
+        </div>
+      </section>
+
+      <section className="pb-8 md:pb-10">
+        <div className="site-container max-w-4xl">
+          <div className="panel p-6 md:p-8">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80">Mit dem Auto</h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Über die A13, Abfahrt Bestensee, fahren Sie Richtung Motzen/Kallinchen. Nach ca. 8 km erreichen Sie Kallinchen.
+                  Der Alte Krug befindet sich direkt an der Hauptstraße 15.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80">Mit der Bahn</h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Bahnhof Zossen oder Bestensee. Von dort aus bieten wir auf Anfrage einen Shuttleservice an. Bitte kontaktieren Sie uns rechtzeitig.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -23,15 +42,8 @@ export default async function DirectionsPage() {
         <div className="site-container">
           <div className="overflow-hidden rounded-[2rem] border border-white/60 shadow-[0_18px_44px_-33px_rgba(22,12,6,0.52)]">
             <div className="relative aspect-[16/9] min-h-[320px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.463378351664!2d13.56588297693575!3d52.17983636195619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a810f135677717%3A0xe53d6118029d5b0!2sAlter%20Krug%20Kallinchen!5e0!3m2!1sen!2sde!4v1707758378546!5m2!1sen!2sde"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0"
+              <GoogleMapsEmbed
+                src="https://maps.google.com/maps?q=Alter+Krug+Kallinchen,+Hauptstra%C3%9Fe+15,+15806+Zossen&t=&z=16&ie=UTF8&iwloc=B&output=embed"
                 title="Anfahrt Alter Krug"
               />
             </div>

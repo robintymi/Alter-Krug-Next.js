@@ -1,9 +1,16 @@
 import { getAuthToken } from './admin-auth'
 import type { Event, MenuCategory } from '@/data/types'
 
-const API = process.env.NEXT_PUBLIC_API_URL || '/api'
+function getApiBase(): string {
+    if (typeof window !== 'undefined') {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+        return window.location.origin + basePath + '/api'
+    }
+    return process.env.NEXT_PUBLIC_API_URL || '/api'
+}
 
-async function authFetch(url: string, options: RequestInit = {}): Promise<Response> {
+async function authFetch(path: string, options: RequestInit = {}): Promise<Response> {
+    const url = getApiBase() + path
     const token = getAuthToken()
     return fetch(url, {
         ...options,
@@ -18,7 +25,7 @@ async function authFetch(url: string, options: RequestInit = {}): Promise<Respon
 // ─── Events ──────────────────────────────────────────────
 
 export async function getEvents(): Promise<Event[]> {
-    const res = await authFetch(`${API}/events.php`)
+    const res = await authFetch(`/events.php`)
     if (!res.ok) throw new Error('Events konnten nicht geladen werden.')
     const data = await res.json()
 
@@ -38,7 +45,7 @@ export async function getEvents(): Promise<Event[]> {
 }
 
 export async function addEvent(event: Partial<Event> & { id: string }) {
-    const res = await authFetch(`${API}/events.php`, {
+    const res = await authFetch(`/events.php`, {
         method: 'POST',
         body: JSON.stringify({
             id: event.id,
@@ -63,7 +70,7 @@ export async function addEvent(event: Partial<Event> & { id: string }) {
 }
 
 export async function updateEvent(id: string, updates: Partial<Event>) {
-    const res = await authFetch(`${API}/events.php?id=${encodeURIComponent(id)}`, {
+    const res = await authFetch(`/events.php?id=${encodeURIComponent(id)}`, {
         method: 'PUT',
         body: JSON.stringify(updates),
     })
@@ -75,7 +82,7 @@ export async function updateEvent(id: string, updates: Partial<Event>) {
 }
 
 export async function deleteEvent(id: string) {
-    const res = await authFetch(`${API}/events.php?id=${encodeURIComponent(id)}`, {
+    const res = await authFetch(`/events.php?id=${encodeURIComponent(id)}`, {
         method: 'DELETE',
     })
     if (!res.ok) {
@@ -88,13 +95,13 @@ export async function deleteEvent(id: string) {
 // ─── Site Content ────────────────────────────────────────
 
 export async function getSiteContentSection<T = unknown>(key: string): Promise<T | null> {
-    const res = await authFetch(`${API}/content.php?key=${encodeURIComponent(key)}`)
+    const res = await authFetch(`/content.php?key=${encodeURIComponent(key)}`)
     if (!res.ok) return null
     return await res.json() as T
 }
 
 export async function updateSiteContentSection(key: string, newData: unknown) {
-    const res = await authFetch(`${API}/content.php?key=${encodeURIComponent(key)}`, {
+    const res = await authFetch(`/content.php?key=${encodeURIComponent(key)}`, {
         method: 'PUT',
         body: JSON.stringify(newData),
     })
@@ -114,13 +121,13 @@ export interface MenuPageData {
 }
 
 export async function getMenuPages(): Promise<{ menuPage: MenuPageData; drinksPage: MenuPageData }> {
-    const res = await authFetch(`${API}/menu.php`)
+    const res = await authFetch(`/menu.php`)
     if (!res.ok) throw new Error('Menü konnte nicht geladen werden.')
     return await res.json()
 }
 
 export async function saveMenuPages(menuPage: MenuPageData, drinksPage: MenuPageData) {
-    const res = await authFetch(`${API}/menu.php`, {
+    const res = await authFetch(`/menu.php`, {
         method: 'PUT',
         body: JSON.stringify({ menuPage, drinksPage }),
     })
@@ -149,19 +156,19 @@ export interface Booking {
 }
 
 export async function getBookings(): Promise<Booking[]> {
-    const res = await authFetch(`${API}/bookings.php`)
+    const res = await authFetch(`/bookings.php`)
     if (!res.ok) throw new Error('Buchungen konnten nicht geladen werden.')
     return await res.json() as Booking[]
 }
 
 export async function getBookingsForEvent(eventId: string): Promise<Booking[]> {
-    const res = await authFetch(`${API}/bookings.php?event_id=${encodeURIComponent(eventId)}`)
+    const res = await authFetch(`/bookings.php?event_id=${encodeURIComponent(eventId)}`)
     if (!res.ok) throw new Error('Buchungen konnten nicht geladen werden.')
     return await res.json() as Booking[]
 }
 
 export async function cancelBooking(bookingId: string) {
-    const res = await authFetch(`${API}/bookings.php?id=${encodeURIComponent(bookingId)}&action=cancel`, {
+    const res = await authFetch(`/bookings.php?id=${encodeURIComponent(bookingId)}&action=cancel`, {
         method: 'PUT',
     })
     if (!res.ok) {

@@ -13,8 +13,7 @@ export default async function RestaurantPage() {
     <main className="min-h-screen">
       <section className="section-space pb-8">
         <div className="site-container text-center">
-          <p className="section-label">Restaurant</p>
-          <h1 className="section-title mt-3">{restaurant_page.title}</h1>
+          <h1 className="font-script text-6xl text-primary/80 md:text-7xl">{restaurant_page.title}</h1>
         </div>
       </section>
 

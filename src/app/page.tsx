@@ -3,7 +3,6 @@ import { ContactSection } from "@/components/ContactSection";
 import { FeatureSection } from "@/components/FeatureSection";
 import { GallerySection } from "@/components/GallerySection";
 import { Hero } from "@/components/Hero";
-import { PromoSection } from "@/components/PromoSection";
 
 export default async function Home() {
   const content = await getSiteContent();
@@ -18,6 +17,7 @@ export default async function Home() {
 
       <FeatureSection
         id="hotel"
+        label="Hotel"
         title={content.home_hotel.title}
         description={content.home_hotel.description}
         buttonText={content.home_hotel.buttonText}
@@ -28,6 +28,7 @@ export default async function Home() {
 
       <FeatureSection
         id="restaurant"
+        label="Restaurant"
         title={content.home_restaurant.title}
         description={content.home_restaurant.description}
         buttonText={content.home_restaurant.buttonText}
@@ -38,6 +39,7 @@ export default async function Home() {
 
       <FeatureSection
         id="events"
+        label="Veranstaltungen"
         title={content.home_events.title}
         description={content.home_events.description}
         buttonText={content.home_events.buttonText}
@@ -47,17 +49,6 @@ export default async function Home() {
       />
 
       <GallerySection images={content.home_gallery?.images || []} />
-
-      {content.home_promo && (
-        <PromoSection
-          title={content.home_promo.title}
-          subtitle={content.home_promo.subtitle}
-          description={content.home_promo.description}
-          buttonText={content.home_promo.buttonText}
-          buttonLink={content.home_promo.buttonLink}
-          image={content.home_promo.image}
-        />
-      )}
 
       {content.home_contact && (
         <ContactSection

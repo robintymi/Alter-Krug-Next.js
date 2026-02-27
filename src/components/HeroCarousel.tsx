@@ -80,20 +80,24 @@ export function HeroCarousel({ images, content }: HeroCarouselProps) {
           <p className="mb-4 font-script text-5xl text-white/85 md:text-6xl">
             Alter Krug Kallinchen
           </p>
-          <h1 className="text-display font-serif font-semibold drop-shadow-[0_8px_28px_rgba(0,0,0,0.45)]">
+          <h1 className="font-script text-6xl text-white drop-shadow-[0_8px_28px_rgba(0,0,0,0.45)] md:text-8xl">
             {content.title}
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base text-white/90 md:text-xl">{content.subtitle}</p>
-          <div className="pointer-events-auto mt-9">
-            <a
-              href={content.buttonLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-brand h-12 px-8 text-[0.8rem] uppercase tracking-[0.16em]"
-            >
-              {content.buttonText}
-            </a>
-          </div>
+          {content.subtitle && (
+            <p className="mx-auto mt-5 max-w-3xl text-base text-white/90 md:text-xl">{content.subtitle}</p>
+          )}
+          {content.buttonText && content.buttonLink && (
+            <div className="pointer-events-auto mt-9">
+              <a
+                href={content.buttonLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-brand h-12 px-8 text-[0.8rem] uppercase tracking-[0.16em]"
+              >
+                {content.buttonText}
+              </a>
+            </div>
+          )}
         </div>
       </div>
 
