@@ -38,6 +38,8 @@
     "buttonLink": "",
     "images": [
       "/img/alter-krug-scharf.jpg",
+      "/img/HG2_Alter_Krug_Kallinchen-1.jpg",
+      "/img/Dekorierter Saal.jpg",
       "/img/allgemein/Alter-Krug-3klein.jpg"
     ]
   },
@@ -98,7 +100,8 @@
     "gallery": [
         "/img/biergarten.jpg",
         "/img/Dekorierter Saal.jpg",
-        "/img/LANDSCHAFT04.jpg"
+        "/img/LANDSCHAFT04.jpg",
+        "/img/Motzen-scaled.jpg"
     ],
     "rooms": [
         { 
@@ -118,12 +121,9 @@
             "features": ["inklusive Frühstück"], 
             "price": "97 bis 120 Euro", 
             "images": [
-                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33.jpeg",
-                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (1).jpeg",
-                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (2).jpeg",
+                "/img/hotel/Standard Doppelzimmer/Zimmer14Doppelbett.jpeg",
                 "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (3).jpeg",
-                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (4).jpeg",
-                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.32.jpeg"
+                "/img/hotel/Standard Doppelzimmer/WhatsApp Image 2026-02-13 at 19.15.33 (4).jpeg"
             ] 
         },
         { 
@@ -131,12 +131,9 @@
           "features": ["inklusive Frühstück"], 
           "price": "111 bis 135 Euro", 
           "images": [
-                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17.jpeg",
-                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17 (1).jpeg",
-                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17 (2).jpeg",
-                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.17 (3).jpeg",
-                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.16.jpeg",
-                "/img/hotel/Comfort Doppelzimmer/WhatsApp Image 2026-02-13 at 19.16.16 (1).jpeg"
+                "/img/hotel/Comfort Doppelzimmer/ComfortDoppelzimmerBett.jpeg",
+                "/img/hotel/Comfort Doppelzimmer/Zimmer11Badewanne.jpeg",
+                "/img/hotel/Comfort Doppelzimmer/Zimmer11Badezimmer.jpeg"
           ]
         },
         { 

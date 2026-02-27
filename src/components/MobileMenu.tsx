@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { type SiteContent } from "@/data/types";
@@ -34,8 +35,8 @@ export function MobileMenu({ content }: MobileMenuProps) {
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
 
-      {isOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/45 backdrop-blur-[2px]">
+      {isOpen && createPortal(
+        <div className="fixed inset-0 z-[9999] bg-black/45 backdrop-blur-[2px]">
           <div className="absolute right-0 top-0 h-full w-[86%] max-w-sm overflow-y-auto border-l border-white/20 bg-[#f9f3e8] p-6 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Navigation</p>
@@ -134,7 +135,8 @@ export function MobileMenu({ content }: MobileMenuProps) {
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
