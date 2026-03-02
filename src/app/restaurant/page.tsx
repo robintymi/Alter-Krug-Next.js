@@ -1,4 +1,5 @@
 import { getSiteContent } from "@/lib/content";
+import { BreakfastGallery } from "@/components/BreakfastGallery";
 
 export default async function RestaurantPage() {
   const content = await getSiteContent();
@@ -40,6 +41,8 @@ export default async function RestaurantPage() {
           ))}
         </div>
       </section>
+
+      <BreakfastGallery />
     </main>
   );
 }

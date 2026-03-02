@@ -38,6 +38,7 @@
     "buttonLink": "",
     "images": [
       "/img/alter-krug-scharf.jpg",
+      "/img/restaurant-kaminzimmer.jpg",
       "/img/HG2_Alter_Krug_Kallinchen-1.jpg",
       "/img/Dekorierter Saal.jpg",
       "/img/allgemein/Alter-Krug-3klein.jpg"
@@ -55,7 +56,7 @@
     "description": "Unser Restaurant serviert frische, regionale Küche – abwechslungsreich, gesund und saisonal in Bio – Qualität. Ob vegetarisch, vegan, Fisch – oder Fleischgerichte – dazu eine feine Weinkarte und tolle Jahresangebote wie Candle‑Light‑Dinner oder Verwöhn‑Wochenenden.",
     "buttonText": "MENÜ ANZEIGEN",
     "buttonLink": "/speisekarte",
-    "image": "/img/restaurant/Blumenkohl paniert.jpeg"
+    "image": "/img/restaurant-kaminzimmer.jpg"
   },
   "home_events": {
     "title": "Veranstaltungen",
