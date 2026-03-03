@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getSiteContent } from "@/lib/content";
 import { BreakfastGallery } from "@/components/BreakfastGallery";
 
@@ -20,12 +21,17 @@ export default async function RestaurantPage() {
 
       <section className="pb-10 md:pb-14">
         <div className="site-container">
-          <div className="panel overflow-hidden">
-            <div className="flex aspect-[16/7] w-full items-center justify-center bg-gradient-to-br from-[#f7ecdb] to-[#efe1cc]">
-              <div className="rounded-2xl border border-dashed border-primary/35 bg-white/70 px-6 py-4 text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/70">Platzhalter</p>
-                <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">Foto folgt</p>
-              </div>
+          <div className="overflow-hidden rounded-3xl">
+            <div className="relative aspect-[16/7]">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/restaurant-kaminzimmer.jpg`}
+                alt="Restaurant Kaminzimmer"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1200px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
             </div>
           </div>
         </div>

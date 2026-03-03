@@ -153,7 +153,7 @@
       "text": "Sollten bei uns keine Zimmer im gewünschten Zeitraum für Sie zur Verfügung stehen, vermitteln wir Ihnen gern eine Ferienwohnung.",
       "recommendationText": "Wir empfehlen",
       "linkText": "www.ferienwohnungenclaudia.de",
-      "linkUrl": "http://www.ferienwohnungenclaudia.de"
+      "linkUrl": "https://www.ferienwohnungenclaudia.de"
     },
     "services": {
         "title": "Unser Service für Sie",
@@ -219,7 +219,7 @@
       "name": "Ellen Block",
       "phone": "033769 50170",
       "mobile": "0162 1324564",
-      "website": "http://www.ellen-block.de"
+      "website": "https://www.ellen-block.de"
     },
     "image": "/img/wellness/massage-room.png",
     "babyImage": "/img/wellness/baby-feet.png"
@@ -478,7 +478,6 @@
       "title": "Unsere kommenden Events",
       "intro": "Erleben Sie unvergessliche Momente bei unseren Veranstaltungen.",
        "gallery": [
-        "/images/Klavierabend.jpeg",
         "/img/events/Klavierabend.jpeg"
       ],
       "events": [
