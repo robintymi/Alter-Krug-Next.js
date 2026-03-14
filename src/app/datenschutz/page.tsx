@@ -77,7 +77,7 @@ export default function DatenschutzPage() {
                     eines Server Log Files als grundlegende Datenbasis zur
                     Fehleranalyse und für Sicherheitsmaßnahmen im Rahmen des
                     durch Ihren Aufruf ausdrücklich gewünschten Dienstes
-                    „Website") gemäß Art. 6 Abs. 1 lit. f DSGVO.
+                    &bdquo;Website&ldquo;) gemäß Art. 6 Abs. 1 lit. f DSGVO.
                   </p>
                 </div>
               </div>

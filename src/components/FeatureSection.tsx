@@ -19,7 +19,6 @@ function isExternalLink(href: string) {
 
 export function FeatureSection({
   id,
-  label,
   title,
   description,
   buttonText,

@@ -1,9 +1,14 @@
 function getApiBase(): string {
+    // Explizite API-URL hat immer Vorrang (lokal + Produktion)
+    if (process.env.NEXT_PUBLIC_API_URL) {
+        return process.env.NEXT_PUBLIC_API_URL
+    }
+    // Fallback: gleicher Origin + basePath
     if (typeof window !== 'undefined') {
         const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
         return window.location.origin + basePath + '/api'
     }
-    return process.env.NEXT_PUBLIC_API_URL || '/api'
+    return '/api'
 }
 
 export async function adminLogin(email: string, password: string) {

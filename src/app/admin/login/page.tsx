@@ -49,8 +49,8 @@ export default function LoginPage() {
                 <form onSubmit={handleSubmit}>
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="email">E-Mail</Label>
-                            <Input id="email" name="email" type="email" required placeholder="admin@alter-krug.de" autoComplete="email" />
+                            <Label htmlFor="email">Benutzername</Label>
+                            <Input id="email" name="email" type="text" required placeholder="Benutzername eingeben" autoComplete="username" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Passwort</Label>

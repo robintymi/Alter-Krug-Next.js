@@ -10,11 +10,9 @@ interface GoogleMapsEmbedProps {
 }
 
 export function GoogleMapsEmbed({ src, title = "Google Maps" }: GoogleMapsEmbedProps) {
-  const [consented, setConsented] = useState(false);
+  const [consented, setConsented] = useState(() => hasExternalConsent());
 
   useEffect(() => {
-    setConsented(hasExternalConsent());
-
     function onConsentChange(e: Event) {
       const detail = (e as CustomEvent).detail;
       setConsented(detail?.external === true);

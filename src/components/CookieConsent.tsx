@@ -36,7 +36,9 @@ export function CookieConsent() {
   useEffect(() => {
     const consent = getStoredConsent();
     if (!consent) {
-      setVisible(true);
+      // Show banner after short delay to avoid layout shift
+      const id = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(id);
     }
   }, []);
 
@@ -62,7 +64,7 @@ export function CookieConsent() {
             </p>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground md:text-sm">
               Diese Website verwendet Cookies und externe Dienste (Google Maps)
-              zur Verbesserung Ihres Erlebnisses. Mit „Alle akzeptieren" stimmen
+              zur Verbesserung Ihres Erlebnisses. Mit &bdquo;Alle akzeptieren&ldquo; stimmen
               Sie der Nutzung externer Dienste zu. Mehr dazu in unserer{" "}
               <a
                 href="/datenschutz"

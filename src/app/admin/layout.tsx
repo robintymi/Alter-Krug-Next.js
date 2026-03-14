@@ -11,7 +11,7 @@ function AdminNav({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
 
     // Login-Seite braucht kein Nav-Layout
-    if (pathname === '/admin/login') {
+    if (pathname === '/admin/login' || pathname === '/admin/login/') {
         return <>{children}</>
     }
 

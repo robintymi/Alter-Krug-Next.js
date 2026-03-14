@@ -2,15 +2,22 @@
 
 import { useEffect, useState } from 'react'
 import { getSession } from '@/lib/admin-auth'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
-    const [loading, setLoading] = useState(true)
-    const [authenticated, setAuthenticated] = useState(false)
     const router = useRouter()
+    const pathname = usePathname()
+
+    const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/'
+
+    const [loading, setLoading] = useState(!isLoginPage)
+    const [authenticated, setAuthenticated] = useState(false)
 
     useEffect(() => {
+        if (isLoginPage) return
+        let cancelled = false
         getSession().then((session) => {
+            if (cancelled) return
             if (session) {
                 setAuthenticated(true)
             } else {
@@ -18,7 +25,10 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
             }
             setLoading(false)
         })
-    }, [router])
+        return () => { cancelled = true }
+    }, [router, isLoginPage])
+
+    if (isLoginPage) return <>{children}</>
 
     if (loading) {
         return (

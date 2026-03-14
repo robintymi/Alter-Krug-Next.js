@@ -2,7 +2,7 @@ import type { SiteContent, Event } from '@/data/types'
 import fs from 'fs/promises'
 import path from 'path'
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'https://alter-krug-kallinchen.de/api'
+const API = process.env.NEXT_PUBLIC_API_URL || 'https://neu.alter-krug-kallinchen.de/api'
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 /**

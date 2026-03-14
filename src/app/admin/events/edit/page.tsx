@@ -10,18 +10,18 @@ export default function EditEventPage() {
     const searchParams = useSearchParams()
     const eventId = searchParams.get('id') ?? ''
     const [event, setEvent] = useState<Event | null>(null)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(!!eventId)
 
     useEffect(() => {
-        if (!eventId) {
-            setLoading(false)
-            return
-        }
+        if (!eventId) return
+        let cancelled = false
         getEvents().then((events) => {
+            if (cancelled) return
             const found = events.find((e) => e.id === eventId)
             setEvent(found ?? null)
             setLoading(false)
         })
+        return () => { cancelled = true }
     }, [eventId])
 
     if (loading) {

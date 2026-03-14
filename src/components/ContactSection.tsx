@@ -9,7 +9,7 @@ interface ContactSectionProps {
   mapUrl: string;
 }
 
-export function ContactSection({ title, subtitle, email, phone, address, mapUrl }: ContactSectionProps) {
+export function ContactSection({ subtitle, email, phone, address, mapUrl }: ContactSectionProps) {
   return (
     <section className="section-space" id="kontakt">
       <div className="site-container grid gap-8 lg:grid-cols-[1fr_1.15fr]">
