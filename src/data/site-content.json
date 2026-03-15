@@ -6,7 +6,7 @@
         "label": "Hotel", 
         "href": "/hotel",
         "items": [
-          { "label": "Online Buchen", "href": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX" },
+          { "label": "Online Buchen", "href": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740" },
           { "label": "Gesundheit & Wohlbefinden", "href": "/gesundheit" },
           { "label": "Gutschein bestellen", "href": "https://www.yovite.com/Restaurant-Gutschein-R-84831799.html?REF=REST" }
         ]
@@ -27,7 +27,7 @@
       { "label": "Stellenangebote", "href": "/stellenangebote" },
       { "label": "Kontakt", "href": "/kontakt" }
     ],
-    "bookingUrl": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "bookingUrl": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740",
     "reservationUrl": "https://reservation.dish.co/widget/hydra-c1868730-c577-11e9-a07f-e38e98c57b7e",
     "voucherUrl": "https://www.yovite.com/Restaurant-Gutschein-R-84831799.html?REF=REST"
   },
@@ -48,7 +48,7 @@
     "title": "Hotel",
     "description": "Unsere stilvollen Einzel- und Doppelzimmer bieten alles, was Sie für eine entspannte Auszeit brauchen – Flatscreen-TV, Telefon, kostenloses WLAN sowie Bäder mit Dusche und WC. In unserem Appartement finden Sie Platz für bis zu fünf Personen mit einer kleinen Küche – ideal für eine kleine Auszeit mit der ganzen Familie.",
     "buttonText": "JETZT BUCHEN",
-    "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740",
     "image": "/img/hotel/Doppelzimmer.jpg"
   },
   "home_restaurant": {
@@ -94,10 +94,10 @@
     "galleryText": "Finden Sie Ruhe und Erholung. Lassen Sie sich am Tage von der waldreichen Umgebung und dem schönen Motzener See zum Spazieren und Baden einladen.",
     "bookingText": "Entdecken Sie eine angenehme Atmosphäre und erstklassigen Service. Ob für einen romantischen Abend oder eine Feier mit Freunden, wir sorgen für Ihr Wohlbefinden.",
     "buttonText": "JETZT BUCHEN",
-    "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740",
     "image": "/img/hotel/ReziNeuMarco-scaled.jpg",
     "heroButtonText": "Zimmer buchen",
-    "heroButtonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX",
+    "heroButtonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740",
     "gallery": [
         "/img/biergarten.jpg",
         "/img/Dekorierter Saal.jpg",
@@ -177,7 +177,7 @@
         "title": "Buchen Sie Ihr Zimmer",
         "text": "Entdecken Sie eine angenehme Atmosphäre und erstklassigen Service. Ob für einen romantischen Abend oder eine Feier mit Freunden, wir sorgen für Ihr Wohlbefinden. Reservieren Sie noch heute und genießen Sie einzigartige Momente in unserem Hotel und Restaurant.",
         "buttonText": "Jetzt buchen",
-        "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX"
+        "buttonLink": "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740"
     }
   },
   "restaurant_page": {
@@ -276,10 +276,11 @@
         },
         {
           "name": "Klassiker",
+          "image": "/img/Schnitzel.jpeg",
           "items": [
             { "name": "Märkisches Schweineschnitzel", "price": "20,70", "description": "gefüllt mit Schinken und Käse, buntes Pfannengemüse und Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
              { "name": "Schweineschnitzel „Wiener Art“", "price": "19,70", "description": "mit Buttermöhrchen, Petersilienkartoffeln oder Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
-             { "name": "Wildschweingulasch", "price": "18,90", "description": "vom heimischen Wildschwein, mit Apfelrotkohl und Kartoffelklößen", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+             { "name": "Wildschweingulasch", "price": "18,90", "description": "vom heimischen Wildschwein, mit Apfelrotkohl und Kartoffelklößen", "image": "/img/Gulasch.jpeg" },
              { "name": "Eisbein", "price": "18,70", "description": "Sauerkraut, Erbsenpüree, Petersilienkartoffeln vom Havelländer Bio-Apfelschwein", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
              { "name": "Schweineschnitzel „Wiener Art“ mit Sauce Hollandaise", "price": "19,70", "description": "mit Buttermöhrchen, Sauce Hollandaise, Petersilienkartoffeln oder Bratkartoffeln Havelländer Bio-Apfelschwein", "image": "/img/allgemein/Alter-Krug-3klein.jpg" }
           ],
@@ -478,7 +479,12 @@
       "title": "Unsere kommenden Events",
       "intro": "Erleben Sie unvergessliche Momente bei unseren Veranstaltungen.",
        "gallery": [
-        "/img/events/Klavierabend.jpeg"
+        "/img/events/Klavierabend.jpeg",
+        "/img/events/krimi-dinner/KrimiDinnerSaalVollWährendShow.jpeg",
+        "/img/events/krimi-dinner/KrimiDinnerSaalDekoriertOhneMenschen.jpeg",
+        "/img/events/karneval/Karneval!.jpeg",
+        "/img/events/karneval/Karneval2.jpeg",
+        "/img/events/karneval/Karneval3.jpeg"
       ],
       "events": [
           {

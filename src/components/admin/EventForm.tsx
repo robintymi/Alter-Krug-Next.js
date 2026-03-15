@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { addEvent, updateEvent } from '@/lib/admin-api'
 import { Event } from '@/data/types'
+import { ImageUpload } from '@/components/admin/ImageUpload'
 
 interface EventFormProps {
     mode: 'create' | 'edit'
@@ -27,6 +28,7 @@ function slugify(text: string): string {
 
 export function EventForm({ mode, initialData, eventId }: EventFormProps) {
     const [saving, setSaving] = useState(false)
+    const [imagePath, setImagePath] = useState(initialData?.image || '')
     const router = useRouter()
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -42,7 +44,7 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
             time: (formData.get('time') as string) || '',
             price: (formData.get('price') as string) || '',
             description: (formData.get('description') as string) || '',
-            image: (formData.get('image') as string) || '',
+            image: imagePath || '',
         }
 
         const maxSeatsRaw = formData.get('maxSeats') as string
@@ -123,11 +125,12 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
                         </div>
                     </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="image">Bild-Pfad (optional)</Label>
-                        <Input id="image" name="image" defaultValue={initialData?.image} placeholder="/img/events/beispiel.jpg" />
-                        <p className="text-xs text-muted-foreground">Geben Sie den Pfad zu einem Bild im public-Ordner an.</p>
-                    </div>
+                    <ImageUpload
+                        label="Event-Bild"
+                        value={imagePath}
+                        onChange={setImagePath}
+                        folder="events"
+                    />
 
                     <div className="space-y-2">
                         <Label htmlFor="description">Beschreibung</Label>

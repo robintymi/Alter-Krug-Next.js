@@ -143,6 +143,32 @@ export async function saveMenuPages(menuPage: MenuPageData, drinksPage: MenuPage
     return { success: true }
 }
 
+// ─── Image Upload ───────────────────────────────────────
+
+export async function uploadImage(file: File, folder?: string): Promise<{ path: string; filename: string }> {
+    const url = getApiBase() + '/upload.php'
+    const token = getAuthToken()
+
+    const formData = new FormData()
+    formData.append('image', file)
+    if (folder) formData.append('folder', folder)
+
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+        },
+        body: formData,
+    })
+
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Upload fehlgeschlagen.')
+    }
+
+    return await res.json()
+}
+
 // ─── Bookings ────────────────────────────────────────────
 
 export interface Booking {

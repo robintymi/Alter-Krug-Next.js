@@ -25,7 +25,7 @@ export default async function HotelPage() {
             <div className="site-container text-white">
               <h1 className="font-script text-6xl text-white md:text-8xl">Hotel</h1>
               <a
-                href={hotel_page.heroButtonLink || "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740&token=2npHCOhibXIn5fb5rG7DcFOX"}
+                href={hotel_page.heroButtonLink || "https://neo.cultbooking.com/CPC/?agentcode=58078&hotelcode=38740"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-brand mt-6"

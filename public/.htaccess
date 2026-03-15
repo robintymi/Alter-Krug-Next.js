@@ -1,0 +1,31 @@
+RewriteEngine On
+
+# ──────────────────────────────────────────────────────────
+# Next.js 16 Static Export – RSC payload rewrites for Apache
+# ──────────────────────────────────────────────────────────
+# Browser requests e.g.: /admin/login/__next.admin.login.__PAGE__.txt
+# File on disk is:       /admin/login/__next.admin/login/__PAGE__.txt
+# Strategy: iteratively convert dots to slashes after __next.
+
+# Step 1: rewrite __PAGE__/__LAYOUT__ segment (deepest)
+# e.g. __next.admin.login.__PAGE__.txt → __next.admin.login/__PAGE__.txt
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+/__next\..+)\.(__PAGE__|__LAYOUT__)\.txt$ $1/$2.txt [N,QSA]
+
+# Step 2: iteratively convert remaining dots to slashes
+# e.g. __next.admin.login/__PAGE__.txt → __next.admin/login/__PAGE__.txt
+# Then on next pass: (file exists, stops)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+/__next\.[^/]+)\.([^.]+/.*)$ $1/$2 [N,QSA]
+
+# Step 3: handle simple (non-nested) RSC txt files
+# e.g. __next.restaurant.txt (already a file, no rewrite needed)
+# But __next.admin.login.txt → __next.admin/login.txt
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+/__next\.[^/]+)\.([^.]+\.txt)$ $1/$2 [N,QSA]
+
+# Fallback: serve index.html for client-side routing (SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(?:css|js|json|ico|svg|png|jpg|jpeg|gif|woff2?|ttf|eot|webp|avif|txt|map)$ [NC]
+RewriteRule ^(.+)$ $1/index.html [L]

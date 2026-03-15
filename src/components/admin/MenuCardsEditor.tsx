@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { ImageUpload } from '@/components/admin/ImageUpload'
 
 type PageKey = 'menu' | 'drinks'
 
@@ -383,16 +384,14 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                                                         <option value="image-left">Links Bild, rechts Einträge</option>
                                                     </select>
                                                 </div>
-                                                <div className="space-y-1.5 md:col-span-3">
-                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
-                                                        Sektionsbild (Pfad, optional)
-                                                    </Label>
-                                                    <Input
-                                                        placeholder="/img/getraenke/Heißgetränke.jpeg"
+                                                <div className="md:col-span-3">
+                                                    <ImageUpload
+                                                        label="Sektionsbild"
                                                         value={category.image ?? ''}
-                                                        onChange={(e) =>
-                                                            setCategoryField(pageKey, categoryIndex, 'image', e.target.value)
+                                                        onChange={(path) =>
+                                                            setCategoryField(pageKey, categoryIndex, 'image', path)
                                                         }
+                                                        folder={pageKey === 'menu' ? 'speisekarte' : 'getraenke'}
                                                     />
                                                 </div>
                                             </div>
@@ -496,17 +495,15 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                                                                         }
                                                                     />
                                                                 </div>
-                                                                <div className="space-y-1.5">
-                                                                    <Label className="text-xs uppercase tracking-wide text-muted-foreground">
-                                                                        Bildpfad am Eintrag (optional)
-                                                                    </Label>
-                                                                    <Input
-                                                                        value={item.image ?? ''}
-                                                                        onChange={(e) =>
-                                                                            setItemField(pageKey, categoryIndex, itemIndex, 'image', e.target.value)
-                                                                        }
-                                                                    />
-                                                                </div>
+                                                                <ImageUpload
+                                                                    label="Bild (optional)"
+                                                                    value={item.image ?? ''}
+                                                                    onChange={(path) =>
+                                                                        setItemField(pageKey, categoryIndex, itemIndex, 'image', path)
+                                                                    }
+                                                                    folder={pageKey === 'menu' ? 'speisekarte' : 'getraenke'}
+                                                                    compact
+                                                                />
                                                             </div>
                                                         )}
                                                     </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getSiteContent } from "@/lib/content";
 import { MenuCategory } from "@/data/types";
 
@@ -46,11 +47,22 @@ export default async function MenuPage() {
                     )}
                   </div>
 
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-dashed border-primary/25 bg-gradient-to-br from-[#f7ecdb] to-[#efe1cc]">
-                    <div className="flex h-full flex-col items-center justify-center gap-2">
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/50">Platzhalter</p>
-                      <p className="font-script text-4xl text-foreground/50">Foto folgt</p>
-                    </div>
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-primary/10 bg-gradient-to-br from-[#f7ecdb] to-[#efe1cc]">
+                    {cat.image ? (
+                      <Image
+                        src={cat.image}
+                        alt={cat.name}
+                        fill
+                        loading="lazy"
+                        sizes="220px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full flex-col items-center justify-center gap-2">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/50">Platzhalter</p>
+                        <p className="font-script text-4xl text-foreground/50">Foto folgt</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </article>

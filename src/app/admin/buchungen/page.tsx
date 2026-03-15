@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getBookings, getEvents, type Booking } from '@/lib/admin-api'
+import { getBookings, getEvents, cancelBooking, type Booking } from '@/lib/admin-api'
 import type { Event } from '@/data/types'
 
 const STATUS_LABELS: Record<Booking['status'], { label: string; class: string }> = {
@@ -35,6 +35,18 @@ export default function AdminBookingsPage() {
             .catch(console.error)
             .finally(() => setLoading(false))
     }, [])
+
+    const handleCancel = async (bookingId: string) => {
+        if (!confirm('Buchung wirklich stornieren?')) return
+        try {
+            await cancelBooking(bookingId)
+            setBookings((prev) =>
+                prev.map((b) => (b.id === bookingId ? { ...b, status: 'cancelled' as const } : b))
+            )
+        } catch (err) {
+            alert('Fehler: ' + (err as Error).message)
+        }
+    }
 
     if (loading) {
         return <div className="text-muted-foreground">Laden...</div>
@@ -147,6 +159,7 @@ export default function AdminBookingsPage() {
                                     <th className="px-4 py-3 text-right">Betrag</th>
                                     <th className="px-4 py-3 text-center">Status</th>
                                     <th className="px-4 py-3 text-left">Datum</th>
+                                    <th className="px-4 py-3 text-center">Aktion</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y">
@@ -176,6 +189,16 @@ export default function AdminBookingsPage() {
                                             </td>
                                             <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap">
                                                 {formatDate(booking.created_at)}
+                                            </td>
+                                            <td className="px-4 py-3 text-center">
+                                                {booking.status !== 'cancelled' && (
+                                                    <button
+                                                        onClick={() => handleCancel(booking.id)}
+                                                        className="rounded-md px-2.5 py-1 text-xs font-medium text-red-600 hover:bg-red-50 transition-colors"
+                                                    >
+                                                        Stornieren
+                                                    </button>
+                                                )}
                                             </td>
                                         </tr>
                                     )

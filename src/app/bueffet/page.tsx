@@ -440,6 +440,33 @@ export default function BuffetPage() {
         </div>
       </section>
 
+      {/* Büffet-Impressionen */}
+      <section className="pb-10 md:pb-14">
+        <div className="site-container">
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              { src: "/img/BüffetVorspeise1.jpeg", alt: "Büffet Vorspeise" },
+              { src: "/img/BüffetVorspeise2.jpeg", alt: "Büffet Vorspeise" },
+              { src: "/img/BüffetDessert.jpeg", alt: "Büffet Dessert" },
+            ].map((img) => (
+              <div
+                key={img.src}
+                className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/60 shadow-md"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Büffet-Gruppen */}
       {buffetGroups.map((group) => (
         <section key={group.label} className="pb-14 md:pb-18">
