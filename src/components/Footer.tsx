@@ -54,6 +54,11 @@ export function Footer({ content }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/agb" className="transition-colors hover:text-[#f6c38a]">
+                  AGB
+                </Link>
+              </li>
+              <li>
                 <Link href="/kontakt" className="transition-colors hover:text-[#f6c38a]">
                   Kontakt
                 </Link>

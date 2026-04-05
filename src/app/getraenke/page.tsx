@@ -1,28 +1,79 @@
-import Image from "next/image";
-import { getSiteContent } from "@/lib/content";
-import { MenuCategory } from "@/data/types";
+'use client'
 
-export default async function DrinksPage() {
-  const content = await getSiteContent();
+import { useState, useEffect } from 'react'
+import Image from "next/image"
+import { MenuCategory } from "@/data/types"
 
-  if (!content) {
-    return <div className="site-container py-16">Laden der Inhalte fehlgeschlagen.</div>;
+const API = process.env.NEXT_PUBLIC_API_URL || '/api'
+
+interface DrinksPageData {
+  title: string
+  categories: MenuCategory[]
+}
+
+export default function DrinksPage() {
+  const [drinksPage, setDrinksPage] = useState<DrinksPageData | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadDrinks() {
+      try {
+        const res = await fetch(`${API}/content.php?key=drinks_page`)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data = await res.json()
+        const pageData = data?.data ?? data
+        if (pageData?.categories) {
+          setDrinksPage(pageData)
+        }
+      } catch (err) {
+        console.warn('Getränkekarte konnte nicht geladen werden:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadDrinks()
+  }, [])
+
+  if (loading) {
+    return (
+      <main className="min-h-screen">
+        <section className="section-space pb-8 text-center">
+          <div className="site-container">
+            <p className="section-label">Restaurant</p>
+            <h1 className="section-title mt-3">Getränkekarte</h1>
+            <p className="text-muted-foreground mt-6">Laden...</p>
+          </div>
+        </section>
+      </main>
+    )
   }
 
-  const { drinks_page } = content;
+  if (!drinksPage) {
+    return (
+      <main className="min-h-screen">
+        <section className="section-space pb-8 text-center">
+          <div className="site-container">
+            <p className="section-label">Restaurant</p>
+            <h1 className="section-title mt-3">Getränkekarte</h1>
+            <p className="text-muted-foreground mt-6">Laden der Inhalte fehlgeschlagen.</p>
+          </div>
+        </section>
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen">
       <section className="section-space pb-8 text-center">
         <div className="site-container">
           <p className="section-label">Restaurant</p>
-          <h1 className="section-title mt-3">{drinks_page.title}</h1>
+          <h1 className="section-title mt-3">{drinksPage.title}</h1>
         </div>
       </section>
 
       <section className="pb-16 md:pb-20">
         <div className="site-container max-w-5xl space-y-8">
-          {drinks_page.categories.map((cat: MenuCategory, idx: number) => {
+          {drinksPage.categories.map((cat: MenuCategory, idx: number) => {
             return (
               <article key={cat.name + idx} className="panel p-5 md:p-7">
                 <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_220px] md:items-start">

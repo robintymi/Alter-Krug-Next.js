@@ -149,12 +149,25 @@ export function BookingForm({ eventId, eventTitle, priceInCents, maxSeats }: Boo
                             </p>
                         )}
 
+                        <div className="rounded-md border border-amber-200 bg-amber-50/80 px-3 py-2.5 text-[11px] leading-relaxed text-muted-foreground">
+                            <label className="flex items-start gap-2 cursor-pointer">
+                                <input type="checkbox" name="agb" required className="mt-0.5 accent-primary" />
+                                <span>
+                                    Ich akzeptiere die{' '}
+                                    <a href="/agb" target="_blank" className="text-primary underline underline-offset-2 hover:text-primary/80">AGB</a>{' '}
+                                    und nehme zur Kenntnis, dass für Veranstaltungen mit festem Termin gemäß § 312g Abs. 2 Nr. 9 BGB{' '}
+                                    <strong className="text-foreground">kein Widerrufsrecht</strong> besteht.
+                                    Eine freiwillige Stornierung ist nur auf Anfrage beim Veranstalter möglich.
+                                </span>
+                            </label>
+                        </div>
+
                         <div className="flex items-center justify-between border-t pt-3">
                             <span className="text-sm text-muted-foreground">
                                 {seats} × {priceFormatted} = <strong className="text-foreground">{totalFormatted}</strong>
                             </span>
                             <Button type="submit" disabled={loading} size="sm">
-                                {loading ? 'Weiterleitung...' : 'Weiter zur Kasse'}
+                                {loading ? 'Weiterleitung...' : 'Zahlungspflichtig bestellen'}
                             </Button>
                         </div>
                     </form>

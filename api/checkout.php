@@ -81,7 +81,7 @@ try {
 
     $seatLabel = $seats > 1 ? 'Plätze' : 'Platz';
     $session = \Stripe\Checkout\Session::create([
-        'payment_method_types' => ['card'],
+        // Keine payment_method_types angegeben → Stripe zeigt automatisch alle im Dashboard aktivierten Zahlungsmethoden
         'line_items' => [[
             'price_data' => [
                 'currency' => 'eur',
