@@ -94,8 +94,8 @@ try {
             'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => SITE_URL . "/events/$eventId/buchung-bestaetigt?session_id={CHECKOUT_SESSION_ID}",
-        'cancel_url' => SITE_URL . "/events/$eventId",
+        'success_url' => SITE_URL . "/buchung-bestaetigt/?session_id={CHECKOUT_SESSION_ID}&event_id=" . urlencode($eventId),
+        'cancel_url' => SITE_URL . "/events/" . urlencode($eventId),
         'customer_email' => $customerEmail,
         'metadata' => [
             'booking_id' => $bookingId,

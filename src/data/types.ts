@@ -156,7 +156,7 @@ export interface SiteContent {
             name: string;
             phone: string;
             mobile: string;
-            website: string;
+            website?: string;
         };
     };
     menu_page: {

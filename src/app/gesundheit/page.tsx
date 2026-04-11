@@ -24,14 +24,16 @@ export default async function WellnessPage() {
               <div className="mt-4 space-y-2 text-sm text-muted-foreground md:text-base">
                 <p>Telefon: {wellness_page.contact.phone}</p>
                 <p>Mobil: {wellness_page.contact.mobile}</p>
-                <a
-                  href={wellness_page.contact.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block pt-2 font-semibold text-primary underline decoration-primary/35 underline-offset-4"
-                >
-                  Zur Website
-                </a>
+                {wellness_page.contact?.website && (
+                  <a
+                    href={wellness_page.contact.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-brand mt-4 inline-flex w-fit items-center gap-2"
+                  >
+                    Website besuchen
+                  </a>
+                )}
               </div>
             </div>
           </article>

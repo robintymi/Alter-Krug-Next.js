@@ -22,7 +22,7 @@ function getImageUrl(path: string): string {
  * Wird verwendet wenn die statische Seite nicht existiert (neues Event über Admin erstellt).
  * Liest den Slug aus der URL und lädt das Event vom API.
  */
-export function EventDetailClient() {
+export function EventDetailClient({ reservationUrl = '#' }: { reservationUrl?: string }) {
     const [event, setEvent] = useState<Event | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -157,16 +157,25 @@ export function EventDetailClient() {
                             <h1 className="font-serif text-4xl md:text-6xl">{event.title}</h1>
                             <p className="mt-6 whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">{event.description}</p>
 
-                            {bookingEnabled && (
-                                <div className="mt-9 border-t border-primary/10 pt-6">
+                            <div className="mt-9 border-t border-primary/10 pt-6">
+                                {bookingEnabled ? (
                                     <BookingForm
                                         eventId={event.id}
                                         eventTitle={event.title}
                                         priceInCents={event.priceInCents!}
                                         maxSeats={event.maxSeats!}
                                     />
-                                </div>
-                            )}
+                                ) : (
+                                    <a
+                                        href={reservationUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn-brand"
+                                    >
+                                        Jetzt reservieren
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
