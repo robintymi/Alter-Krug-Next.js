@@ -354,10 +354,22 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                                             </button>
                                         </div>
 
-                                        {/* Section settings (collapsible) */}
+                                        {/* Sektionsbild — immer sichtbar */}
+                                        <div className="border-b bg-amber-50/30 px-4 py-3">
+                                            <ImageUpload
+                                                label="Sektionsbild"
+                                                value={category.image ?? ''}
+                                                onChange={(path) =>
+                                                    setCategoryField(pageKey, categoryIndex, 'image', path)
+                                                }
+                                                folder={pageKey === 'menu' ? 'speisekarte' : 'getraenke'}
+                                            />
+                                        </div>
+
+                                        {/* Weitere Einstellungen (collapsible) */}
                                         {settingsOpen && (
-                                            <div className="grid gap-4 border-b bg-amber-50/40 px-4 py-4 md:grid-cols-3">
-                                                <div className="space-y-1.5 md:col-span-2">
+                                            <div className="grid gap-4 border-b bg-amber-50/40 px-4 py-4 md:grid-cols-2">
+                                                <div className="space-y-1.5">
                                                     <Label className="text-xs uppercase tracking-wide text-muted-foreground">
                                                         Sektionsname
                                                     </Label>
@@ -383,16 +395,6 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                                                         <option value="items-left">Links Einträge, rechts Bild</option>
                                                         <option value="image-left">Links Bild, rechts Einträge</option>
                                                     </select>
-                                                </div>
-                                                <div className="md:col-span-3">
-                                                    <ImageUpload
-                                                        label="Sektionsbild"
-                                                        value={category.image ?? ''}
-                                                        onChange={(path) =>
-                                                            setCategoryField(pageKey, categoryIndex, 'image', path)
-                                                        }
-                                                        folder={pageKey === 'menu' ? 'speisekarte' : 'getraenke'}
-                                                    />
                                                 </div>
                                             </div>
                                         )}
