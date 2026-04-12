@@ -109,7 +109,7 @@ export function ImageUpload({
                 )}
                 <div className="flex items-center gap-2">
                     {value ? (
-                        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border bg-gray-100">
+                        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border bg-gray-100">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={imageUrl}

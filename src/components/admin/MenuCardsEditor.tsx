@@ -354,8 +354,8 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                                             </button>
                                         </div>
 
-                                        {/* Sektionsbild — immer sichtbar */}
-                                        <div className="border-b bg-amber-50/30 px-4 py-3">
+                                        {/* Sektionsbild — immer sichtbar, kompakt */}
+                                        <div className="border-b bg-amber-50/30 px-4 py-2.5">
                                             <ImageUpload
                                                 label="Sektionsbild"
                                                 value={category.image ?? ''}
@@ -363,6 +363,7 @@ export function MenuCardsEditor({ initialMenuPage, initialDrinksPage }: MenuCard
                                                     setCategoryField(pageKey, categoryIndex, 'image', path)
                                                 }
                                                 folder={pageKey === 'menu' ? 'speisekarte' : 'getraenke'}
+                                                compact
                                             />
                                         </div>
 
