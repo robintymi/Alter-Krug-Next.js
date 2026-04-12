@@ -245,7 +245,7 @@
           "items": [
             { "name": "Veggieburger", "price": "12,90", "description": "im Brioche Bun, mit knusprigem „Grüner-Haferburger“, Ziegenkäse, rauchiger Honig- Apfelsoße, Blattsalat, Tomate, Zwiebel, Gurke", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
             { "name": "mit Süßkartoffel-Pommes", "price": "16,50", "description": "" },
-            { "name": "Wildschweinburger", "price": "13,90", "description": "im Brioche Bun, mit geschmolzenem Camembert, Preiselbeercreme, Blattsalat, Tomate, Zwiebel, Gewürzgurke", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+            { "name": "Wildschweinburger", "price": "13,90", "description": "im Brioche Bun, mit geschmolzenem Camembert, Preiselbeercreme, Blattsalat, Tomate, Zwiebel, Gewürzgurke", "image": "/img/wildschweinburger.jpeg" },
             { "name": "mit Pommes Frites", "price": "16,80", "description": "" }
           ],
           "layout": "alternating"
@@ -278,7 +278,7 @@
           "name": "Klassiker",
           "image": "/img/Schnitzel.jpeg",
           "items": [
-            { "name": "Märkisches Schweineschnitzel", "price": "20,70", "description": "gefüllt mit Schinken und Käse, buntes Pfannengemüse und Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
+            { "name": "Märkisches Schweineschnitzel", "price": "20,70", "description": "gefüllt mit Schinken und Käse, buntes Pfannengemüse und Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/schnitzel2026.jpeg" },
              { "name": "Schweineschnitzel „Wiener Art“", "price": "19,70", "description": "mit Buttermöhrchen, Petersilienkartoffeln oder Bratkartoffeln Havelländer Bio-Apfelschwein vom Neustrelitzer Züchter Karsten Dudziak", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
              { "name": "Wildschweingulasch", "price": "18,90", "description": "vom heimischen Wildschwein, mit Apfelrotkohl und Kartoffelklößen", "image": "/img/Gulasch.jpeg" },
              { "name": "Eisbein", "price": "18,70", "description": "Sauerkraut, Erbsenpüree, Petersilienkartoffeln vom Havelländer Bio-Apfelschwein", "image": "/img/allgemein/Alter-Krug-3klein.jpg" },
@@ -304,7 +304,7 @@
                 { "name": "Eiskaffee", "price": "6,50", "description": "" },
                 { "name": "Eisschokolade", "price": "6,50", "description": "" },
                  { "name": "Salted Peanut Karamelleisbecher", "price": "9,70", "description": "Erdnuss- Karamelleiscreme, Erdnüssen, Karamellsoße und Sahne" },
-                 { "name": "Schwedeneisbecher", "price": "9,50", "description": "Vanilleeiscreme, mit Apfelmus, hausgemachtem Eierlikör und Sahne" },
+                 { "name": "Schwedeneisbecher", "price": "9,50", "description": "Vanilleeiscreme, mit Apfelmus, hausgemachtem Eierlikör und Sahne", "image": "/img/vanillemus.jpeg" },
                  { "name": "Gemischter Eisbecher", "price": "6,90", "description": "Erdbeer- , Schokoladen- und Vanilleeiscreme" },
                  { "name": "Gemischter Eisbecher mit Sahne", "price": "7,90", "description": "" },
                  { "name": "Schokoladentraum", "price": "8,90", "description": "Schokoladeneis mit Schokosoße und Schokoraspeln und Sahne" }
