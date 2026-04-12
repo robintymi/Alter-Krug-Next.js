@@ -79,25 +79,16 @@ export default async function EventDetailPage({ params }: EventPageProps) {
               <h1 className="font-serif text-4xl md:text-6xl">{event.title}</h1>
               <p className="mt-6 whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">{event.description}</p>
 
-              <div className="mt-9 border-t border-primary/10 pt-6">
-                {bookingEnabled ? (
+              {bookingEnabled && (
+                <div className="mt-9 border-t border-primary/10 pt-6">
                   <BookingForm
                     eventId={event.id}
                     eventTitle={event.title}
                     priceInCents={event.priceInCents!}
                     maxSeats={event.maxSeats!}
                   />
-                ) : (
-                  <a
-                    href={content?.header?.reservationUrl ?? '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-brand"
-                  >
-                    Jetzt reservieren
-                  </a>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
