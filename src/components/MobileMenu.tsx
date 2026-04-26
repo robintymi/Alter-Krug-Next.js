@@ -65,6 +65,7 @@ export function MobileMenu({ content }: MobileMenuProps) {
                   ) : (
                     <Link
                       href={item.href}
+                      prefetch={false}
                       className="block text-sm font-semibold uppercase tracking-[0.12em] text-foreground/85"
                       onClick={() => setIsOpen(false)}
                     >
@@ -90,6 +91,7 @@ export function MobileMenu({ content }: MobileMenuProps) {
                           <Link
                             key={subItem.label}
                             href={subItem.href}
+                            prefetch={false}
                             className="block py-1 text-sm text-muted-foreground"
                             onClick={() => setIsOpen(false)}
                           >

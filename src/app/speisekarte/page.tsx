@@ -1,7 +1,7 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
-import Image from "next/image"
+import { SiteImage } from "@/components/SiteImage"
 import { MenuCategory } from "@/data/types"
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api'
@@ -22,7 +22,7 @@ export default function MenuPage() {
         const res = await fetch(`${API}/content.php?key=menu_page`)
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const data = await res.json()
-        // API gibt entweder { key, data } oder direkt das Objekt zurück
+        // API gibt entweder { key, data } oder direkt das Objekt zurÃ¼ck
         const pageData = data?.data ?? data
         if (pageData?.categories) {
           setMenuPage(pageData)
@@ -96,13 +96,13 @@ export default function MenuPage() {
                         ))}
                       </div>
                     ) : (
-                      <p className="mt-4 text-sm text-muted-foreground">Noch keine Einträge in dieser Sektion.</p>
+                      <p className="mt-4 text-sm text-muted-foreground">Noch keine EintrÃ¤ge in dieser Sektion.</p>
                     )}
                   </div>
 
                   <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-primary/10 bg-gradient-to-br from-[#f7ecdb] to-[#efe1cc]">
                     {cat.image ? (
-                      <Image
+                      <SiteImage
                         src={cat.image}
                         alt={cat.name}
                         fill
@@ -126,3 +126,5 @@ export default function MenuPage() {
     </main>
   );
 }
+
+

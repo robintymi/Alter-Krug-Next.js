@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { getSiteContent } from "@/lib/content";
+﻿import { getSiteContent } from "@/lib/content";
+import { SiteImage } from "@/components/SiteImage";
 
 export default async function WellnessPage() {
   const content = await getSiteContent();
@@ -41,7 +41,7 @@ export default async function WellnessPage() {
           <div className="relative overflow-hidden rounded-[2rem] border border-white/60 shadow-[0_16px_42px_-30px_rgba(24,16,8,0.55)]">
             {wellness_page.image ? (
               <div className="relative aspect-[4/5] min-h-[340px]">
-                <Image
+                <SiteImage
                   src={wellness_page.image}
                   alt={wellness_page.contact.name}
                   fill
@@ -59,3 +59,4 @@ export default async function WellnessPage() {
     </main>
   );
 }
+

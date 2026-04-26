@@ -142,4 +142,8 @@
     line-height: 0.95;
     letter-spacing: -0.02em;
   }
+  .defer-render {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
+  }
 }

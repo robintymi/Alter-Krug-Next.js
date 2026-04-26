@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { Calendar, Clock } from 'lucide-react'
 import { Event } from '@/data/types'
+import { getOptimizedImageSrc } from '@/lib/site-image'
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api'
 
@@ -68,15 +69,17 @@ export function EventsList({ fallbackEvents }: { fallbackEvents: Event[] }) {
                     <Link
                         key={event.id}
                         href={href}
+                        prefetch={false}
                         className="group overflow-hidden rounded-3xl border border-white/60 bg-white/78 shadow-[0_18px_42px_-34px_rgba(18,10,4,0.6)] transition-all hover:-translate-y-1"
                     >
                         <div className="relative aspect-[16/10]">
                             {event.image ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
-                                    src={getImageUrl(event.image)}
+                                    src={getImageUrl(getOptimizedImageSrc(event.image))}
                                     alt={event.title}
                                     loading="lazy"
+                                    decoding="async"
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                             ) : (

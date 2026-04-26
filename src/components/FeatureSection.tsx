@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { SiteImage } from "@/components/SiteImage";
 
 interface FeatureSectionProps {
   id?: string;
@@ -37,7 +37,7 @@ export function FeatureSection({
   );
 
   return (
-    <section id={id} className="section-space">
+    <section id={id} className="section-space defer-render">
       <div
         className={cn(
           "site-container grid items-center gap-8 lg:gap-14",
@@ -54,7 +54,7 @@ export function FeatureSection({
           <div className="absolute inset-0 z-10 bg-gradient-to-tr from-black/20 to-transparent" />
           {imageSrc ? (
             <div className="relative aspect-[16/11]">
-              <Image
+              <SiteImage
                 src={imageSrc}
                 alt={title}
                 fill

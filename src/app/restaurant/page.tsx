@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { getSiteContent } from "@/lib/content";
 import { BreakfastGallery } from "@/components/BreakfastGallery";
+import { SiteImage } from "@/components/SiteImage";
 
 export default async function RestaurantPage() {
   const content = await getSiteContent();
@@ -23,14 +23,14 @@ export default async function RestaurantPage() {
         <div className="site-container">
           <div className="overflow-hidden rounded-3xl">
             <div className="relative aspect-[16/7]">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/restaurant-kaminzimmer.jpg`}
-                alt="Restaurant Kaminzimmer"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 1200px"
-                className="object-cover"
-              />
+            <SiteImage
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/restaurant-kaminzimmer.jpg`}
+              alt="Restaurant Kaminzimmer"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 1200px"
+              className="object-cover"
+            />
               <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
             </div>
           </div>

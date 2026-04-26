@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SiteImage } from "@/components/SiteImage";
 
 interface GallerySectionProps {
   images: string[];
@@ -10,7 +10,7 @@ export function GallerySection({ images }: GallerySectionProps) {
   }
 
   return (
-    <section className="section-space">
+    <section className="section-space defer-render">
       <div className="site-container">
         <div className="mb-10 text-center">
           <p className="section-label">Impressionen</p>
@@ -20,7 +20,7 @@ export function GallerySection({ images }: GallerySectionProps) {
           {images.map((img, index) => (
             <div key={img + index} className="group relative overflow-hidden rounded-2xl border border-white/60 shadow-md">
               <div className="relative aspect-square">
-                <Image
+                <SiteImage
                   src={img}
                   alt={`Galerie ${index + 1}`}
                   fill

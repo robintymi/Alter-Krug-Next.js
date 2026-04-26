@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, Clock, Euro } from 'lucide-react'
 import { Event } from '@/data/types'
 import { BookingForm } from '@/components/BookingForm'
 import { AvailableSeatsDisplay } from '@/components/AvailableSeatsDisplay'
+import { getOptimizedImageSrc } from '@/lib/site-image'
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api'
 
@@ -19,8 +20,8 @@ function getImageUrl(path: string): string {
 
 /**
  * Client-side Event-Detail-Ansicht.
- * Wird verwendet wenn die statische Seite nicht existiert (neues Event über Admin erstellt).
- * Liest den Slug aus der URL und lädt das Event vom API.
+ * Wird verwendet wenn die statische Seite nicht existiert (neues Event Ã¼ber Admin erstellt).
+ * Liest den Slug aus der URL und lÃ¤dt das Event vom API.
  */
 export function EventDetailClient() {
     const [event, setEvent] = useState<Event | null>(null)
@@ -94,9 +95,9 @@ export function EventDetailClient() {
                 <div className="site-container py-20 text-center">
                     <h1 className="font-serif text-4xl">Event nicht gefunden</h1>
                     <p className="mt-4 text-muted-foreground">{error}</p>
-                    <Link href="/events" className="mt-6 inline-flex items-center gap-2 text-primary hover:underline">
+                    <Link href="/events" prefetch={false} className="mt-6 inline-flex items-center gap-2 text-primary hover:underline">
                         <ArrowLeft className="h-4 w-4" />
-                        Zurück zur Übersicht
+                        ZurÃ¼ck zur Ãœbersicht
                     </Link>
                 </div>
             </main>
@@ -109,9 +110,9 @@ export function EventDetailClient() {
         <main className="min-h-screen">
             <section className="pt-8">
                 <div className="site-container">
-                    <Link href="/events" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                    <Link href="/events" prefetch={false} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
                         <ArrowLeft className="h-4 w-4" />
-                        Zurück zur Übersicht
+                        ZurÃ¼ck zur Ãœbersicht
                     </Link>
                 </div>
             </section>
@@ -123,8 +124,10 @@ export function EventDetailClient() {
                             {event.image ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
-                                    src={getImageUrl(event.image)}
+                                    src={getImageUrl(getOptimizedImageSrc(event.image))}
                                     alt={event.title}
+                                    loading="eager"
+                                    decoding="async"
                                     className="h-full w-full object-cover"
                                 />
                             ) : (
@@ -174,3 +177,4 @@ export function EventDetailClient() {
         </main>
     )
 }
+

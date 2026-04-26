@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { type SiteContent } from "@/data/types";
+import { SiteImage } from "@/components/SiteImage";
 
 interface FooterProps {
   content: SiteContent["footer"];
@@ -44,22 +44,22 @@ export function Footer({ content }: FooterProps) {
             <h3 className="mt-3 font-script text-5xl leading-none">Links</h3>
             <ul className="mt-4 space-y-2 text-sm text-white/80">
               <li>
-                <Link href="/impressum" className="transition-colors hover:text-[#f6c38a]">
+                <Link href="/impressum" prefetch={false} className="transition-colors hover:text-[#f6c38a]">
                   Impressum
                 </Link>
               </li>
               <li>
-                <Link href="/datenschutz" className="transition-colors hover:text-[#f6c38a]">
+                <Link href="/datenschutz" prefetch={false} className="transition-colors hover:text-[#f6c38a]">
                   Datenschutz
                 </Link>
               </li>
               <li>
-                <Link href="/agb" className="transition-colors hover:text-[#f6c38a]">
+                <Link href="/agb" prefetch={false} className="transition-colors hover:text-[#f6c38a]">
                   AGB
                 </Link>
               </li>
               <li>
-                <Link href="/kontakt" className="transition-colors hover:text-[#f6c38a]">
+                <Link href="/kontakt" prefetch={false} className="transition-colors hover:text-[#f6c38a]">
                   Kontakt
                 </Link>
               </li>
@@ -79,7 +79,7 @@ export function Footer({ content }: FooterProps) {
 
         <div className="mt-12 flex flex-col items-center gap-5 border-t border-white/10 pt-8">
           <div className="relative h-[60px] w-[200px]">
-            <Image
+            <SiteImage
               src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/allgemein/Logo-neu.png`}
               alt="Alter Krug Kallinchen"
               fill

@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import { GoogleMapsEmbed } from "@/components/GoogleMapsEmbed";
 
 interface ContactSectionProps {
   title: string;
@@ -11,7 +12,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ subtitle, email, phone, address, mapUrl }: ContactSectionProps) {
   return (
-    <section className="section-space" id="kontakt">
+    <section className="section-space defer-render" id="kontakt">
       <div className="site-container grid gap-8 lg:grid-cols-[1fr_1.15fr]">
         <div className="panel p-6 md:p-8">
           <p className="section-label">Kontakt</p>
@@ -50,15 +51,8 @@ export function ContactSection({ subtitle, email, phone, address, mapUrl }: Cont
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-white/60 shadow-[0_16px_45px_-28px_rgba(40,28,10,0.55)]">
-          <iframe
-            src={mapUrl}
-            style={{ border: 0, width: "100%", height: "100%", minHeight: "400px" }}
-            allowFullScreen={true}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Karte Alter Krug"
-          />
+        <div className="relative min-h-[400px] overflow-hidden rounded-3xl border border-white/60 shadow-[0_16px_45px_-28px_rgba(40,28,10,0.55)]">
+          <GoogleMapsEmbed src={mapUrl} title="Karte Alter Krug" />
         </div>
       </div>
     </section>

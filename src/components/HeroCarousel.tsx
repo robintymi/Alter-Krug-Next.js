@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SiteImage } from '@/components/SiteImage';
 
 interface HeroCarouselProps {
   images: string[];
@@ -55,20 +55,33 @@ export function HeroCarousel({ images, content }: HeroCarouselProps) {
     return null;
   }
 
+  const shouldRenderSlideImage = (index: number) => {
+    const lastIndex = images.length - 1;
+    const previousIndex = selectedIndex === 0 ? lastIndex : selectedIndex - 1;
+    const nextIndex = selectedIndex === lastIndex ? 0 : selectedIndex + 1;
+
+    return index === selectedIndex || index === previousIndex || index === nextIndex;
+  };
+
   return (
     <div className="group relative w-full min-h-[66svh] overflow-hidden md:min-h-[76svh]">
       <div className="embla h-full w-full" ref={emblaRef}>
         <div className="embla__container flex h-full">
           {images.map((src, index) => (
             <div className="embla__slide relative h-[66svh] min-w-0 flex-[0_0_100%] md:h-[76svh]" key={src + index}>
-              <Image
-                src={src}
-                alt={`Alter Krug Ansicht ${index + 1}`}
-                fill
-                priority={index === 0}
-                sizes="100vw"
-                className="object-cover"
-              />
+              {shouldRenderSlideImage(index) ? (
+                <SiteImage
+                  src={src}
+                  alt={`Alter Krug Ansicht ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  loading={index === 0 ? undefined : 'lazy'}
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[#e8dcc6]" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/50" />
             </div>
           ))}

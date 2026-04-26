@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { SiteImage } from "@/components/SiteImage";
 
 const images = [
   { src: "/img/fruehstueck/bueffet-theke.jpeg", alt: "Frühstücksbüffet Theke" },
@@ -20,7 +20,7 @@ export function BreakfastGallery() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="pb-16 md:pb-20">
+    <section className="pb-16 md:pb-20 defer-render">
       <div className="site-container">
         <div className="text-center">
           <h2 className="font-script text-5xl text-primary/80 md:text-6xl">
@@ -35,7 +35,7 @@ export function BreakfastGallery() {
         {/* Hero image */}
         <div className="mt-8 overflow-hidden rounded-3xl">
           <div className="relative aspect-[21/9]">
-            <Image
+            <SiteImage
               src={`${basePath}${images[0].src}`}
               alt={images[0].alt}
               fill
@@ -69,10 +69,11 @@ export function BreakfastGallery() {
               className="group relative overflow-hidden rounded-2xl"
             >
               <div className="relative aspect-[4/3]">
-                <Image
+                <SiteImage
                   src={`${basePath}${img.src}`}
                   alt={img.alt}
                   fill
+                  loading={open ? "lazy" : undefined}
                   sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />

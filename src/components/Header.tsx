@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PhoneCall } from "lucide-react";
 import { MobileMenu } from "@/components/MobileMenu";
 import { type SiteContent } from "@/data/types";
+import { SiteImage } from "@/components/SiteImage";
 
 interface HeaderProps {
   content: SiteContent["header"];
@@ -29,6 +29,7 @@ function NavItemLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
+      prefetch={false}
       className="inline-flex items-center text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-foreground/80 transition-colors hover:text-primary"
     >
       {label}
@@ -48,7 +49,7 @@ export function Header({ content }: HeaderProps) {
           </div>
 
           <Link href="/" className="relative mx-auto block h-[86px] w-[270px] md:h-[96px] md:w-[320px]">
-            <Image
+            <SiteImage
               src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/allgemein/Logo-neu.png`}
               alt="Alter Krug Kallinchen"
               fill
@@ -97,6 +98,7 @@ export function Header({ content }: HeaderProps) {
                           <Link
                             key={subItem.label}
                             href={subItem.href}
+                            prefetch={false}
                             className="block rounded-xl px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary"
                           >
                             {subItem.label}

@@ -1,7 +1,7 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
-import Image from "next/image"
+import { SiteImage } from "@/components/SiteImage"
 import { MenuCategory } from "@/data/types"
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api'
@@ -26,7 +26,7 @@ export default function DrinksPage() {
           setDrinksPage(pageData)
         }
       } catch (err) {
-        console.warn('Getränkekarte konnte nicht geladen werden:', err)
+        console.warn('GetrÃ¤nkekarte konnte nicht geladen werden:', err)
       } finally {
         setLoading(false)
       }
@@ -40,7 +40,7 @@ export default function DrinksPage() {
         <section className="section-space pb-8 text-center">
           <div className="site-container">
             <p className="section-label">Restaurant</p>
-            <h1 className="section-title mt-3">Getränkekarte</h1>
+            <h1 className="section-title mt-3">GetrÃ¤nkekarte</h1>
             <p className="text-muted-foreground mt-6">Laden...</p>
           </div>
         </section>
@@ -54,7 +54,7 @@ export default function DrinksPage() {
         <section className="section-space pb-8 text-center">
           <div className="site-container">
             <p className="section-label">Restaurant</p>
-            <h1 className="section-title mt-3">Getränkekarte</h1>
+            <h1 className="section-title mt-3">GetrÃ¤nkekarte</h1>
             <p className="text-muted-foreground mt-6">Laden der Inhalte fehlgeschlagen.</p>
           </div>
         </section>
@@ -93,13 +93,13 @@ export default function DrinksPage() {
                         ))}
                       </div>
                     ) : (
-                      <p className="mt-4 text-sm text-muted-foreground">Noch keine Einträge in dieser Sektion.</p>
+                      <p className="mt-4 text-sm text-muted-foreground">Noch keine EintrÃ¤ge in dieser Sektion.</p>
                     )}
                   </div>
 
                   {cat.image ? (
                     <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                      <Image
+                      <SiteImage
                         src={cat.image}
                         alt={cat.name}
                         fill
@@ -123,3 +123,5 @@ export default function DrinksPage() {
     </main>
   );
 }
+
+

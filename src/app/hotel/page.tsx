@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { getSiteContent } from "@/lib/content";
 import { GallerySection } from "@/components/GallerySection";
 import { ImageCarousel } from "@/components/ImageCarousel";
+import { SiteImage } from "@/components/SiteImage";
 
 export default async function HotelPage() {
   const content = await getSiteContent();
@@ -18,7 +18,7 @@ export default async function HotelPage() {
       {hotel_page.image && (
         <section className="relative isolate overflow-hidden">
           <div className="relative h-[58svh] min-h-[480px] w-full md:h-[70svh]">
-            <Image src={hotel_page.image} alt="Hotel Alter Krug" fill priority sizes="100vw" className="object-cover object-[center_25%]" />
+            <SiteImage src={hotel_page.image} alt="Hotel Alter Krug" fill priority sizes="100vw" className="object-cover object-[center_25%]" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/35 to-black/65" />
           <div className="absolute inset-0 z-10 flex items-center">
@@ -85,7 +85,7 @@ export default async function HotelPage() {
                         <ImageCarousel images={room.images} aspectRatio="aspect-[16/10]" />
                       ) : room.image ? (
                         <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                          <Image
+                          <SiteImage
                             src={room.image}
                             alt={room.type}
                             fill

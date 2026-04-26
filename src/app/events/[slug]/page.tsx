@@ -1,8 +1,8 @@
-import Image from "next/image";
+﻿import { SiteImage } from "@/components/SiteImage";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Euro } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getSiteContent, getEvents, getEventBySlug } from "@/lib/content";
+import { getEvents, getEventBySlug } from "@/lib/content";
 import { BookingForm } from "@/components/BookingForm";
 import { AvailableSeatsDisplay } from "@/components/AvailableSeatsDisplay";
 
@@ -21,10 +21,7 @@ interface EventPageProps {
 
 export default async function EventDetailPage({ params }: EventPageProps) {
   const { slug } = await params;
-  const [event, content] = await Promise.all([
-    getEventBySlug(slug),
-    getSiteContent(),
-  ]);
+  const event = await getEventBySlug(slug);
 
   if (!event) {
     notFound();
@@ -36,9 +33,9 @@ export default async function EventDetailPage({ params }: EventPageProps) {
     <main className="min-h-screen">
       <section className="pt-8">
         <div className="site-container">
-          <Link href="/events" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+          <Link href="/events" prefetch={false} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
             <ArrowLeft className="h-4 w-4" />
-            Zurück zur Übersicht
+            ZurÃ¼ck zur Ãœbersicht
           </Link>
         </div>
       </section>
@@ -48,7 +45,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
           <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/82 shadow-[0_18px_52px_-34px_rgba(20,12,6,0.55)]">
             <div className="relative aspect-[16/9]">
               {event.image ? (
-                <Image src={event.image} alt={event.title} fill priority sizes="100vw" className="object-cover" />
+                <SiteImage src={event.image} alt={event.title} fill priority sizes="100vw" className="object-cover" />
               ) : (
                 <div className="absolute inset-0 bg-muted" />
               )}
@@ -96,3 +93,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
     </main>
   );
 }
+
+
+
+

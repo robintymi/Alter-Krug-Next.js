@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SiteImage } from '@/components/SiteImage';
 
 interface ImageCarouselProps {
   images: string[];
@@ -54,7 +54,7 @@ export function ImageCarousel({ images, className, aspectRatio = 'aspect-[4/3]' 
   if (images.length === 1) {
     return (
       <div className={cn('relative w-full overflow-hidden rounded-2xl bg-muted', aspectRatio, className)}>
-        <Image
+        <SiteImage
           src={images[0]}
           alt="Galeriebild"
           fill
@@ -66,20 +66,32 @@ export function ImageCarousel({ images, className, aspectRatio = 'aspect-[4/3]' 
     );
   }
 
+  const shouldRenderSlideImage = (index: number) => {
+    const lastIndex = images.length - 1;
+    const previousIndex = selectedIndex === 0 ? lastIndex : selectedIndex - 1;
+    const nextIndex = selectedIndex === lastIndex ? 0 : selectedIndex + 1;
+
+    return index === selectedIndex || index === previousIndex || index === nextIndex;
+  };
+
   return (
     <div className={cn('group relative w-full overflow-hidden rounded-2xl bg-muted', aspectRatio, className)}>
       <div className="embla h-full w-full" ref={emblaRef}>
         <div className="embla__container flex h-full">
           {images.map((src, index) => (
             <div className="embla__slide relative h-full min-w-0 flex-[0_0_100%]" key={src + index}>
-              <Image
-                src={src}
-                alt={`Zimmerbild ${index + 1}`}
-                fill
-                loading="lazy"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
+              {shouldRenderSlideImage(index) ? (
+                <SiteImage
+                  src={src}
+                  alt={`Zimmerbild ${index + 1}`}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[#ebe2d4]" />
+              )}
             </div>
           ))}
         </div>
