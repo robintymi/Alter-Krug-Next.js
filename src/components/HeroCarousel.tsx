@@ -15,9 +15,11 @@ interface HeroCarouselProps {
     buttonText: string;
     buttonLink: string;
   };
+  bookingUrl?: string;
+  reservationUrl?: string;
 }
 
-export function HeroCarousel({ images, content }: HeroCarouselProps) {
+export function HeroCarousel({ images, content, bookingUrl, reservationUrl }: HeroCarouselProps) {
   const autoplay = useRef(Autoplay({ delay: 6000, stopOnInteraction: false }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -63,12 +65,24 @@ export function HeroCarousel({ images, content }: HeroCarouselProps) {
     return index === selectedIndex || index === previousIndex || index === nextIndex;
   };
 
+  const primaryCta =
+    content.buttonText && content.buttonLink
+      ? { label: content.buttonText, href: content.buttonLink }
+      : bookingUrl
+        ? { label: 'Zimmer buchen', href: bookingUrl }
+        : null;
+
+  const secondaryCta = reservationUrl ? { label: 'Tisch reservieren', href: reservationUrl } : null;
+  const subtitle =
+    content.subtitle?.trim() ||
+    'Erholung am See, regionale Küche und herzliche Gastlichkeit – wir freuen uns auf Ihren Besuch.';
+
   return (
-    <div className="group relative w-full min-h-[66svh] overflow-hidden md:min-h-[76svh]">
+    <div className="group relative w-full min-h-[80svh] overflow-hidden md:min-h-[90svh]">
       <div className="embla h-full w-full" ref={emblaRef}>
         <div className="embla__container flex h-full">
           {images.map((src, index) => (
-            <div className="embla__slide relative h-[66svh] min-w-0 flex-[0_0_100%] md:h-[76svh]" key={src + index}>
+            <div className="embla__slide relative h-[80svh] min-w-0 flex-[0_0_100%] md:h-[90svh]" key={src + index}>
               {shouldRenderSlideImage(index) ? (
                 <SiteImage
                   src={src}
@@ -82,35 +96,62 @@ export function HeroCarousel({ images, content }: HeroCarouselProps) {
               ) : (
                 <div className="absolute inset-0 bg-[#e8dcc6]" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/50" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/60" />
             </div>
           ))}
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-4">
-        <div className="max-w-5xl text-center text-white">
-          <p className="mb-4 font-script text-5xl text-white/85 md:text-6xl">
-            Alter Krug Kallinchen
+        <div className="max-w-4xl text-center text-white">
+          <p className="mx-auto mb-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.26em] text-white/85 backdrop-blur">
+            Hotel &amp; Restaurant am Motzener See
           </p>
-          <h1 className="font-script text-6xl text-white drop-shadow-[0_8px_28px_rgba(0,0,0,0.45)] md:text-8xl">
+          <p className="mb-4 font-script text-4xl text-white/90 md:text-5xl">Alter Krug Kallinchen</p>
+          <h1 className="font-serif text-display font-semibold tracking-tight text-white drop-shadow-[0_10px_34px_rgba(0,0,0,0.55)]">
             {content.title}
           </h1>
-          {content.subtitle && (
-            <p className="mx-auto mt-5 max-w-3xl text-base text-white/90 md:text-xl">{content.subtitle}</p>
-          )}
-          {content.buttonText && content.buttonLink && (
-            <div className="pointer-events-auto mt-9">
-              <a
-                href={content.buttonLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-brand h-12 px-8 text-[0.8rem] uppercase tracking-[0.16em]"
-              >
-                {content.buttonText}
-              </a>
+          <p className="mx-auto mt-5 max-w-3xl text-base text-white/90 md:text-xl">{subtitle}</p>
+
+          {(primaryCta || secondaryCta) && (
+            <div className="pointer-events-auto mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              {primaryCta && (
+                <a
+                  href={primaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-brand h-12 px-9 text-[0.78rem] uppercase tracking-[0.16em]"
+                >
+                  {primaryCta.label}
+                </a>
+              )}
+              {secondaryCta && (
+                <a
+                  href={secondaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 items-center justify-center rounded-full border border-white/45 bg-black/35 px-9 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_14px_30px_-24px_rgba(0,0,0,0.85)] backdrop-blur transition-colors hover:bg-white hover:text-foreground"
+                >
+                  {secondaryCta.label}
+                </a>
+              )}
             </div>
           )}
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/80">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-white/60" />
+              Direkt am See
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-white/60" />
+              Regionale Küche
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-white/60" />
+              Für Feiern &amp; Events
+            </span>
+          </div>
         </div>
       </div>
 

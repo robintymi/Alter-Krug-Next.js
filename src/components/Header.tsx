@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { PhoneCall } from "lucide-react";
 import { MobileMenu } from "@/components/MobileMenu";
 import { type SiteContent } from "@/data/types";
 import { SiteImage } from "@/components/SiteImage";
@@ -96,26 +95,33 @@ export function Header({ content }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <a
-            href="tel:+49337698980"
-            className="hidden xl:inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-          >
-            <PhoneCall className="h-3.5 w-3.5" />
-            033769 8980
-          </a>
-
-          <a href={content.bookingUrl} target="_blank" rel="noopener noreferrer" className="btn-brand-soft h-10 px-5 text-xs">
-            Zimmer buchen
-          </a>
-          <a href={content.reservationUrl} target="_blank" rel="noopener noreferrer" className="btn-brand h-10 px-5 text-xs">
-            Tisch reservieren
-          </a>
-          {content.voucherUrl && (
-            <a href={content.voucherUrl} target="_blank" rel="noopener noreferrer" className="hidden xl:inline-flex btn-brand-soft h-10 px-5 text-xs">
-              Gutschein
-            </a>
-          )}
+        <div className="hidden lg:flex items-center shrink-0">
+          <div className="group relative">
+            <button className="btn-brand h-9 px-5 text-[0.7rem] flex items-center gap-1.5">
+              Buchen
+              <svg className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="invisible absolute right-0 top-full z-30 w-56 translate-y-1 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="rounded-2xl border border-white/60 bg-[#fff9f2] p-2 shadow-xl">
+                <a href={content.bookingUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary">
+                  <span className="text-base">🛏</span> Hotelzimmer buchen
+                </a>
+                <a href={content.reservationUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary">
+                  <span className="text-base">🍽</span> Tisch reservieren
+                </a>
+                {content.voucherUrl && (
+                  <a href={content.voucherUrl} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary">
+                    <span className="text-base">🎁</span> Gutschein kaufen
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="ml-auto lg:hidden">
