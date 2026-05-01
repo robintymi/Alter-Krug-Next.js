@@ -96,7 +96,7 @@ export function HeroCarousel({ images, content, bookingUrl, reservationUrl }: He
               ) : (
                 <div className="absolute inset-0 bg-[#e8dcc6]" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/60" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
             </div>
           ))}
         </div>
@@ -107,11 +107,11 @@ export function HeroCarousel({ images, content, bookingUrl, reservationUrl }: He
           <p className="mx-auto mb-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.26em] text-white/85 backdrop-blur">
             Hotel &amp; Restaurant am Motzener See
           </p>
-          <p className="mb-4 font-script text-4xl text-white/90 md:text-5xl">Alter Krug Kallinchen</p>
-          <h1 className="font-serif text-display font-semibold tracking-tight text-white drop-shadow-[0_10px_34px_rgba(0,0,0,0.55)]">
+          <p className="mb-4 font-script text-4xl text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] md:text-5xl">Alter Krug Kallinchen</p>
+          <h1 className="font-serif text-display font-semibold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
             {content.title}
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base text-white/90 md:text-xl">{subtitle}</p>
+          <p className="mx-auto mt-5 max-w-3xl text-base text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:text-xl">{subtitle}</p>
 
           {(primaryCta || secondaryCta) && (
             <div className="pointer-events-auto mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
