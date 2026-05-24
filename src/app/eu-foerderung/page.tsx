@@ -17,7 +17,7 @@ export default function EuFoerderungPage() {
           <div className="panel flex justify-center p-8">
             <div className="relative h-24 w-96">
               <Image
-                src="/img/eu-kofinanziert.png"
+                src="/img/eu-kofinanziert.jpg"
                 alt="Kofinanziert von der Europäischen Union"
                 fill
                 className="object-contain"

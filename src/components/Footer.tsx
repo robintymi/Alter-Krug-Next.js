@@ -82,7 +82,7 @@ export function Footer({ content }: FooterProps) {
           <Link href="/eu-foerderung" prefetch={false} className="flex items-center gap-4 opacity-80 transition-opacity hover:opacity-100">
             <div className="relative h-10 w-48">
               <SiteImage
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/eu-kofinanziert.png`}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/eu-kofinanziert.jpg`}
                 alt="Kofinanziert von der Europäischen Union"
                 fill
                 loading="lazy"
