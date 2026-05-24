@@ -30,8 +30,29 @@ export default async function DirectionsPage() {
               <div>
                 <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80">Mit der Bahn</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Bahnhof Zossen oder Bestensee. Von dort aus bieten wir auf Anfrage einen Shuttleservice an. Bitte kontaktieren Sie uns rechtzeitig.
+                  Nächste Bahnhöfe: Zossen oder Bestensee. Von dort bieten wir auf Anfrage einen Abholservice an — sprechen Sie uns einfach vor Ihrer Anreise an.
                 </p>
+              </div>
+            </div>
+
+            <div className="mt-6 border-t border-primary/10 pt-6">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80">Abholservice & Shuttle</h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Damit Ihre Anreise so entspannt wie Ihr Aufenthalt wird, bieten wir Ihnen gerne gegen Gebühr einen Abholservice von den umliegenden Bahnhöfen sowie vom nur ca. 20 Minuten entfernten Flughafen an.
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                <div className="rounded-xl border border-primary/10 bg-primary/5 p-3 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-foreground/70">Zossen oder Bestensee</p>
+                  <p className="mt-1 text-lg font-serif text-primary">25,00 €</p>
+                </div>
+                <div className="rounded-xl border border-primary/10 bg-primary/5 p-3 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-foreground/70">Königs Wusterhausen</p>
+                  <p className="mt-1 text-lg font-serif text-primary">35,00 €</p>
+                </div>
+                <div className="rounded-xl border border-primary/10 bg-primary/5 p-3 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-foreground/70">Flughafen BER</p>
+                  <p className="mt-1 text-lg font-serif text-primary">55,00 €</p>
+                </div>
               </div>
             </div>
           </div>
