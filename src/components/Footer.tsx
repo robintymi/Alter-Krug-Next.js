@@ -77,7 +77,26 @@ export function Footer({ content }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-5 border-t border-white/10 pt-8">
+        {/* EU-Förderung */}
+        <div className="mt-10 flex flex-col items-center gap-3 border-t border-white/10 pt-8 sm:flex-row sm:justify-between">
+          <Link href="/eu-foerderung" prefetch={false} className="flex items-center gap-4 opacity-80 transition-opacity hover:opacity-100">
+            <div className="relative h-10 w-48">
+              <SiteImage
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/eu-kofinanziert.png`}
+                alt="Kofinanziert von der Europäischen Union"
+                fill
+                loading="lazy"
+                sizes="192px"
+                className="object-contain"
+              />
+            </div>
+          </Link>
+          <p className="text-xs text-white/40 max-w-sm text-center sm:text-right">
+            Gefördert durch die Europäische Union im Rahmen einer kofinanzierten Baumaßnahme.
+          </p>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-5 border-t border-white/10 pt-8">
           <div className="relative h-[60px] w-[200px]">
             <SiteImage
               src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/img/allgemein/Logo-neu.png`}
