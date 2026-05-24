@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { MapPin } from "lucide-react";
 import { hasExternalConsent } from "@/components/CookieConsent";
 
@@ -10,17 +10,25 @@ interface GoogleMapsEmbedProps {
 }
 
 export function GoogleMapsEmbed({ src, title = "Google Maps" }: GoogleMapsEmbedProps) {
-  const [consented, setConsented] = useState(() => hasExternalConsent());
+  const consented = useSyncExternalStore(
+    (onStoreChange) => {
+      if (typeof window === "undefined") {
+        return () => {};
+      }
 
-  useEffect(() => {
-    function onConsentChange(e: Event) {
-      const detail = (e as CustomEvent).detail;
-      setConsented(detail?.external === true);
-    }
+      const handler = () => onStoreChange();
 
-    window.addEventListener("cookie-consent-change", onConsentChange);
-    return () => window.removeEventListener("cookie-consent-change", onConsentChange);
-  }, []);
+      window.addEventListener("cookie-consent-change", handler);
+      window.addEventListener("storage", handler);
+
+      return () => {
+        window.removeEventListener("cookie-consent-change", handler);
+        window.removeEventListener("storage", handler);
+      };
+    },
+    () => hasExternalConsent(),
+    () => false,
+  );
 
   if (!consented) {
     return (

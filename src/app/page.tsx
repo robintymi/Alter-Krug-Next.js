@@ -3,6 +3,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { FeatureSection } from "@/components/FeatureSection";
 import { GallerySection } from "@/components/GallerySection";
 import { Hero } from "@/components/Hero";
+import { HomeHighlights } from "@/components/HomeHighlights";
 
 export default async function Home() {
   const content = await getSiteContent();
@@ -13,7 +14,13 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
-      <Hero content={content.hero} />
+      <Hero
+        content={content.hero}
+        bookingUrl={content.header?.bookingUrl}
+        reservationUrl={content.header?.reservationUrl}
+      />
+
+      <HomeHighlights />
 
       <FeatureSection
         id="hotel"
