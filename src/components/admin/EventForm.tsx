@@ -45,6 +45,7 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
             price: (formData.get('price') as string) || '',
             description: (formData.get('description') as string) || '',
             image: imagePath || '',
+            website: (formData.get('website') as string) || '',
         }
 
         const maxSeatsRaw = formData.get('maxSeats') as string
@@ -131,6 +132,12 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
                         onChange={setImagePath}
                         folder="events"
                     />
+
+                    <div className="space-y-2">
+                        <Label htmlFor="website">Website-Link (optional)</Label>
+                        <Input id="website" name="website" type="url" defaultValue={initialData?.website} placeholder="https://www.beispiel.de" />
+                        <p className="text-xs text-muted-foreground">Z.B. zur Website des Künstlers oder Veranstalters</p>
+                    </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="description">Beschreibung</Label>

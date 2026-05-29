@@ -51,10 +51,20 @@ if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
 $file = $_FILES['image'];
 
 // Dateityp prüfen
-$allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
+$allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
-$mimeType = finfo_file($finfo, $file['tmp_name']);
-finfo_close($finfo);
+$mimeType = $finfo ? finfo_file($finfo, $file['tmp_name']) : mime_content_type($file['tmp_name']);
+if ($finfo) finfo_close($finfo);
+
+// Normalisiere image/jpg → image/jpeg
+if ($mimeType === 'image/jpg') $mimeType = 'image/jpeg';
+
+// Fallback auf Dateiendung falls MIME-Erkennung fehlschlägt
+if (!$mimeType || $mimeType === 'application/octet-stream') {
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $extMap = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'webp' => 'image/webp', 'gif' => 'image/gif', 'avif' => 'image/avif'];
+    $mimeType = $extMap[$ext] ?? $mimeType;
+}
 
 if (!in_array($mimeType, $allowedTypes)) {
     jsonError('Ungültiges Dateiformat. Erlaubt: JPEG, PNG, WebP, GIF, AVIF.', 400);
