@@ -45,7 +45,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
           <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/82 shadow-[0_18px_52px_-34px_rgba(20,12,6,0.55)]">
             <div className="relative aspect-[16/9]">
               {event.image ? (
-                <SiteImage src={event.image} alt={event.title} fill priority sizes="100vw" className="object-cover" />
+                <SiteImage src={event.image} alt={event.title} fill priority sizes="100vw" className={`object-cover object-${event.imagePosition ?? 'center'}`} />
               ) : (
                 <div className="absolute inset-0 bg-muted" />
               )}

@@ -17,6 +17,7 @@ export interface Event {
     maxSeats?: number;
     priceInCents?: number;
     website?: string;
+    imagePosition?: 'top' | 'center' | 'bottom';
 }
 
 export interface JobOffer {

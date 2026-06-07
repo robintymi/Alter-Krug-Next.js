@@ -46,6 +46,7 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
             description: (formData.get('description') as string) || '',
             image: imagePath || '',
             website: (formData.get('website') as string) || '',
+            imagePosition: (formData.get('imagePosition') as 'top' | 'center' | 'bottom') || 'center',
         }
 
         const maxSeatsRaw = formData.get('maxSeats') as string
@@ -132,6 +133,20 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
                         onChange={setImagePath}
                         folder="events"
                     />
+                    <div className="space-y-2">
+                        <Label htmlFor="imagePosition">Bildausrichtung</Label>
+                        <select
+                            id="imagePosition"
+                            name="imagePosition"
+                            defaultValue={initialData?.imagePosition ?? 'center'}
+                            className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+                        >
+                            <option value="top">Oben (Gesicht/Kopf sichtbar)</option>
+                            <option value="center">Mitte (Standard)</option>
+                            <option value="bottom">Unten</option>
+                        </select>
+                        <p className="text-xs text-muted-foreground">Falls das Bild abgeschnitten wird, hier anpassen.</p>
+                    </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="website">Website-Link (optional)</Label>

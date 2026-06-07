@@ -35,8 +35,8 @@ if ($method === 'POST') {
     }
 
     $stmt = $db->prepare('
-        INSERT INTO events (id, title, date, time, price, description, image, gallery_image, recurring, max_seats, price_in_cents, sort_order, website)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO events (id, title, date, time, price, description, image, gallery_image, recurring, max_seats, price_in_cents, sort_order, website, image_position)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ');
     $stmt->execute([
         $eventId,
@@ -52,6 +52,7 @@ if ($method === 'POST') {
         $body['price_in_cents'] ?? $body['priceInCents'] ?? null,
         $body['sort_order'] ?? 999,
         $body['website'] ?? '',
+        $body['image_position'] ?? $body['imagePosition'] ?? 'center',
     ]);
 
     jsonResponse(['success' => true], 201);
@@ -80,6 +81,8 @@ if ($method === 'PUT' && $id) {
         'price_in_cents' => 'price_in_cents',
         'priceInCents' => 'price_in_cents',
         'website' => 'website',
+        'image_position' => 'image_position',
+        'imagePosition' => 'image_position',
     ];
 
     foreach ($mapping as $input => $column) {
