@@ -67,6 +67,8 @@ export function EventDetailClient() {
                     recurring: row.recurring === 1 || row.recurring === true || row.recurring === '1',
                     maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
                     priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
+                    website: (row.website as string) || '',
+                    imagePosition: (row.image_position as 'top' | 'center' | 'bottom') || 'center',
                 })
             } catch {
                 setError('Event konnte nicht geladen werden.')
@@ -128,7 +130,7 @@ export function EventDetailClient() {
                                     alt={event.title}
                                     loading="eager"
                                     decoding="async"
-                                    className="h-full w-full object-cover"
+                                    className={`h-full w-full object-cover object-${event.imagePosition ?? 'center'}`}
                                 />
                             ) : (
                                 <div className="absolute inset-0 bg-muted" />
