@@ -8,6 +8,25 @@ import { getOptimizedImageSrc } from '@/lib/site-image'
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api'
 
+function parseGermanDate(dateStr: string): Date | null {
+    const parts = dateStr.split('.')
+    if (parts.length < 3) return null
+    const d = parseInt(parts[0], 10)
+    const m = parseInt(parts[1], 10) - 1
+    const y = parseInt(parts[2], 10)
+    if (isNaN(d) || isNaN(m) || isNaN(y)) return null
+    return new Date(y, m, d)
+}
+
+function isEventPast(event: Event): boolean {
+    if (event.recurring) return false
+    const date = parseGermanDate(event.date)
+    if (!date) return false
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    return date < today
+}
+
 function getImageUrl(path: string): string {
     if (!path) return ''
     if (path.startsWith('http')) return path
@@ -57,9 +76,19 @@ export function EventsList({ fallbackEvents }: { fallbackEvents: Event[] }) {
         loadEvents()
     }, [])
 
+    const visibleEvents = events.filter((e) => !isEventPast(e))
+
+    if (visibleEvents.length === 0) {
+        return (
+            <div className="site-container py-12 text-center text-muted-foreground">
+                <p>Aktuell sind keine Veranstaltungen geplant.</p>
+            </div>
+        )
+    }
+
     return (
         <div className="site-container grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {events.map((event: Event) => {
+            {visibleEvents.map((event: Event) => {
                 // Statisch gebaute Events → direkte URL, dynamische → Fallback-Seite
                 const href = staticIds.has(event.id)
                     ? `/events/${event.id}`
@@ -72,7 +101,7 @@ export function EventsList({ fallbackEvents }: { fallbackEvents: Event[] }) {
                         prefetch={false}
                         className="group overflow-hidden rounded-3xl border border-white/60 bg-white/78 shadow-[0_18px_42px_-34px_rgba(18,10,4,0.6)] transition-all hover:-translate-y-1"
                     >
-                        <div className="relative aspect-[16/10]">
+                        <div className="relative aspect-[16/10] bg-gray-100">
                             {event.image ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
@@ -80,7 +109,7 @@ export function EventsList({ fallbackEvents }: { fallbackEvents: Event[] }) {
                                     alt={event.title}
                                     loading="lazy"
                                     decoding="async"
-                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                                 />
                             ) : (
                                 <div className="absolute inset-0 bg-muted" />

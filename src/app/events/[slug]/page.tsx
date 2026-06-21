@@ -35,7 +35,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
         <div className="site-container">
           <Link href="/events" prefetch={false} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
             <ArrowLeft className="h-4 w-4" />
-            ZurÃ¼ck zur Ãœbersicht
+            Zurück zur Übersicht
           </Link>
         </div>
       </section>
@@ -43,13 +43,12 @@ export default async function EventDetailPage({ params }: EventPageProps) {
       <article className="section-space pt-5">
         <div className="site-container">
           <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/82 shadow-[0_18px_52px_-34px_rgba(20,12,6,0.55)]">
-            <div className="relative aspect-[16/9]">
+            <div className="relative aspect-[16/9] bg-gray-100">
               {event.image ? (
-                <SiteImage src={event.image} alt={event.title} fill priority sizes="100vw" className={`object-cover object-${event.imagePosition ?? 'center'}`} />
+                <SiteImage src={event.image} alt={event.title} fill priority sizes="100vw" className="object-contain" />
               ) : (
                 <div className="absolute inset-0 bg-muted" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
             </div>
 
             <div className="p-6 md:p-10">

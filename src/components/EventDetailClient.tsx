@@ -99,7 +99,7 @@ export function EventDetailClient() {
                     <p className="mt-4 text-muted-foreground">{error}</p>
                     <Link href="/events" prefetch={false} className="mt-6 inline-flex items-center gap-2 text-primary hover:underline">
                         <ArrowLeft className="h-4 w-4" />
-                        ZurÃ¼ck zur Ãœbersicht
+                        Zurück zur Übersicht
                     </Link>
                 </div>
             </main>
@@ -114,7 +114,7 @@ export function EventDetailClient() {
                 <div className="site-container">
                     <Link href="/events" prefetch={false} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
                         <ArrowLeft className="h-4 w-4" />
-                        ZurÃ¼ck zur Ãœbersicht
+                        Zurück zur Übersicht
                     </Link>
                 </div>
             </section>
@@ -122,7 +122,7 @@ export function EventDetailClient() {
             <article className="section-space pt-5">
                 <div className="site-container">
                     <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/82 shadow-[0_18px_52px_-34px_rgba(20,12,6,0.55)]">
-                        <div className="relative aspect-[16/9]">
+                        <div className="relative aspect-[16/9] bg-gray-100">
                             {event.image ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
@@ -130,12 +130,11 @@ export function EventDetailClient() {
                                     alt={event.title}
                                     loading="eager"
                                     decoding="async"
-                                    className={`h-full w-full object-cover object-${event.imagePosition ?? 'center'}`}
+                                    className="h-full w-full object-contain"
                                 />
                             ) : (
                                 <div className="absolute inset-0 bg-muted" />
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
                         </div>
 
                         <div className="p-6 md:p-10">
@@ -161,6 +160,18 @@ export function EventDetailClient() {
 
                             <h1 className="font-serif text-4xl md:text-6xl">{event.title}</h1>
                             <p className="mt-6 whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">{event.description}</p>
+
+                            {event.website && (
+                                <div className="mt-6">
+                                    <a href={event.website} target="_blank" rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
+                                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg>
+                                        Zur Website der Veranstaltung
+                                    </a>
+                                </div>
+                            )}
 
                             {bookingEnabled && (
                                 <div className="mt-9 border-t border-primary/10 pt-6">

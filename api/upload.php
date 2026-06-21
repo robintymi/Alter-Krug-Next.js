@@ -112,9 +112,51 @@ while (file_exists($uploadDir . $filename)) {
     $counter++;
 }
 
-// Datei verschieben
+// Datei verschieben & komprimieren
 $destination = $uploadDir . $filename;
-if (!move_uploaded_file($file['tmp_name'], $destination)) {
+$compressed = false;
+
+if (extension_loaded('gd') && in_array($mimeType, ['image/jpeg', 'image/png', 'image/webp'])) {
+    $src = null;
+    if ($mimeType === 'image/jpeg') {
+        $src = @imagecreatefromjpeg($file['tmp_name']);
+    } elseif ($mimeType === 'image/png') {
+        $src = @imagecreatefrompng($file['tmp_name']);
+    } elseif ($mimeType === 'image/webp') {
+        $src = @imagecreatefromwebp($file['tmp_name']);
+    }
+
+    if ($src !== false && $src !== null) {
+        $origW = imagesx($src);
+        $origH = imagesy($src);
+        $maxDim = 1920;
+
+        if ($origW > $maxDim || $origH > $maxDim) {
+            $ratio = min($maxDim / $origW, $maxDim / $origH);
+            $newW = (int)round($origW * $ratio);
+            $newH = (int)round($origH * $ratio);
+            $resized = imagecreatetruecolor($newW, $newH);
+            if ($mimeType === 'image/png') {
+                imagealphablending($resized, false);
+                imagesavealpha($resized, true);
+            }
+            imagecopyresampled($resized, $src, 0, 0, 0, 0, $newW, $newH, $origW, $origH);
+            imagedestroy($src);
+            $src = $resized;
+        }
+
+        if ($mimeType === 'image/jpeg') {
+            $compressed = imagejpeg($src, $destination, 85);
+        } elseif ($mimeType === 'image/png') {
+            $compressed = imagepng($src, $destination, 7);
+        } elseif ($mimeType === 'image/webp') {
+            $compressed = imagewebp($src, $destination, 85);
+        }
+        imagedestroy($src);
+    }
+}
+
+if (!$compressed && !move_uploaded_file($file['tmp_name'], $destination)) {
     jsonError('Datei konnte nicht gespeichert werden.', 500);
 }
 

@@ -46,6 +46,8 @@ export async function getEvents(): Promise<Event[]> {
         recurring: row.recurring === 1 || row.recurring === true,
         maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
         priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
+        website: (row.website as string) || '',
+        imagePosition: (row.image_position as 'top' | 'center' | 'bottom') || 'center',
     }))
 }
 
@@ -64,6 +66,8 @@ export async function addEvent(event: Partial<Event> & { id: string }) {
             recurring: event.recurring || false,
             maxSeats: event.maxSeats || null,
             priceInCents: event.priceInCents || null,
+            website: event.website || '',
+            imagePosition: event.imagePosition || 'center',
             sort_order: 999,
         }),
     })

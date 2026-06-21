@@ -7,6 +7,20 @@ import { Button } from '@/components/ui/button'
 import { getEvents, deleteEvent } from '@/lib/admin-api'
 import type { Event } from '@/data/types'
 
+function isEventPast(event: Event): boolean {
+    if (event.recurring) return false
+    const parts = event.date.split('.')
+    if (parts.length < 3) return false
+    const d = parseInt(parts[0], 10)
+    const m = parseInt(parts[1], 10) - 1
+    const y = parseInt(parts[2], 10)
+    if (isNaN(d) || isNaN(m) || isNaN(y)) return false
+    const date = new Date(y, m, d)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    return date < today
+}
+
 export default function AdminEventsPage() {
     const [events, setEvents] = useState<Event[]>([])
     const [loading, setLoading] = useState(true)
@@ -60,15 +74,20 @@ export default function AdminEventsPage() {
                     </div>
                 ) : (
                     <div className="divide-y rounded-md border bg-white shadow-sm">
-                        {events.map((event) => (
+                        {events.map((event) => {
+                            const past = isEventPast(event)
+                            return (
                             <div
                                 key={event.id}
-                                className="flex flex-col justify-between gap-4 p-6 transition-colors hover:bg-gray-50 md:flex-row md:items-center"
+                                className={`flex flex-col justify-between gap-4 p-6 transition-colors hover:bg-gray-50 md:flex-row md:items-center ${past ? 'opacity-50' : ''}`}
                             >
                                 <div className="space-y-1">
                                     <div className="flex items-center gap-2">
                                         <h3 className="text-lg font-bold">{event.title}</h3>
                                         <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">#{event.id}</span>
+                                        {past && (
+                                            <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-500">Vergangen</span>
+                                        )}
                                     </div>
                                     <div className="flex flex-col text-sm text-gray-500 sm:flex-row sm:gap-4">
                                         <span>{event.date}</span>
@@ -92,7 +111,8 @@ export default function AdminEventsPage() {
                                     </Button>
                                 </div>
                             </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 )}
             </div>
