@@ -173,6 +173,32 @@ export async function uploadImage(file: File, folder?: string): Promise<{ path: 
     return await res.json()
 }
 
+// ─── PDF Upload ─────────────────────────────────────────
+
+export async function uploadPdf(file: File, folder?: string): Promise<{ path: string; filename: string }> {
+    const url = getApiBase() + '/upload-pdf.php'
+    const token = getAuthToken()
+
+    const formData = new FormData()
+    formData.append('file', file)
+    if (folder) formData.append('folder', folder)
+
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+        },
+        body: formData,
+    })
+
+    if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Upload fehlgeschlagen.')
+    }
+
+    return await res.json()
+}
+
 // ─── Bookings ────────────────────────────────────────────
 
 export interface Booking {

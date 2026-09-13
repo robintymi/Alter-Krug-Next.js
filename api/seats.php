@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !$eventId) {
 }
 
 $db = getDB();
+cleanupStalePendingBookings($db);
 
 // Event laden für max_seats
 $stmt = $db->prepare('SELECT max_seats FROM events WHERE id = ?');

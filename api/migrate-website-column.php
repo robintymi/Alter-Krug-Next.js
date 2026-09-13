@@ -21,6 +21,15 @@ try {
         $db->exec("ALTER TABLE events ADD COLUMN image_position VARCHAR(20) DEFAULT 'center' AFTER website");
         echo "OK: Spalte 'image_position' hinzugefügt.\n";
     }
+
+    // flyer_pdf Spalte
+    $stmt = $db->query("SHOW COLUMNS FROM events LIKE 'flyer_pdf'");
+    if ($stmt->rowCount() > 0) {
+        echo "OK: Spalte 'flyer_pdf' existiert bereits.\n";
+    } else {
+        $db->exec("ALTER TABLE events ADD COLUMN flyer_pdf VARCHAR(500) DEFAULT '' AFTER image_position");
+        echo "OK: Spalte 'flyer_pdf' hinzugefügt.\n";
+    }
 } catch (Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }

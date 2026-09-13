@@ -18,6 +18,7 @@ export interface Event {
     priceInCents?: number;
     website?: string;
     imagePosition?: 'top' | 'center' | 'bottom';
+    flyerPdf?: string;
 }
 
 export interface JobOffer {

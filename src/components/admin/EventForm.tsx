@@ -11,6 +11,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { addEvent, updateEvent } from '@/lib/admin-api'
 import { Event } from '@/data/types'
 import { ImageUpload } from '@/components/admin/ImageUpload'
+import { PdfUpload } from '@/components/admin/PdfUpload'
 
 interface EventFormProps {
     mode: 'create' | 'edit'
@@ -29,6 +30,7 @@ function slugify(text: string): string {
 export function EventForm({ mode, initialData, eventId }: EventFormProps) {
     const [saving, setSaving] = useState(false)
     const [imagePath, setImagePath] = useState(initialData?.image || '')
+    const [flyerPdf, setFlyerPdf] = useState(initialData?.flyerPdf || '')
     const router = useRouter()
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -47,6 +49,7 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
             image: imagePath || '',
             website: (formData.get('website') as string) || '',
             imagePosition: (formData.get('imagePosition') as 'top' | 'center' | 'bottom') || 'center',
+            flyerPdf: flyerPdf || '',
         }
 
         const maxSeatsRaw = formData.get('maxSeats') as string
@@ -147,6 +150,13 @@ export function EventForm({ mode, initialData, eventId }: EventFormProps) {
                         </select>
                         <p className="text-xs text-muted-foreground">Falls das Bild abgeschnitten wird, hier anpassen.</p>
                     </div>
+
+                    <PdfUpload
+                        label="Event-PDF (Flyer, Programm o.ä. — optional)"
+                        value={flyerPdf}
+                        onChange={setFlyerPdf}
+                        folder="events"
+                    />
 
                     <div className="space-y-2">
                         <Label htmlFor="website">Website-Link (optional)</Label>

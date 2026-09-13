@@ -97,6 +97,9 @@ export async function getEvents(): Promise<Event[]> {
             recurring: row.recurring === 1 || row.recurring === true || row.recurring === '1',
             maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
             priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
+            website: (row.website as string) || '',
+            imagePosition: (row.image_position as 'top' | 'center' | 'bottom') || 'center',
+            flyerPdf: (row.flyer_pdf as string) || '',
         })))
     } catch (err) {
         console.warn('PHP API events not available, using fallback JSON:', (err as Error).message)
@@ -126,6 +129,9 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
             recurring: row.recurring === 1 || row.recurring === true || row.recurring === '1',
             maxSeats: row.max_seats ? Number(row.max_seats) : undefined,
             priceInCents: row.price_in_cents ? Number(row.price_in_cents) : undefined,
+            website: (row.website as string) || '',
+            imagePosition: (row.image_position as 'top' | 'center' | 'bottom') || 'center',
+            flyerPdf: (row.flyer_pdf as string) || '',
         }
     } catch {
         const events = await getEvents()

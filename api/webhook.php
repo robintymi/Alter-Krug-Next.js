@@ -85,6 +85,17 @@ if ($event->type === 'checkout.session.completed') {
             );
         }
     }
+} elseif ($event->type === 'checkout.session.expired') {
+    // Kunde hat die Zahlung nicht abgeschlossen (abgebrochen, Tab geschlossen, etc.)
+    // → reservierte Plätze wieder freigeben, statt sie zu blockieren.
+    $session = $event->data->object;
+    $bookingId = $session->metadata->booking_id ?? null;
+
+    if ($bookingId) {
+        $db = getDB();
+        $stmt = $db->prepare("UPDATE bookings SET status = 'cancelled' WHERE id = ? AND status = 'pending'");
+        $stmt->execute([$bookingId]);
+    }
 }
 
 jsonResponse(['received' => true]);

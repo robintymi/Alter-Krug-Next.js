@@ -24,6 +24,7 @@ if (!$eventId || !$customerName || !$customerEmail || $seats < 1) {
 }
 
 $db = getDB();
+cleanupStalePendingBookings($db);
 
 // Event laden
 $stmt = $db->prepare('SELECT * FROM events WHERE id = ?');
@@ -97,6 +98,9 @@ try {
         'success_url' => SITE_URL . "/buchung-bestaetigt/?session_id={CHECKOUT_SESSION_ID}&event_id=" . urlencode($eventId),
         'cancel_url' => SITE_URL . "/events/" . urlencode($eventId),
         'customer_email' => $customerEmail,
+        // Session läuft nach 30 Min ab, damit abgebrochene Zahlungen die
+        // reservierten Plätze schnell wieder freigeben (Stripe-Minimum: 30 Min)
+        'expires_at' => time() + 1800,
         'metadata' => [
             'booking_id' => $bookingId,
             'event_id' => $eventId,
