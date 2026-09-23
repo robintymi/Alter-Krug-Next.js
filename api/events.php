@@ -8,7 +8,13 @@ $db = getDB();
 
 // --- GET /api/events.php --- (public)
 if ($method === 'GET' && !$id) {
-    $stmt = $db->query('SELECT * FROM events ORDER BY sort_order ASC');
+    // Wiederkehrende Events (kein festes Datum, z.B. "Jeden Dienstag") zuerst,
+    // danach alle anderen Events chronologisch nach Datum (TT.MM.JJJJ).
+    // sort_order dient nur noch als Tie-Breaker bei gleichem Datum.
+    $stmt = $db->query("
+        SELECT * FROM events
+        ORDER BY recurring DESC, STR_TO_DATE(date, '%d.%m.%Y') ASC, sort_order ASC
+    ");
     jsonResponse($stmt->fetchAll());
 }
 
