@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ArrowLeft, Calendar, Clock, Euro } from 'lucide-react'
 import { Event } from '@/data/types'
 import { BookingForm } from '@/components/BookingForm'
-import { AvailableSeatsDisplay } from '@/components/AvailableSeatsDisplay'
 import { getOptimizedImageSrc } from '@/lib/site-image'
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api'
@@ -154,9 +153,6 @@ export function EventDetailClient() {
                                     <Euro className="h-4 w-4 text-primary" />
                                     {event.price}
                                 </span>
-                                {bookingEnabled && (
-                                    <AvailableSeatsDisplay eventId={event.id} maxSeats={event.maxSeats!} />
-                                )}
                             </div>
 
                             <h1 className="font-serif text-4xl md:text-6xl">{event.title}</h1>

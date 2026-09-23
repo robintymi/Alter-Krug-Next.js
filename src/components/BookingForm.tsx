@@ -129,7 +129,7 @@ export function BookingForm({ eventId, eventTitle, priceInCents, maxSeats }: Boo
                             </div>
                             <div className="space-y-1.5">
                                 <Label htmlFor="booking-seats" className="text-xs">
-                                    Anzahl Plätze (max. {availableSeats})
+                                    Anzahl Plätze
                                 </Label>
                                 <Input
                                     id="booking-seats"

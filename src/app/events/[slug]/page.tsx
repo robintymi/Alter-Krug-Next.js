@@ -4,7 +4,6 @@ import { ArrowLeft, Calendar, Clock, Euro } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getEvents, getEventBySlug } from "@/lib/content";
 import { BookingForm } from "@/components/BookingForm";
-import { AvailableSeatsDisplay } from "@/components/AvailableSeatsDisplay";
 
 export const dynamicParams = false;
 
@@ -67,9 +66,6 @@ export default async function EventDetailPage({ params }: EventPageProps) {
                   <Euro className="h-4 w-4 text-primary" />
                   {event.price}
                 </span>
-                {bookingEnabled && (
-                  <AvailableSeatsDisplay eventId={event.id} maxSeats={event.maxSeats!} />
-                )}
               </div>
 
               <h1 className="font-serif text-4xl md:text-6xl">{event.title}</h1>
