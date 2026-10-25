@@ -1,4 +1,5 @@
 import { getSiteContent } from "@/lib/content";
+import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import { ContactSection } from "@/components/ContactSection";
 import { FeatureSection } from "@/components/FeatureSection";
 import { GallerySection } from "@/components/GallerySection";
@@ -14,6 +15,8 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
+      <AnnouncementBanner />
+
       <Hero
         content={content.hero}
         bookingUrl={content.header?.bookingUrl}

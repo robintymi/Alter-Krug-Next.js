@@ -53,6 +53,10 @@ export interface Room {
 }
 
 export interface SiteContent {
+    announcement: {
+        active: boolean;
+        message: string;
+    };
     header: {
         navItems: NavItem[];
         bookingUrl: string;

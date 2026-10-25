@@ -1,5 +1,5 @@
 import { getAuthToken } from './admin-auth'
-import type { Event, MenuCategory } from '@/data/types'
+import type { Event, MenuCategory, SiteContent } from '@/data/types'
 
 function getApiBase(): string {
     // Explizite API-URL hat immer Vorrang (lokal + Produktion)
@@ -119,6 +119,23 @@ export async function updateSiteContentSection(key: string, newData: unknown) {
         throw new Error(data.error || 'Fehler beim Speichern.')
     }
     return { success: true }
+}
+
+export async function getAnnouncement(): Promise<SiteContent['announcement']> {
+    const data = await getSiteContentSection<SiteContent['announcement']>('announcement')
+    return data ?? { active: false, message: '' }
+}
+
+export async function saveAnnouncement(data: SiteContent['announcement']) {
+    return updateSiteContentSection('announcement', data)
+}
+
+export async function getFooterContent(): Promise<SiteContent['footer'] | null> {
+    return getSiteContentSection<SiteContent['footer']>('footer')
+}
+
+export async function saveFooterContent(data: SiteContent['footer']) {
+    return updateSiteContentSection('footer', data)
 }
 
 // ─── Menu & Drinks ───────────────────────────────────────

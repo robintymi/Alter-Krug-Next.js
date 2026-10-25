@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { type SiteContent } from "@/data/types";
 import { SiteImage } from "@/components/SiteImage";
+import { OpeningHours } from "@/components/OpeningHours";
 
 interface FooterProps {
   content: SiteContent["footer"];
@@ -31,12 +32,7 @@ export function Footer({ content }: FooterProps) {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Info</p>
-            <h3 className="mt-3 font-script text-5xl leading-none">{content.openingHours.title}</h3>
-            <ul className="mt-4 space-y-1 text-sm text-white/80">
-              {content.openingHours.lines.map((line, i) => (
-                <li key={line + i}>{line}</li>
-              ))}
-            </ul>
+            <OpeningHours initial={content.openingHours} />
           </div>
 
           <div>

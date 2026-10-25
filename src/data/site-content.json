@@ -1,4 +1,8 @@
 {
+  "announcement": {
+    "active": false,
+    "message": ""
+  },
   "header": {
     "navItems": [
       { "label": "Startseite", "href": "/" },
