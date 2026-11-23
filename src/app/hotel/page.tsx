@@ -3,6 +3,7 @@ import { getSiteContent } from "@/lib/content";
 import { GallerySection } from "@/components/GallerySection";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { SiteImage } from "@/components/SiteImage";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const metadata: Metadata = {
   title: "Hotel am Motzener See",
@@ -151,6 +152,15 @@ export default async function HotelPage() {
           </div>
         </section>
       )}
+
+      <RelatedLinks
+        title="Mehr vom Alten Krug entdecken"
+        links={[
+          { href: "/restaurant/", label: "Unser Restaurant" },
+          { href: "/events/", label: "Veranstaltungen" },
+          { href: "/anfahrt/", label: "Anfahrt" },
+        ]}
+      />
     </main>
   );
 }

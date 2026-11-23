@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
 import { EventsList } from "@/components/EventsList";
 import { SiteImage } from "@/components/SiteImage";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const metadata: Metadata = {
   title: "Veranstaltungen & Events",
@@ -53,6 +54,14 @@ export default async function EventsPage() {
           </div>
         </section>
       )}
+
+      <RelatedLinks
+        title="Mehr vom Alten Krug entdecken"
+        links={[
+          { href: "/hotel/", label: "Bei uns übernachten" },
+          { href: "/restaurant/", label: "Unser Restaurant" },
+        ]}
+      />
     </main>
   );
 }

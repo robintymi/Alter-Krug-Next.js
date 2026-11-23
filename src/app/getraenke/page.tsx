@@ -2,6 +2,7 @@
 import { SiteImage } from "@/components/SiteImage"
 import { MenuCategory } from "@/data/types"
 import { getSiteContent } from "@/lib/content"
+import { RelatedLinks } from "@/components/RelatedLinks"
 
 export const metadata: Metadata = {
   title: "Getränkekarte",
@@ -85,6 +86,14 @@ export default async function DrinksPage() {
           })}
         </div>
       </section>
+
+      <RelatedLinks
+        title="Entdecken Sie mehr"
+        links={[
+          { href: "/speisekarte/", label: "Speisekarte" },
+          { href: "/restaurant/", label: "Zum Restaurant" },
+        ]}
+      />
     </main>
   );
 }

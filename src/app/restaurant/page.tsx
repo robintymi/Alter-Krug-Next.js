@@ -3,6 +3,7 @@ import { getSiteContent } from "@/lib/content";
 import { BreakfastGallery } from "@/components/BreakfastGallery";
 import { SiteImage } from "@/components/SiteImage";
 import { buildRestaurantJsonLd } from "@/lib/structured-data";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const metadata: Metadata = {
   title: "Restaurant in Kallinchen am Motzener See",
@@ -61,6 +62,16 @@ export default async function RestaurantPage() {
       </section>
 
       <BreakfastGallery />
+
+      <RelatedLinks
+        title="Entdecken Sie mehr"
+        links={[
+          { href: "/speisekarte/", label: "Speisekarte ansehen" },
+          { href: "/getraenke/", label: "Getränkekarte" },
+          { href: "/bueffet/", label: "Büffet & Catering" },
+          { href: "/events/", label: "Veranstaltungen" },
+        ]}
+      />
     </main>
   );
 }

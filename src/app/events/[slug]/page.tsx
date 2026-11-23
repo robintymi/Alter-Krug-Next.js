@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getEvents, getEventBySlug } from "@/lib/content";
 import { BookingForm } from "@/components/BookingForm";
 import { buildEventJsonLd, buildBreadcrumbJsonLd } from "@/lib/structured-data";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const dynamicParams = false;
 
@@ -143,6 +144,15 @@ export default async function EventDetailPage({ params }: EventPageProps) {
           </div>
         </div>
       </article>
+
+      <RelatedLinks
+        title="Mehr vom Alten Krug entdecken"
+        links={[
+          { href: "/hotel/", label: "Bei uns übernachten" },
+          { href: "/speisekarte/", label: "Unsere Speisekarte" },
+          { href: "/events/", label: "Weitere Veranstaltungen" },
+        ]}
+      />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
 import { GoogleMapsEmbed } from "@/components/GoogleMapsEmbed";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const metadata: Metadata = {
   title: "Anfahrt",
@@ -88,6 +89,14 @@ export default async function DirectionsPage() {
           </div>
         </div>
       </section>
+
+      <RelatedLinks
+        title="Mehr vom Alten Krug entdecken"
+        links={[
+          { href: "/hotel/", label: "Zimmer buchen" },
+          { href: "/restaurant/", label: "Unser Restaurant" },
+        ]}
+      />
     </main>
   );
 }

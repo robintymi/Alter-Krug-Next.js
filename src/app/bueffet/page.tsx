@@ -2,6 +2,7 @@
 import { SiteImage } from "@/components/SiteImage";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const metadata: Metadata = {
   title: "Büffet & Catering",
@@ -544,6 +545,15 @@ export default function BuffetPage() {
           </div>
         </div>
       </section>
+
+      <RelatedLinks
+        title="Entdecken Sie mehr"
+        links={[
+          { href: "/speisekarte/", label: "Speisekarte" },
+          { href: "/restaurant/", label: "Zum Restaurant" },
+          { href: "/events/", label: "Veranstaltungen" },
+        ]}
+      />
     </main>
   );
 }
