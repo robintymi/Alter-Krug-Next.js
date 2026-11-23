@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, Clock, Euro } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getEvents, getEventBySlug } from "@/lib/content";
 import { BookingForm } from "@/components/BookingForm";
-import { buildEventJsonLd } from "@/lib/structured-data";
+import { buildEventJsonLd, buildBreadcrumbJsonLd } from "@/lib/structured-data";
 
 export const dynamicParams = false;
 
@@ -51,6 +51,18 @@ export default async function EventDetailPage({ params }: EventPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildEventJsonLd(event)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            buildBreadcrumbJsonLd([
+              { name: "Startseite", path: "/" },
+              { name: "Veranstaltungen", path: "/events/" },
+              { name: event.title, path: `/events/${event.id}/` },
+            ])
+          ),
+        }}
       />
       <section className="pt-8">
         <div className="site-container">

@@ -31,7 +31,8 @@ export default async function DirectionsPage() {
                 <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80">Mit dem Auto</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   Über die A13, Abfahrt Bestensee, fahren Sie Richtung Motzen/Kallinchen. Nach ca. 8 km erreichen Sie Kallinchen.
-                  Der Alte Krug befindet sich direkt an der Hauptstraße 15.
+                  Der Alte Krug befindet sich direkt an der Hauptstraße 15. Auch aus Richtung Zossen und Königs Wusterhausen
+                  ist der Alte Krug Kallinchen am Motzener See gut und schnell zu erreichen.
                 </p>
               </div>
               <div>

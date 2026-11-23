@@ -106,6 +106,24 @@ export function buildEventJsonLd(event: Event) {
 }
 
 /**
+ * Breadcrumb-Pfad (JSON-LD) — zeigt Google den Navigationspfad zu einer
+ * Seite an (z.B. "Startseite > Veranstaltungen > Jazz-Dinner" statt nur
+ * der nackten URL) im Suchergebnis.
+ */
+export function buildBreadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  }
+}
+
+/**
  * Wandelt ein deutsches Datum ("24.04.2026") + optionale Uhrzeit ("18:00")
  * in ein ISO-8601-Datum um. Gibt null zurück, wenn das Datum nicht im
  * erwarteten Format vorliegt (z.B. bei wiederkehrenden Events wie
