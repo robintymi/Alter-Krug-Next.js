@@ -89,7 +89,7 @@ export default async function HotelPage() {
 
                     <div>
                       {room.images && room.images.length > 0 ? (
-                        <ImageCarousel images={room.images} aspectRatio="aspect-[16/10]" />
+                        <ImageCarousel images={room.images} aspectRatio="aspect-[16/10]" altPrefix={room.type} />
                       ) : room.image ? (
                         <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                           <SiteImage

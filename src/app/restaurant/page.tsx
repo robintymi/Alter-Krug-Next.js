@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
 import { BreakfastGallery } from "@/components/BreakfastGallery";
 import { SiteImage } from "@/components/SiteImage";
+import { buildRestaurantJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Restaurant in Kallinchen am Motzener See",
@@ -20,6 +21,10 @@ export default async function RestaurantPage() {
 
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildRestaurantJsonLd()) }}
+      />
       <section className="section-space pb-8">
         <div className="site-container text-center">
           <h1 className="font-script text-6xl text-primary/80 md:text-7xl">{restaurant_page.title}</h1>

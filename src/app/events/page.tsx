@@ -41,7 +41,7 @@ export default async function EventsPage() {
                 <div key={img + idx} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/60 shadow-md">
                   <SiteImage
                     src={img}
-                    alt="Event Impression"
+                    alt={`Impression einer Veranstaltung im Alter Krug Kallinchen ${idx + 1}`}
                     fill
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw, 33vw"

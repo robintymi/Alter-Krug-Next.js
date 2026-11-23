@@ -29,36 +29,36 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
     label: "Brunch",
     buffets: [
       {
-        name: "BrunchbÃ¼ffet",
+        name: "Brunchbüffet",
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "GroÃŸer FrÃ¼hstÃ¼ckskorb mit Brot und BrÃ¶tchen, KonfitÃ¼re, Honig, Nutella, Butter, Schmalz, KrÃ¤uterquark",
-              "MÃ¼slibar mit Joghurt, Quark und Obst, frische Milch und Orangensaft, FrÃ¼hstÃ¼ckskaffee und Tee",
-              "KÃ¤sespezialitÃ¤ten, Wurst- und Schinkenauswahl",
-              "RÃ¼hrei, Speck und NÃ¼rnberger WÃ¼rstchen",
-              "RÃ¤ucherfischplatte von Lachs, Forelle und Makrele",
+              "Großer Frühstückskorb mit Brot und Brötchen, Konfitüre, Honig, Nutella, Butter, Schmalz, Kräuterquark",
+              "Müslibar mit Joghurt, Quark und Obst, frische Milch und Orangensaft, Frühstückskaffee und Tee",
+              "Käsespezialitäten, Wurst- und Schinkenauswahl",
+              "Rührei, Speck und Nürnberger Würstchen",
+              "Räucherfischplatte von Lachs, Forelle und Makrele",
               "Tomate-Mozzarella mit Basilikum",
-              "GemÃ¼sesticks mit Joghurtdip",
+              "Gemüsesticks mit Joghurtdip",
               "Roastbeef mit Sahnemeerrettich",
             ],
           },
           {
             heading: "Suppe",
-            items: ["RahmsÃ¼ppchen von frischen Gurken"],
+            items: ["Rahmsüppchen von frischen Gurken"],
           },
           {
             heading: "Warmes",
             items: [
-              "Medaillons vom Schweinefilet in WaldpilzrahmsoÃŸe und SpÃ¤tzle",
-              "Gebratene Wildlachsfilets auf WurzelgemÃ¼se und KrÃ¤uter-Reis",
+              "Medaillons vom Schweinefilet in Waldpilzrahmsoße und Spätzle",
+              "Gebratene Wildlachsfilets auf Wurzelgemüse und Kräuter-Reis",
               "Broccoli-Nudel-Auflauf",
             ],
           },
           {
             heading: "Dessert",
-            items: ["Obstkorb", "Rote GrÃ¼tze mit Vanillesauce"],
+            items: ["Obstkorb", "Rote Grütze mit Vanillesauce"],
           },
         ],
       },
@@ -68,52 +68,52 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
     label: "Klassiker",
     buffets: [
       {
-        name: 'BÃ¼ffet â€žAlter Krug"',
+        name: 'Büffet „Alter Krug"',
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "Roastbeef-RÃ¶llchen mit Sahne-Meerrettich",
-              "RÃ¤ucherfischplatte von Lachs, Forelle und Pfeffermakrele",
-              "Internationale KÃ¤sespezialitÃ¤ten mit Trauben und Crackern",
+              "Roastbeef-Röllchen mit Sahne-Meerrettich",
+              "Räucherfischplatte von Lachs, Forelle und Pfeffermakrele",
+              "Internationale Käsespezialitäten mit Trauben und Crackern",
               "Kartoffelsalat und Partybuletten",
-              "Marinierter FetakÃ¤se mit frischen KrÃ¤utern",
-              "GeflÃ¼gelsalat",
-              "Brotkorb mit Butter, Schmalz und KrÃ¤uterquark",
+              "Marinierter Fetakäse mit frischen Kräutern",
+              "Geflügelsalat",
+              "Brotkorb mit Butter, Schmalz und Kräuterquark",
             ],
           },
           {
             heading: "Suppe",
             items: [
-              "MÃ¤rkische Hochzeitssuppe mit FleischklÃ¶ÃŸchen, Eierstich und Spargel",
+              "Märkische Hochzeitssuppe mit Fleischklößchen, Eierstich und Spargel",
             ],
           },
           {
             heading: "Warmes",
             items: [
               "Schweinemedaillons in Pilzrahmsauce und Kartoffelkroketten",
-              "Zanderfilet in SpreewaldsoÃŸe mit Kartoffeln",
+              "Zanderfilet in Spreewaldsoße mit Kartoffeln",
             ],
           },
           {
             heading: "Dessert",
             items: [
-              "WeiÃŸe Schokoladencreme mit Orangenfilets",
-              "Hausgemachte Rote GrÃ¼tze mit Vanillesauce",
+              "Weiße Schokoladencreme mit Orangenfilets",
+              "Hausgemachte Rote Grütze mit Vanillesauce",
             ],
           },
         ],
       },
       {
-        name: 'BÃ¼ffet â€žClassic"',
+        name: 'Büffet „Classic"',
         categories: [
           {
             heading: "Kaltes",
             items: [
               "Partybuletten",
-              "Hackepeter mit ZwiebelwÃ¼rfeln",
+              "Hackepeter mit Zwiebelwürfeln",
               "Pikanter Gurkensalat, Tomatensalat",
-              "Internationale KÃ¤seauswahl mit Trauben",
+              "Internationale Käseauswahl mit Trauben",
               "Brotkorb",
             ],
           },
@@ -124,28 +124,28 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
           {
             heading: "Warmes",
             items: [
-              "Gebratene HÃ¤hnchenbrust mit Rahmchampignons und Kroketten",
-              "Schollenfilets in DillsoÃŸe und Petersilienkartoffeln",
+              "Gebratene Hähnchenbrust mit Rahmchampignons und Kroketten",
+              "Schollenfilets in Dillsoße und Petersilienkartoffeln",
             ],
           },
           {
             heading: "Dessert",
-            items: ["Hausgemachte Rote GrÃ¼tze mit Vanillesauce"],
+            items: ["Hausgemachte Rote Grütze mit Vanillesauce"],
           },
         ],
       },
     ],
   },
   {
-    label: "GrillbÃ¼ffets",
+    label: "Grillbüffets",
     buffets: [
       {
-        name: "Kleines GrillbÃ¼ffet",
+        name: "Kleines Grillbüffet",
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "Marinierte FetawÃ¼rfel mit Oliven und Peperoni",
+              "Marinierte Fetawürfel mit Oliven und Peperoni",
               "Kartoffelsalat",
               "Tomatensalat",
               "Gurkensalat",
@@ -159,23 +159,23 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
               "Bratwurst",
               "Marinierte Putensteaks",
               "Marinierter Schweinenacken",
-              "Rosmarinkartoffeln mit KrÃ¤uterquark",
-              "Verschiedene GrillsoÃŸen",
+              "Rosmarinkartoffeln mit Kräuterquark",
+              "Verschiedene Grillsoßen",
             ],
           },
           {
             heading: "Dessert",
-            items: ["Rote GrÃ¼tze mit VanillesoÃŸe"],
+            items: ["Rote Grütze mit Vanillesoße"],
           },
         ],
       },
       {
-        name: "GroÃŸes GrillbÃ¼ffet",
+        name: "Großes Grillbüffet",
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "Marinierter FetakÃ¤se mit Oliven und Peperoni",
+              "Marinierter Fetakäse mit Oliven und Peperoni",
               "Bunter Nudelsalat mit Curry, Ananas und Cashewkernen",
               "Kartoffelsalat",
               "Tomatensalat",
@@ -186,38 +186,38 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
           {
             heading: "Warmes",
             items: [
-              "Bunte SchaschlikspieÃŸe vom Grill",
+              "Bunte Schaschlikspieße vom Grill",
               "Gebratenes Lachsfilet",
               "Marinierte Zucchini und Riesenchampignons vom Grill",
               "Bratwurst",
               "Marinierte Putensteaks vom Grill",
-              "Grilltomate mit KÃ¤sefÃ¼llung",
+              "Grilltomate mit Käsefüllung",
               "Marinierter Schweinenacken vom Grill",
-              "Ofenkartoffel mit KrÃ¤uterquark",
-              "Verschiedene GrillsoÃŸen",
+              "Ofenkartoffel mit Kräuterquark",
+              "Verschiedene Grillsoßen",
             ],
           },
           {
             heading: "Dessert",
-            items: ["Rote GrÃ¼tze mit VanillesoÃŸe", "Tiramisu"],
+            items: ["Rote Grütze mit Vanillesoße", "Tiramisu"],
           },
         ],
       },
     ],
   },
   {
-    label: "Internationale BÃ¼ffets",
+    label: "Internationale Büffets",
     buffets: [
       {
-        name: 'BÃ¼ffet â€žMittelmeer"',
+        name: 'Büffet „Mittelmeer"',
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "Marinierter SchafskÃ¤se mit Oliven und Peperoni",
-              "Salat von Kirschtomaten und MozzarellabÃ¤llchen mit Pesto",
+              "Marinierter Schafskäse mit Oliven und Peperoni",
+              "Salat von Kirschtomaten und Mozzarellabällchen mit Pesto",
               "Rucolasalat mit geriebenem Parmesan und Tomatenvinaigrette",
-              "Farfallesalat mit getrockneten Tomaten, FrÃ¼hlingszwiebeln und Oliven",
+              "Farfallesalat mit getrockneten Tomaten, Frühlingszwiebeln und Oliven",
               "Honigmelone mit Serranoschinken",
               "Bunte Antipastiauswahl",
               "Baguettebrot mit Aioli und Mojo Rojo",
@@ -230,9 +230,9 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
           {
             heading: "Warmes",
             items: [
-              "Schweinemedaillons in GorgonzolasoÃŸe mit Broccoli und Tortellini",
-              "Wildlachssteak auf mediterranem PfannengemÃ¼se und Risotto",
-              'Spanischer Kartoffelauflauf â€žTortilla" mit Grilltomaten',
+              "Schweinemedaillons in Gorgonzolasoße mit Broccoli und Tortellini",
+              "Wildlachssteak auf mediterranem Pfannengemüse und Risotto",
+              'Spanischer Kartoffelauflauf „Tortilla" mit Grilltomaten',
             ],
           },
           {
@@ -242,15 +242,15 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
         ],
       },
       {
-        name: 'BÃ¼ffet â€žInternational"',
+        name: 'Büffet „International"',
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "Bunte CanapÃ©es mit ungarischer Salami, spanischem Serrano, franzÃ¶sischem Roquefort und norwegischem Lachs",
+              "Bunte Canapées mit ungarischer Salami, spanischem Serrano, französischem Roquefort und norwegischem Lachs",
               "Auberginentaler in Sesamkruste",
-              "GefÃ¼llte Zucchini mit Oliven, Tomaten und Feta",
-              "MeeresfrÃ¼chtesalat",
+              "Gefüllte Zucchini mit Oliven, Tomaten und Feta",
+              "Meeresfrüchtesalat",
               "Bunter Nudelsalat mit Curry, Ananas und Cashewkernen",
               "Brotkorb",
             ],
@@ -262,31 +262,31 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
           {
             heading: "Warmes",
             items: [
-              "HÃ¤hnchenbrust auf ChinagemÃ¼se und Limettenreis",
-              "Bandnudeln mit Lachs-SahnesoÃŸe",
-              "KalbshÃ¼ftsteak in Morchelrahm mit KrÃ¤utercouscous",
+              "Hähnchenbrust auf Chinagemüse und Limettenreis",
+              "Bandnudeln mit Lachs-Sahnesoße",
+              "Kalbshüftsteak in Morchelrahm mit Kräutercouscous",
             ],
           },
           {
             heading: "Dessert",
             items: [
-              "RÃ¶llchen von Mascarpone-CrÃªpes mit Erdbeeren",
-              "Limetten-Joghurt-CrÃ¨me",
+              "Röllchen von Mascarpone-Crêpes mit Erdbeeren",
+              "Limetten-Joghurt-Crème",
             ],
           },
         ],
       },
       {
-        name: 'BÃ¼ffet â€žHawaii"',
+        name: 'Büffet „Hawaii"',
         categories: [
           {
             heading: "Kaltes",
             items: [
               "Ika Mata Thunfischsalat",
-              "KÃ¤seauswahl mit FrÃ¼chten",
+              "Käseauswahl mit Früchten",
               "Wassermelonensalat mit Rucola und Feta",
-              "Exotischer HÃ¼hnchensalat",
-              'Reissalat â€žHawaii"',
+              "Exotischer Hühnchensalat",
+              'Reissalat „Hawaii"',
               "Brotkorb mit Guacamole",
             ],
           },
@@ -298,16 +298,16 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
             heading: "Warmes",
             items: [
               "Gegrillte Dorade mit kanarischen Kartoffeln und Mojo Rojo",
-              "Fruchtige HÃ¤hnchenspieÃŸe",
-              "GarnelenspieÃŸe in Curry-Ananas-Marinade",
+              "Fruchtige Hähnchenspieße",
+              "Garnelenspieße in Curry-Ananas-Marinade",
               "Schweinemedaillons Florida mit Curryreis",
-              "SÃ¼ÃŸkartoffel-GemÃ¼sepfanne mit Kokos",
+              "Süßkartoffel-Gemüsepfanne mit Kokos",
             ],
           },
           {
             heading: "Dessert",
             items: [
-              "PiÃ±a-Colada-Creme mit Mangospiegel",
+              "Piña-Colada-Creme mit Mangospiegel",
               "Kokos-Bananencreme unter gebrannter Rohrzuckerhaube",
               "Exotischer Obstsalat",
               "Eisbombe",
@@ -316,17 +316,17 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
         ],
       },
       {
-        name: 'BÃ¼ffet â€žGourmet"',
+        name: 'Büffet „Gourmet"',
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "HeringshÃ¤ckerle auf Pumpernickeltaler",
-              "Internationale KÃ¤seauswahl mit Trauben und Cracker",
-              "Tomaten-Castellosalat mit FrÃ¼hlingszwiebeln",
-              "GeflÃ¼gelsalat mit Spargel und Mandarinen",
-              "RÃ¤ucherfisch-Canapees von Lachs, Forelle und Makrele",
-              "PartybrÃ¶tchen",
+              "Heringshäckerle auf Pumpernickeltaler",
+              "Internationale Käseauswahl mit Trauben und Cracker",
+              "Tomaten-Castellosalat mit Frühlingszwiebeln",
+              "Geflügelsalat mit Spargel und Mandarinen",
+              "Räucherfisch-Canapees von Lachs, Forelle und Makrele",
+              "Partybrötchen",
             ],
           },
           {
@@ -336,14 +336,14 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
           {
             heading: "Warmes",
             items: [
-              "Marinierte Wildschweinmedaillons in PreiselbeersoÃŸe und Schupfnudeln",
-              "Flugentenbrust in OrangensoÃŸe mit Schwarzwurzel-LauchgemÃ¼se und Kroketten",
-              "Pochierte Schollenfilets in WeiÃŸweinsoÃŸe mit Broccoli und Limettenreis",
+              "Marinierte Wildschweinmedaillons in Preiselbeersoße und Schupfnudeln",
+              "Flugentenbrust in Orangensoße mit Schwarzwurzel-Lauchgemüse und Kroketten",
+              "Pochierte Schollenfilets in Weißweinsoße mit Broccoli und Limettenreis",
             ],
           },
           {
             heading: "Dessert",
-            items: ["GrieÃŸflammerie mit Himbeeren", "CrÃ¨me Caramel"],
+            items: ["Grießflammerie mit Himbeeren", "Crème Caramel"],
           },
         ],
       },
@@ -353,36 +353,36 @@ const buffetGroups: { label: string; buffets: Buffet[] }[] = [
     label: "Weihnachten",
     buffets: [
       {
-        name: "Weihnachtliches BÃ¼ffet",
+        name: "Weihnachtliches Büffet",
         categories: [
           {
             heading: "Kaltes",
             items: [
-              "Winterliche Blattsalate mit Sprossen, NÃ¼ssen, Croutons und Walnussvinaigrette",
+              "Winterliche Blattsalate mit Sprossen, Nüssen, Croutons und Walnussvinaigrette",
               "Deftiger Speckkartoffelsalat",
-              "Hausgebeizter Caipirinha-Lachs mit Honig-SenfsoÃŸe",
-              "Bunte KÃ¤sespieÃŸe",
-              "MÃ¶hrensalat mit Kokos und Ananas",
-              "Brotkorb mit Brezeln, PartybrÃ¶tchen und Baguette",
+              "Hausgebeizter Caipirinha-Lachs mit Honig-Senfsoße",
+              "Bunte Käsespieße",
+              "Möhrensalat mit Kokos und Ananas",
+              "Brotkorb mit Brezeln, Partybrötchen und Baguette",
             ],
           },
           {
             heading: "Suppe",
-            items: ["Deftige Zwiebelsuppe mit KÃ¤secroutons"],
+            items: ["Deftige Zwiebelsuppe mit Käsecroutons"],
           },
           {
             heading: "Warmes",
             items: [
-              "Welsfilet in Weinteig gebacken mit KrÃ¤uterreis",
-              "GÃ¤nsebrust mit Rotkohl, GrÃ¼nkohl und KlÃ¶ÃŸen",
-              "Schweinebraten in BackobstsoÃŸe, Rotkohl und Kartoffeln",
+              "Welsfilet in Weinteig gebacken mit Kräuterreis",
+              "Gänsebrust mit Rotkohl, Grünkohl und Klößen",
+              "Schweinebraten in Backobstsoße, Rotkohl und Kartoffeln",
             ],
           },
           {
             heading: "Dessert",
             items: [
-              "Warmer Apfelstrudel mit VanillesoÃŸe",
-              "GrieÃŸflammerie",
+              "Warmer Apfelstrudel mit Vanillesoße",
+              "Grießflammerie",
               "Apfel-Zimt",
               "Obstaufplatte",
             ],
@@ -404,12 +404,12 @@ export default function BuffetPage() {
       <section className="section-space pb-8 text-center">
         <div className="site-container">
           <h1 className="font-script text-6xl text-primary/80 md:text-7xl">
-            Unsere BÃ¼ffets
+            Unsere Büffets
           </h1>
           <p className="section-lead mx-auto">
             Sie planen eine Familienfeier, eine Hochzeit oder organisieren Ihr
-            Betriebsfest? Unsere beliebten BÃ¼ffets sind sicher genau das
-            Richtige fÃ¼r Ihre Veranstaltung.
+            Betriebsfest? Unsere beliebten Büffets sind sicher genau das
+            Richtige für Ihre Veranstaltung.
           </p>
         </div>
       </section>
@@ -436,25 +436,25 @@ export default function BuffetPage() {
       <section className="pb-10 md:pb-14">
         <div className="site-container max-w-3xl text-center">
           <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-            Im Folgenden finden Sie einige BÃ¼ffetvorschlÃ¤ge, die Sie gerne auch
-            miteinander kombinieren kÃ¶nnen. FÃ¼r spezielle WÃ¼nsche sind wir
-            natÃ¼rlich ganz offen und erstellen Ihr ganz individuelles Angebot.
+            Im Folgenden finden Sie einige Büffetvorschläge, die Sie gerne auch
+            miteinander kombinieren können. Für spezielle Wünsche sind wir
+            natürlich ganz offen und erstellen Ihr ganz individuelles Angebot.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-            In den Wintermonaten arrangieren wir BÃ¼ffets fÃ¼r bis zu 60 Personen
+            In den Wintermonaten arrangieren wir Büffets für bis zu 60 Personen
             und in den Sommermonaten bis ca. 20 Personen.
           </p>
         </div>
       </section>
 
-      {/* BÃ¼ffet-Impressionen */}
+      {/* Büffet-Impressionen */}
       <section className="pb-10 md:pb-14">
         <div className="site-container">
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { src: "/img/buffet-vorspeise-1.jpeg", alt: "BÃ¼ffet Vorspeise" },
-              { src: "/img/buffet-vorspeise-2.jpeg", alt: "BÃ¼ffet Vorspeise" },
-              { src: "/img/buffet-dessert.jpeg", alt: "BÃ¼ffet Dessert" },
+              { src: "/img/buffet-vorspeise-1.jpeg", alt: "Büffet Vorspeise 1 im Alter Krug Kallinchen" },
+              { src: "/img/buffet-vorspeise-2.jpeg", alt: "Büffet Vorspeise 2 im Alter Krug Kallinchen" },
+              { src: "/img/buffet-dessert.jpeg", alt: "Büffet Dessert im Alter Krug Kallinchen" },
             ].map((img) => (
               <div
                 key={img.src}
@@ -474,7 +474,7 @@ export default function BuffetPage() {
         </div>
       </section>
 
-      {/* BÃ¼ffet-Gruppen */}
+      {/* Büffet-Gruppen */}
       {buffetGroups.map((group) => (
         <section key={group.label} className="pb-14 md:pb-18">
           <div className="site-container">
@@ -522,16 +522,16 @@ export default function BuffetPage() {
           <div className="panel p-7 text-center md:p-10">
             <p className="section-label">Interesse?</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold md:text-4xl">
-              Ihr individuelles BÃ¼ffet
+              Ihr individuelles Büffet
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Sie mÃ¶chten ein BÃ¼ffet fÃ¼r Ihre Feier oder Veranstaltung
-              zusammenstellen? Schreiben Sie uns gerne eine E-Mail â€” wir beraten
-              Sie persÃ¶nlich und erstellen Ihnen ein individuelles Angebot.
+              Sie möchten ein Büffet für Ihre Feier oder Veranstaltung
+              zusammenstellen? Schreiben Sie uns gerne eine E-Mail — wir beraten
+              Sie persönlich und erstellen Ihnen ein individuelles Angebot.
             </p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
-                href="mailto:info@alter-krug-kallinchen.de?subject=BÃ¼ffet-Anfrage"
+                href="mailto:info@alter-krug-kallinchen.de?subject=Büffet-Anfrage"
                 className="btn-brand gap-2"
               >
                 <Mail className="h-4 w-4" />

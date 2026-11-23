@@ -11,9 +11,11 @@ interface ImageCarouselProps {
   images: string[];
   className?: string;
   aspectRatio?: string;
+  /** Vorangestellter Text für Bild-Alt-Attribute, z.B. der Zimmertyp */
+  altPrefix?: string;
 }
 
-export function ImageCarousel({ images, className, aspectRatio = 'aspect-[4/3]' }: ImageCarouselProps) {
+export function ImageCarousel({ images, className, aspectRatio = 'aspect-[4/3]', altPrefix = 'Zimmerbild' }: ImageCarouselProps) {
   const autoplay = useRef(Autoplay({ delay: 5500, stopOnInteraction: false }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -56,7 +58,7 @@ export function ImageCarousel({ images, className, aspectRatio = 'aspect-[4/3]' 
       <div className={cn('relative w-full overflow-hidden rounded-2xl bg-muted', aspectRatio, className)}>
         <SiteImage
           src={images[0]}
-          alt="Galeriebild"
+          alt={altPrefix}
           fill
           loading="lazy"
           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -83,7 +85,7 @@ export function ImageCarousel({ images, className, aspectRatio = 'aspect-[4/3]' 
               {shouldRenderSlideImage(index) ? (
                 <SiteImage
                   src={src}
-                  alt={`Zimmerbild ${index + 1}`}
+                  alt={`${altPrefix} ${index + 1}`}
                   fill
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 50vw"

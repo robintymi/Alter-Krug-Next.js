@@ -22,7 +22,7 @@ export function GallerySection({ images }: GallerySectionProps) {
               <div className="relative aspect-square">
                 <SiteImage
                   src={img}
-                  alt={`Galerie ${index + 1}`}
+                  alt={`Impression vom Alter Krug Kallinchen am Motzener See ${index + 1}`}
                   fill
                   loading="lazy"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

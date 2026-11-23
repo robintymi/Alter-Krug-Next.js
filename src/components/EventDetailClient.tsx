@@ -19,8 +19,8 @@ function getImageUrl(path: string): string {
 
 /**
  * Client-side Event-Detail-Ansicht.
- * Wird verwendet wenn die statische Seite nicht existiert (neues Event Ã¼ber Admin erstellt).
- * Liest den Slug aus der URL und lÃ¤dt das Event vom API.
+ * Wird verwendet wenn die statische Seite nicht existiert (neues Event über Admin erstellt).
+ * Liest den Slug aus der URL und lädt das Event vom API.
  */
 export function EventDetailClient() {
     const [event, setEvent] = useState<Event | null>(null)
