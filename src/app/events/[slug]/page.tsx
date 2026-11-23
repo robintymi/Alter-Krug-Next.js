@@ -1,4 +1,5 @@
-﻿import { SiteImage } from "@/components/SiteImage";
+﻿import type { Metadata } from "next";
+import { SiteImage } from "@/components/SiteImage";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Euro } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -16,6 +17,22 @@ interface EventPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await getEventBySlug(slug);
+
+  if (!event) return {};
+
+  const description = event.description
+    ? event.description.slice(0, 155).trim() + (event.description.length > 155 ? "…" : "")
+    : `${event.title} im Alter Krug Kallinchen am Motzener See — ${event.date}${event.time ? `, ${event.time}` : ""}.`;
+
+  return {
+    title: event.title,
+    description,
+  };
 }
 
 export default async function EventDetailPage({ params }: EventPageProps) {

@@ -25,8 +25,12 @@ const tangerine = Tangerine({
 });
 
 export const metadata: Metadata = {
-  title: "Alter Krug Kallinchen",
-  description: "Hotel & Restaurant am Motzener See",
+  title: {
+    default: "Alter Krug Kallinchen — Hotel & Restaurant am Motzener See",
+    template: "%s | Alter Krug Kallinchen",
+  },
+  description:
+    "Hotel & Restaurant Alter Krug in Kallinchen am Motzener See bei Zossen, Brandenburg — Zimmer mit Seenähe, regionale Küche und Veranstaltungen.",
 };
 
 export default async function RootLayout({

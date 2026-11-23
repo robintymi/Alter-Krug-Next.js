@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Kontakt",
+  description:
+    "Kontaktieren Sie das Hotel & Restaurant Alter Krug in Kallinchen am Motzener See — Telefon, E-Mail und Adresse.",
+};
 
 export default async function ContactPage() {
   const content = await getSiteContent();

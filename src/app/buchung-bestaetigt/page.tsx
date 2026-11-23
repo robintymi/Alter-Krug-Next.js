@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 import BookingSuccessClient from './BookingSuccessClient'
+
+export const metadata: Metadata = {
+    title: 'Buchung bestätigt',
+    robots: { index: false, follow: false },
+}
 
 export default function BookingSuccessPage() {
     return (

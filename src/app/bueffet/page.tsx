@@ -1,6 +1,13 @@
-﻿import { SiteImage } from "@/components/SiteImage";
+﻿import type { Metadata } from "next";
+import { SiteImage } from "@/components/SiteImage";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Büffet & Catering",
+  description:
+    "Büffets und Catering für Feiern und Veranstaltungen im Alter Krug Kallinchen am Motzener See, Brandenburg.",
+};
 
 /* ------------------------------------------------------------------ */
 /*  Buffet data                                                        */

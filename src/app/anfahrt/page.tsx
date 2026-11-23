@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
 import { GoogleMapsEmbed } from "@/components/GoogleMapsEmbed";
+
+export const metadata: Metadata = {
+  title: "Anfahrt",
+  description:
+    "So finden Sie den Alten Krug in Kallinchen am Motzener See — zwischen Berlin und Zossen, Brandenburg.",
+};
 
 export default async function DirectionsPage() {
   const content = await getSiteContent();

@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
 import { BreakfastGallery } from "@/components/BreakfastGallery";
 import { SiteImage } from "@/components/SiteImage";
+
+export const metadata: Metadata = {
+  title: "Restaurant in Kallinchen am Motzener See",
+  description:
+    "Regionale Küche im Restaurant Alter Krug in Kallinchen — frische Gerichte und herzliche Gastlichkeit direkt am Motzener See, Brandenburg.",
+};
 
 export default async function RestaurantPage() {
   const content = await getSiteContent();

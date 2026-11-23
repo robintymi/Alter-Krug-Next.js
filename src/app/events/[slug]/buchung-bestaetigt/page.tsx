@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { getEvents } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Buchung bestätigt",
+  robots: { index: false, follow: false },
+};
 
 export const dynamicParams = false;
 

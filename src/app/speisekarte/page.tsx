@@ -1,54 +1,17 @@
-﻿'use client'
-
-import { useState, useEffect } from 'react'
+﻿import type { Metadata } from "next"
 import { SiteImage } from "@/components/SiteImage"
 import { MenuCategory } from "@/data/types"
+import { getSiteContent } from "@/lib/content"
 
-const API = process.env.NEXT_PUBLIC_API_URL || '/api'
-
-interface MenuPageData {
-  title: string
-  intro: string
-  categories: MenuCategory[]
+export const metadata: Metadata = {
+  title: "Speisekarte",
+  description:
+    "Die Speisekarte des Restaurants Alter Krug in Kallinchen am Motzener See — regionale Küche, frisch zubereitet.",
 }
 
-export default function MenuPage() {
-  const [menuPage, setMenuPage] = useState<MenuPageData | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function loadMenu() {
-      try {
-        const res = await fetch(`${API}/content.php?key=menu_page`)
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const data = await res.json()
-        // API gibt entweder { key, data } oder direkt das Objekt zurÃ¼ck
-        const pageData = data?.data ?? data
-        if (pageData?.categories) {
-          setMenuPage(pageData)
-        }
-      } catch (err) {
-        console.warn('Speisekarte konnte nicht geladen werden:', err)
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadMenu()
-  }, [])
-
-  if (loading) {
-    return (
-      <main className="min-h-screen">
-        <section className="section-space pb-8 text-center">
-          <div className="site-container">
-            <p className="section-label">Restaurant</p>
-            <h1 className="section-title mt-3">Speisekarte</h1>
-            <p className="text-muted-foreground mt-6">Laden...</p>
-          </div>
-        </section>
-      </main>
-    )
-  }
+export default async function MenuPage() {
+  const content = await getSiteContent()
+  const menuPage = content?.menu_page
 
   if (!menuPage) {
     return (
@@ -96,7 +59,7 @@ export default function MenuPage() {
                         ))}
                       </div>
                     ) : (
-                      <p className="mt-4 text-sm text-muted-foreground">Noch keine EintrÃ¤ge in dieser Sektion.</p>
+                      <p className="mt-4 text-sm text-muted-foreground">Noch keine Einträge in dieser Sektion.</p>
                     )}
                   </div>
 
@@ -126,5 +89,3 @@ export default function MenuPage() {
     </main>
   );
 }
-
-

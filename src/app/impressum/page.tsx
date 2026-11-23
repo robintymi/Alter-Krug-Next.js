@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Impressum",
+  robots: { index: false, follow: true },
+};
+
 export default function ImpressumPage() {
   return (
     <main className="min-h-screen">

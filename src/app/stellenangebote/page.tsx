@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Stellenangebote",
+  description:
+    "Offene Stellen im Hotel & Restaurant Alter Krug Kallinchen am Motzener See — werden Sie Teil unseres Teams.",
+};
 
 export default async function JobPage() {
   const content = await getSiteContent();

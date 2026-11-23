@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { getSiteContent } from "@/lib/content";
 import { EventsList } from "@/components/EventsList";
 import { SiteImage } from "@/components/SiteImage";
+
+export const metadata: Metadata = {
+  title: "Veranstaltungen & Events",
+  description:
+    "Events, Dinner-Shows und Veranstaltungen im Alter Krug Kallinchen am Motzener See — Tickets direkt online sichern.",
+};
 
 export default async function EventsPage() {
   const content = await getSiteContent();

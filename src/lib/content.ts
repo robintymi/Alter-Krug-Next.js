@@ -43,7 +43,7 @@ async function loadFallbackContent(): Promise<SiteContent | null> {
  */
 export async function getSiteContent(): Promise<SiteContent | null> {
     try {
-        const res = await fetch(`${API}/content.php`, { next: { revalidate: 0 } })
+        const res = await fetch(`${API}/content.php`)
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const rows: { key: string; data: unknown }[] = await res.json()
 
@@ -81,7 +81,7 @@ export async function getSiteContent(): Promise<SiteContent | null> {
  */
 export async function getEvents(): Promise<Event[]> {
     try {
-        const res = await fetch(`${API}/events.php`, { next: { revalidate: 0 } })
+        const res = await fetch(`${API}/events.php`)
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const data = await res.json()
 
@@ -113,7 +113,7 @@ export async function getEvents(): Promise<Event[]> {
  */
 export async function getEventBySlug(slug: string): Promise<Event | null> {
     try {
-        const res = await fetch(`${API}/events.php?id=${encodeURIComponent(slug)}`, { next: { revalidate: 0 } })
+        const res = await fetch(`${API}/events.php?id=${encodeURIComponent(slug)}`)
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const row = await res.json() as Record<string, unknown>
 

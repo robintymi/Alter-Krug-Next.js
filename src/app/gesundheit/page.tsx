@@ -1,5 +1,12 @@
-﻿import { getSiteContent } from "@/lib/content";
+﻿import type { Metadata } from "next";
+import { getSiteContent } from "@/lib/content";
 import { SiteImage } from "@/components/SiteImage";
+
+export const metadata: Metadata = {
+  title: "Gesundheit & Wohlbefinden",
+  description:
+    "Wellness- und Gesundheitsangebote im Alter Krug Kallinchen am Motzener See, Brandenburg.",
+};
 
 export default async function WellnessPage() {
   const content = await getSiteContent();

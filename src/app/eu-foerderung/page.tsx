@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "EU-Förderung",
+  robots: { index: false, follow: true },
+};
 
 export default function EuFoerderungPage() {
   return (

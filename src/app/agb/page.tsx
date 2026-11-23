@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AGB",
+  robots: { index: false, follow: true },
+};
+
 export default function AGBPage() {
   return (
     <main className="min-h-screen">
