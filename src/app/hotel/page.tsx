@@ -7,7 +7,7 @@ import { SiteImage } from "@/components/SiteImage";
 export const metadata: Metadata = {
   title: "Hotel am Motzener See",
   description:
-    "Übernachten im Hotel Alter Krug direkt am Motzener See in Kallinchen bei Zossen, Brandenburg — komfortable Zimmer, Frühstück und Ruhe am Wasser.",
+    "Übernachten im Hotel Alter Krug direkt am Motzener See in Kallinchen bei Zossen, südlich von Berlin nahe Königs Wusterhausen — komfortable Zimmer, Frühstück und Ruhe am Wasser.",
 };
 
 export default async function HotelPage() {

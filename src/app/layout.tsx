@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Alter Krug Kallinchen",
   },
   description:
-    "Hotel & Restaurant Alter Krug in Kallinchen am Motzener See bei Zossen, Brandenburg — Zimmer mit Seenähe, regionale Küche und Veranstaltungen.",
+    "Hotel & Restaurant Alter Krug in Kallinchen am Motzener See bei Zossen und Königs Wusterhausen, südlich von Berlin — Zimmer mit Seenähe, regionale Küche und Veranstaltungen.",
 };
 
 export default async function RootLayout({

@@ -13,6 +13,18 @@ const ADDRESS = {
 
 const HERO_IMAGE = `${SITE_URL}/img/alter-krug-scharf.jpg`
 
+// Orte im Einzugsgebiet — sagt Google, für welche Umgebung das Haus relevant
+// ist, nicht nur für den Ort Kallinchen selbst.
+const AREA_SERVED = [
+  "Zossen",
+  "Königs Wusterhausen",
+  "Mittenwalde",
+  "Wünsdorf",
+  "Mellensee",
+  "Trebbin",
+  "Berlin",
+].map((name) => ({ "@type": "City", name }))
+
 /**
  * Site-weite Hotel-Daten (JSON-LD) — im Root-Layout eingebunden, erscheint
  * also auf jeder Seite. Zeigt Google z.B. Adresse und Telefonnummer direkt
@@ -29,6 +41,7 @@ export function buildHotelJsonLd() {
     telephone: "+49 33769 8980",
     email: "info@alter-krug-kallinchen.de",
     address: ADDRESS,
+    areaServed: AREA_SERVED,
   }
 }
 
@@ -48,6 +61,7 @@ export function buildRestaurantJsonLd() {
     address: ADDRESS,
     servesCuisine: "Regionale Küche",
     menu: `${SITE_URL}/speisekarte/`,
+    areaServed: AREA_SERVED,
   }
 }
 
