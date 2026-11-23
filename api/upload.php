@@ -73,7 +73,15 @@ if ($file['size'] > $maxSize) {
 }
 
 // Dateiname generieren (sicher + einzigartig)
-$ext = match ($mimeType) {
+// JPEG/PNG werden, falls der Server WebP unterstützt, als WebP gespeichert —
+// deutlich kleinere Dateien bei gleicher Bildqualität, besonders bei Fotos im
+// PNG-Format (PNG ist verlustfrei und daher für Fotos extrem ineffizient).
+// Prüft gezielt die Funktionen, die gebraucht werden, statt nur extension_loaded('gd'),
+// da manche GD-Builds ohne WebP-Unterstützung kompiliert sind.
+$serverSupportsWebp = function_exists('imagewebp') && function_exists('imagecreatefromwebp');
+$canReencode = extension_loaded('gd') && $serverSupportsWebp
+    && in_array($mimeType, ['image/jpeg', 'image/png', 'image/webp']);
+$ext = $canReencode ? 'webp' : match ($mimeType) {
     'image/jpeg' => 'jpg',
     'image/png' => 'png',
     'image/webp' => 'webp',
@@ -115,14 +123,15 @@ while (file_exists($uploadDir . $filename)) {
 // Datei verschieben & komprimieren
 $destination = $uploadDir . $filename;
 $compressed = false;
+$canResizeOriginalFormat = extension_loaded('gd') && in_array($mimeType, ['image/jpeg', 'image/png']);
 
-if (extension_loaded('gd') && in_array($mimeType, ['image/jpeg', 'image/png', 'image/webp'])) {
+if ($canReencode || $canResizeOriginalFormat) {
     $src = null;
     if ($mimeType === 'image/jpeg') {
         $src = @imagecreatefromjpeg($file['tmp_name']);
     } elseif ($mimeType === 'image/png') {
         $src = @imagecreatefrompng($file['tmp_name']);
-    } elseif ($mimeType === 'image/webp') {
+    } elseif ($mimeType === 'image/webp' && function_exists('imagecreatefromwebp')) {
         $src = @imagecreatefromwebp($file['tmp_name']);
     }
 
@@ -136,21 +145,21 @@ if (extension_loaded('gd') && in_array($mimeType, ['image/jpeg', 'image/png', 'i
             $newW = (int)round($origW * $ratio);
             $newH = (int)round($origH * $ratio);
             $resized = imagecreatetruecolor($newW, $newH);
-            if ($mimeType === 'image/png') {
-                imagealphablending($resized, false);
-                imagesavealpha($resized, true);
-            }
+            imagealphablending($resized, false);
+            imagesavealpha($resized, true);
             imagecopyresampled($resized, $src, 0, 0, 0, 0, $newW, $newH, $origW, $origH);
             imagedestroy($src);
             $src = $resized;
         }
 
-        if ($mimeType === 'image/jpeg') {
+        if ($canReencode) {
+            // Als WebP speichern — deutlich kleinere Dateien als PNG/JPEG bei
+            // vergleichbarer Bildqualität.
+            $compressed = imagewebp($src, $destination, 80);
+        } elseif ($mimeType === 'image/jpeg') {
             $compressed = imagejpeg($src, $destination, 85);
         } elseif ($mimeType === 'image/png') {
             $compressed = imagepng($src, $destination, 7);
-        } elseif ($mimeType === 'image/webp') {
-            $compressed = imagewebp($src, $destination, 85);
         }
         imagedestroy($src);
     }
@@ -167,6 +176,6 @@ echo json_encode([
     'success' => true,
     'path' => $webPath,
     'filename' => $filename,
-    'size' => $file['size'],
-    'type' => $mimeType,
+    'size' => filesize($destination) ?: $file['size'],
+    'type' => $canReencode ? 'image/webp' : $mimeType,
 ], JSON_UNESCAPED_UNICODE);
