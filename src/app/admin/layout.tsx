@@ -39,6 +39,9 @@ function AdminNav({ children }: { children: React.ReactNode }) {
                             <Button variant="ghost" size="sm" asChild>
                                 <Link href="/admin/hinweise">Hinweise</Link>
                             </Button>
+                            <Button variant="ghost" size="sm" asChild>
+                                <Link href="/admin/seitentexte">Seitentexte</Link>
+                            </Button>
                         </div>
                     </div>
 

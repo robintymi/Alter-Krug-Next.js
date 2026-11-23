@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { CalendarDays, ChefHat, Ticket, Megaphone } from 'lucide-react'
+import { CalendarDays, ChefHat, Ticket, Megaphone, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getEvents, getMenuPages, getBookings } from '@/lib/admin-api'
 
@@ -92,6 +92,19 @@ export default function AdminDashboardPage() {
                     </div>
                     <Button asChild className="w-full">
                         <Link href="/admin/hinweise">Hinweise verwalten</Link>
+                    </Button>
+                </section>
+
+                <section className="space-y-4 rounded-xl border bg-white p-6 shadow-sm">
+                    <div className="flex items-start justify-between">
+                        <div>
+                            <p className="text-sm text-muted-foreground">Seitentexte</p>
+                            <h2 className="mt-1 text-2xl font-bold">Hotel & Restaurant</h2>
+                        </div>
+                        <FileText className="h-6 w-6 text-primary" />
+                    </div>
+                    <Button asChild className="w-full">
+                        <Link href="/admin/seitentexte">Seitentexte bearbeiten</Link>
                     </Button>
                 </section>
             </div>

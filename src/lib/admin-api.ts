@@ -138,6 +138,22 @@ export async function saveFooterContent(data: SiteContent['footer']) {
     return updateSiteContentSection('footer', data)
 }
 
+export async function getHotelPageContent(): Promise<SiteContent['hotel_page'] | null> {
+    return getSiteContentSection<SiteContent['hotel_page']>('hotel_page')
+}
+
+export async function saveHotelPageContent(data: SiteContent['hotel_page']) {
+    return updateSiteContentSection('hotel_page', data)
+}
+
+export async function getRestaurantPageContent(): Promise<SiteContent['restaurant_page'] | null> {
+    return getSiteContentSection<SiteContent['restaurant_page']>('restaurant_page')
+}
+
+export async function saveRestaurantPageContent(data: SiteContent['restaurant_page']) {
+    return updateSiteContentSection('restaurant_page', data)
+}
+
 // ─── Menu & Drinks ───────────────────────────────────────
 
 export interface MenuPageData {
